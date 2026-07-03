@@ -1,1 +1,1 @@
-# SCD
+# Society of Capital Design

@@ -128,8 +128,8 @@ ol.rules li,ol.steps li{margin-bottom:10px}
   <div class="wrap">
     <p class="eyebrow">About</p>
     <h1>About SCD</h1>
-    <p class="lede">The Society of Capital Design was founded in 2025 by two students, one focused on economics and one on engineering, on a simple observation: the interesting problems live where the two fields meet. Every bridge is a budget. Every budget builds something.</p>
-    <p class="lede">SCD runs through school chapters across the UAE, each with a named student chapter lead. Our programs, essay competitions, speaker sessions and the SCD Bulletin, all put economics students and engineering students on the same problem.</p>
+    <p class="lede" id="t-about-1">The Society of Capital Design was founded in 2025 by two students, one focused on economics and one on engineering, on a simple observation: the interesting problems live where the two fields meet. Every bridge is a budget. Every budget builds something.</p>
+    <p class="lede" id="t-about-2">SCD runs through school chapters across the UAE, each with a named student chapter lead. Our programs, essay competitions, speaker sessions and the SCD Bulletin, all put economics students and engineering students on the same problem.</p>
 
     <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Leadership</h2></div>
     <div class="leaders" id="leaders"><p class="loading">Loading</p></div>
@@ -189,6 +189,14 @@ async function settings(){
   const c = await content();
   return c.settings || {};
 }
+
+async function applyText(map){
+  const c = await content(); const t = c.text || {};
+  for(const [id,key] of Object.entries(map)){
+    const el = document.getElementById(id);
+    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+  }
+}
 const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
 
 
@@ -234,6 +242,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
       <p class="meta">Chapter lead: ${ph("[Initials, CRM Confirmed]")}</p></div>`;
   }
 })();
+applyText({"t-about-1":"about_1","t-about-2":"about_2"});
 </script>
 </body>
 </html>

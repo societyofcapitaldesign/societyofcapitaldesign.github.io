@@ -182,6 +182,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ph = s => `<span class="ph">${esc(s)}</span>`;
+const fmt = s => esc(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
 let __content = null;
 async function content(){
   if(__content) return __content;
@@ -205,10 +206,10 @@ async function applyText(map){
   const c = await content(); const t = c.text || {};
   for(const [id,key] of Object.entries(map)){
     const el = document.getElementById(id);
-    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+    if(el && t[key] && String(t[key]).trim()) el.innerHTML = fmt(t[key]);
   }
 }
-const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
+const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(fallback);
 
 
 (async () => {
@@ -220,8 +221,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
   const evs = await rows("events","sort");
   if(evs && evs.length){
     EL.innerHTML = `<div class="rowlist">` + evs.map(e => `<div class="rowitem">
-      <strong>${esc(e.name)}</strong>
-      <p class="meta">${esc(e.date_text||"")} · ${esc(e.venue||"")} · ${esc(e.description||"")} Status: scheduled.</p>
+      <strong>${fmt(e.name)}</strong>
+      <p class="meta">${fmt(e.date_text||"")} · ${fmt(e.venue||"")} · ${fmt(e.description||"")} Status: scheduled.</p>
       ${e.photo_url ? `<img class="evphoto" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : ""}
       </div>`).join("") + `</div>`;
   } else {
@@ -235,12 +236,12 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
   const cur = (cycles||[]).filter(c => c.is_current)[0];
   if(cur){
     CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
-      <strong style="font-weight:800">${esc(cur.name)}</strong>
-      <p class="meta">Status: ${esc(cur.status||"")} · Deadline: ${esc(cur.deadline_text||"")}</p></div>
+      <strong style="font-weight:800">${fmt(cur.name)}</strong>
+      <p class="meta">Status: ${fmt(cur.status||"")} · Deadline: ${fmt(cur.deadline_text||"")}</p></div>
       <div class="program"><span class="panel-label">Track 1</span><h3>Economics</h3>
-      <p>${cur.econ_prompts && cur.econ_prompts.trim() ? esc(cur.econ_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>
+      <p>${cur.econ_prompts && cur.econ_prompts.trim() ? fmt(cur.econ_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>
       <div class="program"><span class="panel-label">Track 2</span><h3>Engineering</h3>
-      <p>${cur.eng_prompts && cur.eng_prompts.trim() ? esc(cur.eng_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>`;
+      <p>${cur.eng_prompts && cur.eng_prompts.trim() ? fmt(cur.eng_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>`;
   } else {
     CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
       <strong style="font-weight:800">${ph("[Term or cycle name, founders]")}</strong>
@@ -253,9 +254,9 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
   const res = await rows("results","sort");
   if(res && res.length){
     R.innerHTML = res.map(r => `<div class="archive-item">
-      <h3>${esc(r.title)}</h3>
-      <p class="meta">${esc(r.meta||"")}</p>
-      ${r.winner ? `<p style="margin-top:8px"><strong>Winner:</strong> ${esc(r.winner)}</p>` : ""}
+      <h3>${fmt(r.title)}</h3>
+      <p class="meta">${fmt(r.meta||"")}</p>
+      ${r.winner ? `<p style="margin-top:8px"><strong>Winner:</strong> ${fmt(r.winner)}</p>` : ""}
       ${r.photo_url ? `<img class="evphoto" src="${esc(r.photo_url)}" alt="${esc(r.photo_alt||r.title)}">` : ""}
       </div>`).join("");
   } else {

@@ -171,6 +171,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ph = s => `<span class="ph">${esc(s)}</span>`;
+const fmt = s => esc(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
 let __content = null;
 async function content(){
   if(__content) return __content;
@@ -194,10 +195,10 @@ async function applyText(map){
   const c = await content(); const t = c.text || {};
   for(const [id,key] of Object.entries(map)){
     const el = document.getElementById(id);
-    if(el && t[key] && String(t[key]).trim()) el.textContent = t[key];
+    if(el && t[key] && String(t[key]).trim()) el.innerHTML = fmt(t[key]);
   }
 }
-const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(fallback);
+const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(fallback);
 
 
 (async () => {
@@ -211,8 +212,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
     L.innerHTML = leads.map(l => `<div class="leader">
       ${l.photo_url ? `<img class="headshot" src="${esc(l.photo_url)}" alt="Portrait of ${esc(l.name)}" width="104" height="104" style="border-radius:50%;margin:0 auto 12px">`
                     : `<div class="headshot">[photo optional]</div>`}
-      <h3>${l.name && l.name.trim() ? esc(l.name) : ph("[Name, CRM Confirmed]")}</h3>
-      <p class="role">${esc(l.role)}</p></div>`).join("");
+      <h3>${l.name && l.name.trim() ? fmt(l.name) : ph("[Name, CRM Confirmed]")}</h3>
+      <p class="role">${fmt(l.role)}</p></div>`).join("");
   } else {
     L.innerHTML = ["Co founder · Economics","Co founder · Engineering","Head of Marketing","Head of Operations"]
       .map(r => `<div class="leader"><div class="headshot">[photo optional]</div>
@@ -226,8 +227,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
     ["Entries, latest essay cycle","[N, Evidence Register, Essay Cycle row]"],
     ["Bulletin issues published","[N, Evidence Register, Bulletin row]"]];
   if(nums && nums.length){
-    B.innerHTML += nums.map((n,i) => `<tr><td>${i+1}</td><td>${esc(n.description)}</td>
-      <td>${n.qty && n.qty.trim() ? esc(n.qty) : ph("[N, Evidence Register]")}</td></tr>`).join("");
+    B.innerHTML += nums.map((n,i) => `<tr><td>${i+1}</td><td>${fmt(n.description)}</td>
+      <td>${n.qty && n.qty.trim() ? fmt(n.qty) : ph("[N, Evidence Register]")}</td></tr>`).join("");
   } else {
     B.innerHTML += defaults.map((d,i) => `<tr><td>${i+1}</td><td>${d[0]}</td><td>${ph(d[1])}</td></tr>`).join("");
   }
@@ -235,8 +236,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? esc(o[k]) : ph(
   const C = document.getElementById("chapters");
   const ch = await rows("chapters","sort");
   if(ch && ch.length){
-    C.innerHTML = ch.map(c => `<div class="rowitem"><strong>${esc(c.school)}</strong>
-      <p class="meta">Chapter lead: ${c.lead && c.lead.trim() ? esc(c.lead) : ph("[Initials, CRM Confirmed]")}${c.chartered ? " · Chartered " + esc(c.chartered) : ""}</p></div>`).join("");
+    C.innerHTML = ch.map(c => `<div class="rowitem"><strong>${fmt(c.school)}</strong>
+      <p class="meta">Chapter lead: ${c.lead && c.lead.trim() ? fmt(c.lead) : ph("[Initials, CRM Confirmed]")}${c.chartered ? " · Chartered " + fmt(c.chartered) : ""}</p></div>`).join("");
   } else {
     C.innerHTML = `<div class="rowitem"><strong>${ph("[School name, Evidence Register, Chapters row]")}</strong>
       <p class="meta">Chapter lead: ${ph("[Initials, CRM Confirmed]")}</p></div>`;

@@ -16,14 +16,14 @@
     {
       "id": 1,
       "name": "",
-      "role": "Co founder \u00b7 Economics",
+      "role": "Co founder · Economics",
       "photo_url": "",
       "sort": 1
     },
     {
       "id": 2,
       "name": "",
-      "role": "Co founder \u00b7 Engineering",
+      "role": "Co founder · Engineering",
       "photo_url": "",
       "sort": 2
     },
@@ -67,5 +67,18 @@
       "qty": "",
       "sort": 4
     }
-  ]
+  ],
+  "text": {
+    "home_tagline": "xxx\n",
+    "home_intro": "",
+    "home_membership": "",
+    "program_1": "",
+    "program_2": "",
+    "program_3": "",
+    "about_1": "",
+    "about_2": "",
+    "archive_intro": "",
+    "newsletter_intro": "",
+    "join_intro": ""
+  }
 }

@@ -11,7 +11,15 @@
   "cycles": [],
   "results": [],
   "chapters": [],
-  "issues": [],
+  "issues": [
+    {
+      "id": 1783233086252,
+      "title": "ISSUE 01: Assets that answer to nobody",
+      "date_text": "October, 2025",
+      "link_url": "bulletins/1783233045803-bulletin8.pdf",
+      "sort": 1
+    }
+  ],
   "leaders": [
     {
       "id": 1,

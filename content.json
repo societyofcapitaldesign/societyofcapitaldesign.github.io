@@ -10,7 +10,15 @@
   "events": [],
   "cycles": [],
   "results": [],
-  "chapters": [],
+  "chapters": [
+    {
+      "id": 1783500748314,
+      "school": "Jumeirah College",
+      "lead": "Adwaith Arun and Kazim Abbas",
+      "chartered": "",
+      "sort": 1
+    }
+  ],
   "issues": [
     {
       "id": 1783233086252,

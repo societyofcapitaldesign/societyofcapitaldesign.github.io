@@ -92,7 +92,25 @@ img.headshot{border-style:solid;object-fit:cover}
 .rowitem .meta,.meta{font-size:14px;color:#4a5261;margin-top:3px}
 ol.rules,ol.steps{margin:14px 0 0 22px;max-width:62ch}
 ol.rules li,ol.steps li{margin-bottom:10px}
-.archive-item{border:1.5px solid var(--ink);background:#fff;padding:20px;margin-top:20px;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+
+.archive-item{border:1.5px solid var(--ink);background:#fff;padding:0;margin-top:16px;box-shadow:5px 5px 0 rgba(54,59,62,.14);overflow:hidden}
+.archive-head{padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.archive-head:hover{background:rgba(181,146,78,.06)}
+.archive-head h3{font-size:16px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;margin:0}
+.archive-head .meta{font-size:14px;color:#4a5261;margin-top:3px}
+.archive-chevron{width:24px;height:24px;flex-shrink:0;transition:transform .2s;color:var(--brass)}
+.archive-item.open .archive-chevron{transform:rotate(180deg)}
+.archive-body{display:none;padding:0 18px 18px;border-top:1px solid var(--rule)}
+.archive-item.open .archive-body{display:block}
+.winner-row{padding:10px 0;border-bottom:1px solid var(--rule)}
+.winner-row:last-child{border-bottom:none}
+.winner-row strong{font-size:14px}
+.winner-row .wmeta{font-size:13px;color:#4a5261;margin-top:2px}
+.archive-files{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.archive-file{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1.5px solid var(--ink);
+ background:#fff;font-size:13px;font-weight:700;text-decoration:none;color:var(--ink)}
+.archive-file:hover{background:rgba(181,146,78,.08)}
+
 .btnrow{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;background:var(--brass);color:#fff;text-decoration:none;padding:12px 22px;
  font-weight:800;letter-spacing:.1em;font-size:12px;text-transform:uppercase;border:1.5px solid var(--ink);
@@ -254,15 +272,36 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const R = document.getElementById("results");
   const res = await rows("results","sort");
   if(res && res.length){
-    R.innerHTML = res.map(r => `<div class="archive-item">
-      <h3>${fmt(r.title)}</h3>
-      <p class="meta">${fmt(r.meta||"")}</p>
-      ${r.winner ? `<p style="margin-top:8px"><strong>Winner:</strong> ${fmt(r.winner)}</p>` : ""}
-      ${(r.photo_url || r.photo_url_2) ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
-        ${r.photo_url ? `<img class="evphoto ${esc(r.photo_size||"")}" src="${esc(r.photo_url)}" alt="${esc(r.photo_alt||r.title)}" style="margin:0">` : ""}
-        ${r.photo_url_2 ? `<img class="evphoto ${esc(r.photo_size_2||r.photo_size||"")}" src="${esc(r.photo_url_2)}" alt="${esc(r.photo_alt_2||r.title)}" style="margin:0">` : ""}
-      </div>` : ""}
-      </div>`).join("");
+    R.innerHTML = res.map((r,i) => {
+      const winners = (r.winners||r.winner||"").split("\n").filter(w=>w.trim());
+      const files = [];
+      if(r.file_url) files.push({url:r.file_url, name:r.file_label||"View document"});
+      if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
+      if(r.file_url_3) files.push({url:r.file_url_3, name:r.file_label_3||"View document"});
+      const photos = [];
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||""});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||""});
+      return `<div class="archive-item" data-idx="${i}">
+        <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
+          <div>
+            <h3>${fmt(r.title)}</h3>
+            <p class="meta">${fmt(r.meta||"")}</p>
+          </div>
+          <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="archive-body">
+          ${winners.length ? `<div style="margin-top:4px">${winners.map(w => {
+            const parts = w.split("|");
+            return `<div class="winner-row"><strong>${fmt(parts[0])}</strong>${parts[1] ? `<div class="wmeta">${fmt(parts[1])}</div>` : ""}</div>`;
+          }).join("")}</div>` : ""}
+          ${photos.length ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
+            ${photos.map(p => `<img class="evphoto ${esc(p.size)}" src="${esc(p.url)}" alt="${esc(p.alt)}" style="margin:0">`).join("")}
+          </div>` : ""}
+          ${files.length ? `<div class="archive-files">${files.map(f =>
+            `<a class="archive-file" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
+        </div>
+      </div>`;
+    }).join("");
   } else {
     R.innerHTML = `<div class="archive-item"><h3>${ph("[No results citable yet]")}</h3>
       <p class="meta">The first cycle's results will appear here once its Evidence Register row is marked CITABLE.</p>

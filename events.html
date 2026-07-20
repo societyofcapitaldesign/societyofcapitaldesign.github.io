@@ -180,9 +180,11 @@ ol.rules li,ol.steps li{margin-bottom:10px}
       </div>
     </div>
 
-    <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Results archive</h2></div>
+    <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Competition results</h2></div>
     <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events.</p>
     <div id="results"><p class="loading">Loading</p></div>
+    <h2 class="sheetidx" style="margin-top:36px">Event archive</h2>
+    <div id="eventarchive"><p class="loading">Loading</p></div>
   </div>
 </section>
 
@@ -242,7 +244,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
     EL.innerHTML = `<div class="rowlist">` + evs.map(e => `<div class="rowitem">
       <strong>${fmt(e.name)}</strong>
       <p class="meta">${fmt(e.date_text||"")} · ${fmt(e.venue||"")} · ${fmt(e.description||"")} Status: scheduled.</p>
-      ${e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : ""}
+      ${(e.poster_url ? `<img class="evphoto" src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}" style="width:100%;height:auto;margin-top:14px">` : "") +
+      (e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : "")}
       </div>`).join("") + `</div>`;
   } else {
     EL.innerHTML = `<div class="rowlist"><div class="rowitem">
@@ -307,6 +310,39 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
       <p class="meta">The first cycle's results will appear here once its Evidence Register row is marked CITABLE.</p>
       <div class="photobox"><span class="stamp">Real event photo pending</span></div></div>`;
   }
+  // Event archive
+  const EA = document.getElementById("eventarchive");
+  const ea = await rows("event_archive","sort");
+  if(ea && ea.length){
+    EA.innerHTML = ea.map((r,i) => {
+      const files = [];
+      if(r.file_url) files.push({url:r.file_url, name:r.file_label||"View document"});
+      if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
+      const photos = [];
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||""});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||""});
+      return `<div class="archive-item" data-idx="ea${i}">
+        <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
+          <div>
+            <h3>${fmt(r.title)}</h3>
+            <p class="meta">${fmt(r.meta||"")}</p>
+          </div>
+          <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="archive-body">
+          ${r.description ? `<p style="margin-top:8px">${fmt(r.description)}</p>` : ""}
+          ${r.speaker ? `<p style="margin-top:8px"><strong>Speaker:</strong> ${fmt(r.speaker)}</p>` : ""}
+          ${r.attendance ? `<p style="margin-top:4px"><strong>Attendance:</strong> ${esc(r.attendance)} students${r.schools ? " from "+esc(r.schools)+" schools" : ""}</p>` : ""}
+          ${photos.length ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
+            ${photos.map(p => `<img class="evphoto ${esc(p.size)}" src="${esc(p.url)}" alt="${esc(p.alt)}" style="margin:0">`).join("")}
+          </div>` : ""}
+          ${files.length ? `<div class="archive-files">${files.map(f =>
+            `<a class="archive-file" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+  } else { EA.innerHTML = '<p class="meta">No past events archived yet.</p>'; }
+
 })();
 applyText({"t-archive-intro":"archive_intro"});
 </script>

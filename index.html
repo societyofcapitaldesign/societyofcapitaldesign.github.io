@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
- <meta name="google-site-verification" content="ia4p0POHlF17BoX5rvJF3F-Zpu_6aOOYhjrtawJjvEU" /> 
- <meta charset="utf-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home · Society of Capital Design</title>
@@ -130,10 +128,10 @@ ol.rules li,ol.steps li{margin-bottom:10px}
   <div class="wrap">
     <div class="cols">
       <div>
-        <p class="eyebrow">Finance × Engineering </p>
+        <p class="eyebrow">Finance × Engineering</p>
         <h1>Society of<br>Capital Design</h1>
         <p class="tagline" id="t-tagline">where the design and the balance sheet meet.</p>
-        <p class="lede" id="t-home-intro">Founded by students in 2025 and run through school chapters across the world. Economics students and engineering students work the same problems here, from budget caps to load limits.</p>
+        <p class="lede" id="t-home-intro">Founded by students in 2025 and run through school chapters worldwide. Finance students and engineering students work the same problems here, from budget caps to load limits.</p>
         <div class="btnrow">
           <a class="btn" href="join.html">Join SCD</a>
           <a class="btn ghost" href="events.html">Events + Competitions</a>
@@ -181,7 +179,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
         <tr>
           <td><span class="lbl">Sheet title</span><span class="val">General arrangement</span></td>
           <td><span class="lbl">Sheet</span><span class="val">01 / 05</span></td>
-          <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025 </span></td>
+          <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025</span></td>
         </tr>
       </table>
     </div>
@@ -229,6 +227,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
     box.innerHTML = `<span class="panel-label">Scheduled</span>
       <strong style="font-weight:800">${fmt(next.name)}</strong>
       <p class="meta">${fmt(next.date_text||"")} · ${fmt(next.venue||"")} · Register through your chapter lead.</p>
+      ${next.poster_url ? `<img src="${esc(next.poster_url)}" alt="${esc(next.poster_alt||next.name+' poster')}" style="max-width:300px;height:auto;margin-top:14px;display:block;border:1.5px solid var(--ink)">` : ""}
       ${next.photo_url ? `<img class="evphoto" src="${esc(next.photo_url)}" alt="${esc(next.photo_alt||next.name)}">` : ""}`;
   } else {
     box.innerHTML = `<span class="panel-label">Scheduled</span>

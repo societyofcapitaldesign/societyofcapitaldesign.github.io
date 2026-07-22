@@ -32,6 +32,19 @@
       "is_next": false,
       "sort": 2,
       "poster_url": ""
+    },
+    {
+      "id": 1784702529090,
+      "name": "Speaker Session: Designing for 50°C: Engineering Infrastructure in Extreme Heat",
+      "date_text": "December 2025",
+      "venue": "Online",
+      "description": "Concrete cures differently at 50°C. Steel expands. Asphalt softens. Every material behaves differently in extreme heat, and Gulf engineers design for conditions that violate the assumptions in most international building codes. This session covers material selection, thermal expansion calculations, passive cooling in structures, and the trade offs between cost, durability, and performance when the environment works against you.",
+      "poster_url": "",
+      "photo_url": "",
+      "photo_alt": "",
+      "photo_size": "full",
+      "is_next": false,
+      "sort": 100
     }
   ],
   "cycles": [

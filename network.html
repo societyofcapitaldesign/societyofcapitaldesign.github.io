@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home · Society of Capital Design</title>
+<meta name="description" content="Society of Capital Design, a student founded UAE organization at the intersection of finance and engineering.">
+<style>
+:root{--coal:#363b3e;--brass:#b5924e;--paper:#edf0f3;--ink:#24282c;--steel:#33608f;--rule:#c7cdd3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Liberation Sans",Arial,sans-serif;
+ color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px;padding:10px;
+ background-image:linear-gradient(rgba(51,96,143,.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(51,96,143,.05) 1px,transparent 1px),
+  linear-gradient(rgba(51,96,143,.09) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(51,96,143,.09) 1px,transparent 1px);
+ background-size:8px 8px,8px 8px,40px 40px,40px 40px}
+.mono,.tabs a,.callout .bubble,.eyebrow,.ph,.stamp,.tb td,.boq,.panel-label,.role
+ {font-family:ui-monospace,"Cascadia Mono",Menlo,Consolas,"Liberation Mono",monospace}
+img{max-width:100%;display:block}
+a{color:inherit}
+main p a,main .meta a{color:var(--steel);text-decoration-color:var(--brass)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--brass);color:#fff;padding:8px 14px;z-index:9}
+.skip:focus{left:8px}
+.sheet{width:100%;border:2px solid var(--ink);outline:1px solid var(--ink);outline-offset:4px}
+.wrap{padding:0 18px}
+@media(min-width:700px){.wrap{padding:0 40px}}
+@media(min-width:1400px){.wrap{padding:0 64px}}
+.cols{display:grid;gap:0 56px}
+@media(min-width:1000px){.cols{grid-template-columns:1fr 1fr}}
+.band{background:var(--coal);color:var(--paper);display:flex;align-items:center;gap:14px;
+ padding:12px 18px;border-bottom:2px solid var(--ink)}
+.band img{width:46px;height:46px;border-radius:50%;border:2px solid var(--brass);flex-shrink:0}
+.band .org{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px;line-height:1.3}
+.band .sub{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.tabs{display:flex;overflow-x:auto;border-bottom:2px solid var(--ink);background:#fff}
+.tabs a{flex:1 0 auto;text-decoration:none;font-size:11px;letter-spacing:.1em;padding:10px 14px;
+ border-right:1px solid var(--ink);white-space:nowrap;text-transform:uppercase}
+.tabs a:last-child{border-right:none}
+.tabs a:hover{background:var(--paper)}
+.tabs a[aria-current="page"]{background:var(--brass);color:#fff;font-weight:700}
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);
+ font-weight:700;margin-bottom:10px}
+h1{font-size:clamp(28px,5vw,46px);text-transform:uppercase;letter-spacing:.02em;font-weight:800;line-height:1.12}
+.tagline{margin-top:10px;font-size:clamp(16px,2.4vw,19px);color:var(--steel);font-weight:600}
+.lede{max-width:62ch;margin-top:14px}
+section{padding:36px 0 8px}
+.callout{display:flex;align-items:center;gap:14px;margin:34px 0 18px}
+.callout .bubble{width:38px;height:38px;border:2px solid var(--ink);border-radius:50%;
+ display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0;background:#fff}
+.callout h2{font-size:clamp(18px,2.6vw,24px);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.callout::after{content:"";flex:1;border-top:1.5px solid var(--ink);min-width:24px}
+.panel,.banner,.program,.card{border:1.5px solid var(--ink);background:#fff;padding:20px;
+ position:relative;box-shadow:5px 5px 0 rgba(54,59,62,.14);margin-top:22px}
+.panel-label{position:absolute;top:-10px;left:14px;background:#fff;border:1.5px solid var(--ink);
+ font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:2px 8px;font-weight:700}
+.cards,.leaders{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:8px}
+.card h3,.panel h3,.program h3,.archive-item h3{font-size:17px;text-transform:uppercase;
+ letter-spacing:.05em;font-weight:800;margin-bottom:8px}
+.card p,.panel p{font-size:15px}
+a.more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+ font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--brass)}
+.ph{border:1.5px dashed var(--brass);background:rgba(181,146,78,.09);padding:0 6px;
+ font-size:.82em;color:#6f5a2a;white-space:normal}
+.stamp{display:inline-block;transform:rotate(-2deg);border:2.5px solid #6f5a2a;color:#6f5a2a;
+ text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.12em;padding:5px 12px;margin:8px 0}
+.photobox{border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,#fff,#fff 12px,rgba(51,96,143,.05) 12px,rgba(51,96,143,.05) 24px);
+ display:grid;place-items:center;min-height:150px;margin-top:16px;padding:14px;text-align:center}
+.evphoto{margin-top:14px;border:1.5px solid var(--ink);max-height:420px;object-fit:cover}
+.boq{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;font-size:14px;
+ border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.boq th,.boq td{border:1px solid var(--ink);padding:10px 12px;text-align:left}
+.boq th{background:var(--coal);color:var(--paper);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.boq td:first-child{width:56px;text-align:center}
+.boq td:last-child{text-align:right}
+.note{font-size:13px;color:#4a5261;margin-top:12px;max-width:60ch}
+.leader{border:1.5px solid var(--ink);background:#fff;padding:20px;text-align:center;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.leader .headshot{width:104px;height:104px;border-radius:50%;border:1.5px dashed var(--brass);
+ background:rgba(181,146,78,.07);display:grid;place-items:center;margin:0 auto 12px;
+ font-size:10px;color:#6f5a2a;padding:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+img.headshot{border-style:solid;object-fit:cover}
+.leader h3{font-size:15px}
+.role{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#6f5a2a;font-weight:700;margin-top:6px}
+.rowlist{margin-top:20px;border:1.5px solid var(--ink);background:#fff;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.rowitem{padding:16px 18px;border-bottom:1px solid var(--rule)}
+.rowitem:last-child{border-bottom:none}
+.rowitem strong{font-size:16px;font-weight:800}
+.rowitem .meta,.meta{font-size:14px;color:#4a5261;margin-top:3px}
+ol.rules,ol.steps{margin:14px 0 0 22px;max-width:62ch}
+ol.rules li,ol.steps li{margin-bottom:10px}
+.archive-item{border:1.5px solid var(--ink);background:#fff;padding:20px;margin-top:20px;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+.btnrow{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--brass);color:#fff;text-decoration:none;padding:12px 22px;
+ font-weight:800;letter-spacing:.1em;font-size:12px;text-transform:uppercase;border:1.5px solid var(--ink);
+ box-shadow:4px 4px 0 var(--ink);cursor:pointer}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+@media(prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+.tb{width:100%;border-collapse:collapse;border-top:2px solid var(--ink);margin-top:44px;background:#fff}
+.tb td{border:1px solid var(--ink);padding:7px 12px;font-size:11px;letter-spacing:.08em}
+.tb .lbl{display:block;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#6f5a2a;font-weight:700}
+.tb .val{text-transform:uppercase;font-weight:700}
+.loading{opacity:.6;font-style:italic}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sheet">
+  <div class="band">
+    <img src="scd-logo.jpg" alt="Society of Capital Design logo showing the letters SCD with gears, a rising chart and a compass needle">
+    <div>
+      <div class="org">Society of Capital Design</div>
+      <div class="sub">Drawing set · Sheet 01 of 05</div>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Sheet index">
+    <a href="index.html">01 Home</a>
+    <a href="about.html">02 About</a>
+    <a href="events.html">03 Events + Competitions</a>
+    <a href="network.html" aria-current="page">04 Network</a>
+    <a href="newsletter.html">05 Newsletter</a>
+    <a href="join.html">06 Join</a>
+  </nav>
+  <main id="main">
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The SCD Network</p>
+    <h1>Clubs and societies<br>in the network</h1>
+    <p class="lede">SCD chapters and affiliated clubs across schools and countries. Every activity listed here happened, was reported by the club that ran it, and is verified before publication.</p>
+
+    <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Recent activity</h2></div>
+    <div id="activity-feed"><p class="loading">Loading</p></div>
+
+    <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">B</span><h2>Directory</h2></div>
+    <div id="directory"><p class="loading">Loading</p></div>
+
+    <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">C</span><h2>Join the network</h2></div>
+    <div class="panel">
+      <span class="panel-label">For club presidents</span>
+      <p style="margin-top:10px"><strong>What your club keeps.</strong> Your name, your identity, your leadership, and full control of what you run at your school. Affiliation adds, it does not absorb.</p>
+      <p><strong>What your members gain.</strong> Entry to every SCD competition cycle, the Bulletin every issue, invitations to network events, and their work published alongside students from other schools and countries.</p>
+      <p><strong>What your chapter lead gains.</strong> A named position in a cross school network, judging and marking experience against a published rubric, and a track record that is verifiable because we only publish what happened.</p>
+      <p><strong>How to join.</strong> Email us with your club name, school, and a short description of what you currently run. We reply to every message.</p>
+      <p class="meta" style="margin-top:12px">societyofcapitaldesign@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+    <div class="wrap">
+      <table class="tb" aria-label="Title block">
+        <tr>
+          <td><span class="lbl">Sheet title</span><span class="val">Network directory</span></td>
+          <td><span class="lbl">Sheet</span><span class="val">04 / 06</span></td>
+          <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025 · UAE</span></td>
+        </tr>
+      </table>
+    </div>
+  </main>
+</div>
+<style>
+.feed-item{border:1.5px solid var(--ink);background:#fff;padding:12px 16px;margin-top:10px;box-shadow:4px 4px 0 rgba(54,59,62,.12);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.feed-item .fmain{font-weight:800;font-size:15px}
+.feed-item .fmeta{font-size:13px;color:#4a5261}
+.club-entry{border:1.5px solid var(--ink);background:#fff;margin-top:16px;box-shadow:5px 5px 0 rgba(54,59,62,.14);padding:18px}
+.club-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border:1.5px solid var(--brass);color:var(--brass);margin-left:10px;vertical-align:middle}
+.club-tag.founding{background:var(--brass);color:#fff}
+.country-head{font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#4a5261;margin-top:28px;border-bottom:1.5px solid var(--rule);padding-bottom:6px}
+.club-activity{border-top:1px solid var(--rule);padding:10px 0 4px;margin-top:10px}
+.club-activity .an{font-weight:700;font-size:14px}
+.club-activity .am{font-size:13px;color:#4a5261}
+.club-activity img{max-width:280px;height:auto;display:block;margin-top:8px;border:1.5px solid var(--ink)}
+</style>
+<script>
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ph = s => `<span class="ph">${esc(s)}</span>`;
+const fmt = s => esc(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
+let __content = null;
+async function content(){
+  if(__content) return __content;
+  try{
+    const r = await fetch("content.json?v=" + Date.now());
+    __content = r.ok ? await r.json() : {};
+  }catch(e){ __content = {}; }
+  return __content;
+}
+async function rows(table){
+  const c = await content();
+  const a = Array.isArray(c[table]) ? c[table] : [];
+  return a.slice().sort((x,y) => (parseInt(x.sort)||100) - (parseInt(y.sort)||100));
+}
+async function settings(){
+  const c = await content();
+  return c.settings || {};
+}
+
+async function applyText(map){
+  const c = await content(); const t = c.text || {};
+  for(const [id,key] of Object.entries(map)){
+    const el = document.getElementById(id);
+    if(el && t[key] && String(t[key]).trim()) el.innerHTML = fmt(t[key]);
+  }
+}
+
+function parseDate(d){
+  const t = Date.parse(d);
+  return isNaN(t) ? 0 : t;
+}
+
+(async () => {
+  const clubs = await rows("network_clubs");
+  const acts = await rows("network_activities");
+
+  // ── Activity feed: most recent 8 across all clubs ──
+  const F = document.getElementById("activity-feed");
+  const clubByName = {};
+  clubs.forEach(c => clubByName[(c.club_name||"").trim().toLowerCase()] = c);
+  const sortedActs = acts.slice().sort((a,b) => parseDate(b.date) - parseDate(a.date));
+  const recent = sortedActs.slice(0, 8);
+  if(recent.length){
+    F.innerHTML = recent.map(a => {
+      const c = clubByName[(a.club||"").trim().toLowerCase()] || {};
+      return `<div class="feed-item">
+        <div>
+          <div class="fmain">${fmt(a.event_name)}</div>
+          <div class="fmeta">${fmt(c.club_name||a.club||"")} · ${fmt(c.school||"")} · ${fmt(c.country||"")}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="fmeta">${fmt(a.date||"")}</div>
+          ${a.attendees ? `<div class="fmeta"><strong>${esc(a.attendees)}</strong> attended</div>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+  } else {
+    F.innerHTML = '<p class="meta">No activities posted yet. The first club reports will appear here.</p>';
+  }
+
+  // ── Directory grouped by country, clubs ordered by most recent activity ──
+  const D = document.getElementById("directory");
+  if(!clubs.length){
+    D.innerHTML = '<p class="meta">The directory is being assembled. Chapters and affiliates will be listed here.</p>';
+    return;
+  }
+  const lastAct = {};
+  acts.forEach(a => {
+    const k = (a.club||"").trim().toLowerCase();
+    const t = parseDate(a.date);
+    if(!lastAct[k] || t > lastAct[k]) lastAct[k] = t;
+  });
+  const countries = {};
+  clubs.forEach(c => {
+    const co = (c.country||"Other").trim();
+    (countries[co] = countries[co] || []).push(c);
+  });
+  const countryNames = Object.keys(countries).sort();
+  D.innerHTML = countryNames.map(co => {
+    const list = countries[co].slice().sort((a,b) =>
+      (lastAct[(b.club_name||"").trim().toLowerCase()]||0) - (lastAct[(a.club_name||"").trim().toLowerCase()]||0));
+    return `<div class="country-head">${esc(co)}</div>` + list.map(c => {
+      const k = (c.club_name||"").trim().toLowerCase();
+      const clubActs = sortedActs.filter(a => (a.club||"").trim().toLowerCase() === k);
+      const isFounding = (c.type||"").toLowerCase().includes("found");
+      return `<div class="club-entry">
+        <h3 style="display:inline;font-size:18px">${fmt(c.club_name)}</h3>
+        <span class="club-tag ${isFounding ? "founding" : ""}">${isFounding ? "Founding Chapter" : "Affiliate"}</span>
+        <p class="meta" style="margin-top:6px">${fmt(c.school||"")} · ${fmt(c.city||"")}${c.joined ? " · In the network since " + fmt(c.joined) : ""}${c.lead ? " · Chapter lead: " + fmt(c.lead) : ""}</p>
+        ${c.description ? `<p style="margin-top:8px;font-size:15px">${fmt(c.description)}</p>` : ""}
+        ${clubActs.length ? clubActs.map(a => `<div class="club-activity">
+          <div class="an">${fmt(a.event_name)}</div>
+          <div class="am">${fmt(a.date||"")}${a.attendees ? " · " + esc(a.attendees) + " attended" : ""}</div>
+          ${a.description ? `<div class="am" style="margin-top:4px">${fmt(a.description)}</div>` : ""}
+          ${a.photo_url ? `<img src="${esc(a.photo_url)}" alt="${esc(a.photo_alt||a.event_name)}">` : ""}
+        </div>`).join("") : ""}
+      </div>`;
+    }).join("");
+  }).join("");
+})();
+</script>
+</body>
+</html>

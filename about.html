@@ -119,8 +119,9 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     <a href="index.html">01 Home</a>
     <a href="about.html" aria-current="page">02 About</a>
     <a href="events.html">03 Events + Competitions</a>
-    <a href="newsletter.html">04 Newsletter</a>
-    <a href="join.html">05 Join</a>
+    <a href="network.html">04 Network</a>
+    <a href="newsletter.html">05 Newsletter</a>
+    <a href="join.html">06 Join</a>
   </nav>
   <main id="main">
 
@@ -128,8 +129,8 @@ ol.rules li,ol.steps li{margin-bottom:10px}
   <div class="wrap">
     <p class="eyebrow">About</p>
     <h1>About SCD</h1>
-    <p class="lede" id="t-about-1">The Society of Capital Design was founded in 2025 by two students, one focused on economics and one on engineering, on a simple observation: the interesting problems live where the two fields meet. Every bridge is a budget. Every budget builds something.</p>
-    <p class="lede" id="t-about-2">SCD runs through school chapters across the UAE, each with a named student chapter lead. Our programs, essay competitions, speaker sessions and the SCD Bulletin, all put economics students and engineering students on the same problem.</p>
+    <p class="lede" id="t-about-1">The Society of Capital Design was founded in 2025 by two students, one focused on finance and one on engineering, on a simple observation: the interesting problems live where the two fields meet. Every bridge is a budget. Every budget builds something.</p>
+    <p class="lede" id="t-about-2">SCD runs through school chapters across the UAE, each with a named student chapter lead. Our programs, essay competitions, speaker sessions and the SCD Bulletin, all put finance students and engineering students on the same problem.</p>
 
     <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Leadership</h2></div>
     <div class="leaders" id="leaders"><p class="loading">Loading</p></div>
@@ -160,7 +161,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
       <table class="tb" aria-label="Title block">
         <tr>
           <td><span class="lbl">Sheet title</span><span class="val">About SCD</span></td>
-          <td><span class="lbl">Sheet</span><span class="val">02 / 05</span></td>
+          <td><span class="lbl">Sheet</span><span class="val">02 / 06</span></td>
           <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025 · UAE</span></td>
         </tr>
       </table>
@@ -215,7 +216,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
       <h3>${l.name && l.name.trim() ? fmt(l.name) : ph("[Name, CRM Confirmed]")}</h3>
       <p class="role">${fmt(l.role)}</p></div>`).join("");
   } else {
-    L.innerHTML = ["Co founder · Economics","Co founder · Engineering","Head of Marketing","Head of Operations"]
+    L.innerHTML = ["Co founder · Finance","Co founder · Engineering","Head of Marketing","Head of Operations"]
       .map(r => `<div class="leader"><div class="headshot">[photo optional]</div>
         <h3>${ph("[Name, CRM Confirmed]")}</h3><p class="role">${r}</p></div>`).join("");
   }

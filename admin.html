@@ -273,11 +273,36 @@ const SCHEMAS = {
       ["photo_size_2","select","Photo 2 size","full|Full width,half|Half width,small|Small"],
       ["sort","text","Sort order (1 shows first)"]]
   },
+  network_clubs: { label:"Network clubs",
+    hint:"Every club and society in the SCD network. The club name must match exactly what you type in the Club field of Network activities, that is how activities attach to clubs.",
+    sub:r=>((r.school||"") + (r.country ? " · " + r.country : "")),
+    fields:[["club_name","text","Club name as they use it at their school"],
+      ["school","text","School name"],
+      ["city","text","City"],
+      ["country","text","Country (clubs are grouped by this on the page)"],
+      ["type","select","Status","founding|Founding Chapter,affiliate|Affiliate"],
+      ["joined","text","When they joined the network (for example November 2025)"],
+      ["lead","text","Chapter lead first name only, unless full name permission is confirmed in writing"],
+      ["description","textarea","Short description written by the club themselves, two to three sentences"],
+      ["sort","text","Sort order within country (optional, recency of activity usually decides)"]]
+  },
+  network_activities: { label:"Network activities",
+    hint:"Every activity a network club reports. Club field must exactly match a Club name in Network clubs. Only add activities that actually happened and are verified.",
+    sub:r=>((r.club||"") + (r.date ? " · " + r.date : "")),
+    fields:[["club","text","Club name, exactly as entered in Network clubs"],
+      ["event_name","text","Event name"],
+      ["date","text","Date (use a real parseable date like 12 March 2026, the feed sorts by this)"],
+      ["attendees","text","Attendee count (number only)"],
+      ["description","textarea","Short description of what happened, one to two sentences"],
+      ["photo_url","file","Photo from the event (optional, real photos only)"],
+      ["photo_alt","text","Photo description for screen readers"],
+      ["sort","text","Sort order (optional)"]]
+  },
   cycles: { label:"Essay cycle", titleField:"name", sub:r=>r.status,
     fields:[["name","text","Cycle name (for example Term 1 2026)"],
       ["status","text","Status: opens, open, or closed"],
       ["deadline_text","text","Deadline (as it should appear)"],
-      ["econ_prompts","textarea","Economics prompts (one per line)"],
+      ["econ_prompts","textarea","Finance prompts (one per line)"],
       ["eng_prompts","textarea","Engineering prompts (one per line)"],
       ["is_current","check","This is the current cycle shown on the site"]],
     hint:"Only one cycle should have Current ticked at a time." },
@@ -306,9 +331,9 @@ const SCHEMAS = {
     hint:"Remember to update the School chapters quantity under Numbers when you add or remove a chapter." },
   leaders: { label:"Leadership", titleField:"role", sub:r=>r.name,
     fields:[["name","text","Name (with the person's permission)"],
-      ["role","text","Role (for example Co founder · Economics)"],
+      ["role","text","Role (for example Co founder · Finance)"],
       ["photo_url","file","Portrait photo (optional)"],["sort","text","Sort order"]],
-    hint:"Four roles: Co founder · Economics, Co founder · Engineering, Head of Marketing, Head of Operations." },
+    hint:"Four roles: Co founder · Finance, Co founder · Engineering, Head of Marketing, Head of Operations." },
   ledger: { label:"Numbers", titleField:"description", sub:r=>r.qty,
     fields:[["description","text","Description (for example Registered members)"],
       ["qty","text","Quantity (leave blank until verified in the Evidence Register)"],
@@ -505,7 +530,7 @@ function renderPreview(k, s, formEl){
   } else if(k==="cycles"){
     html = `<div class="p-title">${bold(vals.name)}</div>
       <div class="p-meta">Status: ${e(vals.status)} · Deadline: ${e(vals.deadline_text)}</div>
-      ${vals.econ_prompts ? `<div style="margin-top:10px"><strong>Economics:</strong><br>${bold(vals.econ_prompts).replace(/\n/g,"<br>")}</div>` : ""}
+      ${vals.econ_prompts ? `<div style="margin-top:10px"><strong>Finance:</strong><br>${bold(vals.econ_prompts).replace(/\n/g,"<br>")}</div>` : ""}
       ${vals.eng_prompts ? `<div style="margin-top:10px"><strong>Engineering:</strong><br>${bold(vals.eng_prompts).replace(/\n/g,"<br>")}</div>` : ""}`;
   } else if(k==="issues"){
     html = `<div class="p-row"><strong>${vals.link_url ? `<a href="${e(vals.link_url)}">${bold(vals.title)}</a>` : bold(vals.title)}</strong>

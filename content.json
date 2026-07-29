@@ -59,6 +59,19 @@
       "photo_size": "full",
       "is_next": true,
       "sort": 100
+    },
+    {
+      "id": 1785309731599,
+      "name": "Research Workshop: How to Plan and Make a Research Project",
+      "date_text": "May 2026",
+      "venue": "Online",
+      "description": "Founders-led workshop teaching SCD members how to develop a research question, structure a methodology, conduct primary and secondary research, and produce a publishable paper. Drawing directly from the founders' experience writing and publishing two original research papers.",
+      "poster_url": "",
+      "photo_url": "",
+      "photo_alt": "",
+      "photo_size": "full",
+      "is_next": true,
+      "sort": 100
     }
   ],
   "cycles": [

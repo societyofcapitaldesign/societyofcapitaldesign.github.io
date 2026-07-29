@@ -129,7 +129,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
   <div class="wrap">
     <p class="eyebrow">The SCD Network</p>
     <h1>Clubs and societies<br>in the network</h1>
-    <p class="lede">SCD chapters and affiliated clubs across schools and countries. Every activity listed here happened, was reported by the club that ran it, and is verified before publication.</p>
+    <p class="lede" id="t-network-intro">SCD chapters and affiliated clubs across schools and countries. Every activity listed here happened, was reported by the club that ran it, and is verified before publication.</p>
 
     <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Recent activity</h2></div>
     <div id="activity-feed"><p class="loading">Loading</p></div>
@@ -140,10 +140,10 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">C</span><h2>Join the network</h2></div>
     <div class="panel">
       <span class="panel-label">For club presidents</span>
-      <p style="margin-top:10px"><strong>What your club keeps.</strong> Your name, your identity, your leadership, and full control of what you run at your school. Affiliation adds, it does not absorb.</p>
-      <p><strong>What your members gain.</strong> Entry to every SCD competition cycle, the Bulletin every issue, invitations to network events, and their work published alongside students from other schools and countries.</p>
-      <p><strong>What your chapter lead gains.</strong> A named position in a cross school network, judging and marking experience against a published rubric, and a track record that is verifiable because we only publish what happened.</p>
-      <p><strong>How to join.</strong> Email us with your club name, school, and a short description of what you currently run. We reply to every message.</p>
+      <p style="margin-top:10px" id="t-net-keeps"><strong>What your club keeps.</strong> Your name, your identity, your leadership, and full control of what you run at your school. Affiliation adds, it does not absorb.</p>
+      <p id="t-net-members"><strong>What your members gain.</strong> Entry to every SCD competition cycle, the Bulletin every issue, invitations to network events, and their work published alongside students from other schools and countries.</p>
+      <p id="t-net-lead"><strong>What your chapter lead gains.</strong> A named position in a cross school network, judging and marking experience against a published rubric, and a track record that is verifiable because we only publish what happened.</p>
+      <p id="t-net-how"><strong>How to join.</strong> Email us with your club name, school, and a short description of what you currently run. We reply to every message.</p>
       <p class="meta" style="margin-top:12px">societyofcapitaldesign@gmail.com</p>
     </div>
   </div>
@@ -278,6 +278,7 @@ function parseDate(d){
     }).join("");
   }).join("");
 })();
+applyText({"t-network-intro":"network_intro","t-net-keeps":"network_join_keeps","t-net-members":"network_join_members","t-net-lead":"network_join_lead","t-net-how":"network_join_how"});
 </script>
 </body>
 </html>

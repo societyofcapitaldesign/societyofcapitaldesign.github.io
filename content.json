@@ -523,6 +523,18 @@
       "lead": "",
       "description": "",
       "sort": 100
+    },
+    {
+      "id": 1785392999162,
+      "club_name": "test",
+      "school": "Altrincham Grammar School ",
+      "city": "London",
+      "country": "",
+      "type": "affiliate",
+      "joined": "",
+      "lead": "",
+      "description": "",
+      "sort": 100
     }
   ]
 }

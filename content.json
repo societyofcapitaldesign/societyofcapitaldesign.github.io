@@ -548,6 +548,17 @@
       "photo_url": "",
       "photo_alt": "",
       "sort": 100
+    },
+    {
+      "id": 1785394700593,
+      "club": "6",
+      "event_name": "First Session",
+      "date": "03/08/2026",
+      "attendees": "21",
+      "description": "",
+      "photo_url": "photos/1785394695343-Screenshot20250730at2.44.17PM.png",
+      "photo_alt": "",
+      "sort": 100
     }
   ]
 }

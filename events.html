@@ -139,8 +139,9 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     <a href="index.html">01 Home</a>
     <a href="about.html">02 About</a>
     <a href="events.html" aria-current="page">03 Events + Competitions</a>
-    <a href="newsletter.html">04 Newsletter</a>
-    <a href="join.html">05 Join</a>
+    <a href="network.html">04 Network</a>
+    <a href="newsletter.html">05 Newsletter</a>
+    <a href="join.html">06 Join</a>
   </nav>
   <main id="main">
 
@@ -181,7 +182,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     </div>
 
     <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Competition results</h2></div>
-    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events.</p>
+    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events. </p>
     <div id="results"><p class="loading">Loading</p></div>
     <h2 class="sheetidx" style="margin-top:36px">Event archive</h2>
     <div id="eventarchive"><p class="loading">Loading</p></div>
@@ -192,7 +193,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
       <table class="tb" aria-label="Title block">
         <tr>
           <td><span class="lbl">Sheet title</span><span class="val">Events + competitions</span></td>
-          <td><span class="lbl">Sheet</span><span class="val">03 / 05</span></td>
+          <td><span class="lbl">Sheet</span><span class="val">03 / 06</span></td>
           <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025 · UAE</span></td>
         </tr>
       </table>
@@ -267,7 +268,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
     CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
       <strong style="font-weight:800">${fmt(cur.name)}</strong>
       <p class="meta">Status: ${fmt(cur.status||"")} · Deadline: ${fmt(cur.deadline_text||"")}</p></div>
-      <div class="program"><span class="panel-label">Track 1</span><h3>Economics</h3>
+      <div class="program"><span class="panel-label">Track 1</span><h3>Finance</h3>
       <p>${cur.econ_prompts && cur.econ_prompts.trim() ? fmt(cur.econ_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>
       <div class="program"><span class="panel-label">Track 2</span><h3>Engineering</h3>
       <p>${cur.eng_prompts && cur.eng_prompts.trim() ? fmt(cur.eng_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>`;
@@ -275,7 +276,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
     CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
       <strong style="font-weight:800">${ph("[Term or cycle name, founders]")}</strong>
       <p class="meta">Status: ${ph("[opens / open / closed]")} · Deadline: ${ph("[Date, Evidence Register, Essay Cycle row]")}</p></div>
-      <div class="program"><span class="panel-label">Track 1</span><h3>Economics</h3><p>${ph("[Prompts published here when the cycle opens]")}</p></div>
+      <div class="program"><span class="panel-label">Track 1</span><h3>Finance</h3><p>${ph("[Prompts published here when the cycle opens]")}</p></div>
       <div class="program"><span class="panel-label">Track 2</span><h3>Engineering</h3><p>${ph("[Prompts published here when the cycle opens]")}</p></div>`;
   }
 

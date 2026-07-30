@@ -536,5 +536,18 @@
       "description": "",
       "sort": 100
     }
+  ],
+  "network_activities": [
+    {
+      "id": 1785393022367,
+      "club": "Shark Tank ",
+      "event_name": "Pitch Competition",
+      "date": "",
+      "attendees": "47",
+      "description": "",
+      "photo_url": "",
+      "photo_alt": "",
+      "sort": 100
+    }
   ]
 }

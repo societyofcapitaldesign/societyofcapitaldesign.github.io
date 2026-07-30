@@ -499,6 +499,18 @@
       "lead": "",
       "description": "",
       "sort": 100
+    },
+    {
+      "id": 1785392970061,
+      "club_name": "test",
+      "school": "test",
+      "city": "",
+      "country": "",
+      "type": "founding",
+      "joined": "",
+      "lead": "",
+      "description": "",
+      "sort": 100
     }
   ]
 }

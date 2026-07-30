@@ -123,6 +123,51 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .tb .lbl{display:block;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#6f5a2a;font-weight:700}
 .tb .val{text-transform:uppercase;font-weight:700}
 .loading{opacity:.6;font-style:italic}
+
+
+/* schedule as a vertical timeline */
+.timeline{position:relative;margin-top:8px;padding-left:8px}
+.timeline::before{content:"";position:absolute;left:14px;top:6px;bottom:6px;width:2px;background:var(--rule)}
+.tl-item{position:relative;padding:0 0 20px 46px}
+.tl-node{position:absolute;left:6px;top:2px;width:18px;height:18px;border:2.5px solid var(--brass);background:var(--paper);border-radius:50%;z-index:1}
+.tl-item.next .tl-node{background:var(--brass);box-shadow:0 0 0 5px rgba(181,146,78,.22)}
+.tl-when{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--brass)}
+.tl-card{border:1.5px solid var(--ink);background:#fff;box-shadow:4px 4px 0 rgba(54,59,62,.14);margin-top:6px;transition:box-shadow .12s}
+.tl-card.open{box-shadow:6px 6px 0 var(--brass)}
+.tl-head{padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.tl-head:hover{background:rgba(181,146,78,.05)}
+.tl-name{font-weight:800;font-size:17px;line-height:1.2}
+.tl-venue{font-size:12.5px;color:#4a5261;margin-top:5px}
+.tl-badge{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#fff;background:var(--brass);padding:3px 9px;white-space:nowrap;flex-shrink:0}
+.tl-chev{width:22px;height:22px;flex-shrink:0;color:var(--brass);transition:transform .2s}
+.tl-card.open .tl-chev{transform:rotate(180deg)}
+.tl-body{display:none;padding:0 18px 16px}
+.tl-card.open .tl-body{display:block}
+.tl-body img{max-width:100%;height:auto;display:block;margin-top:4px;border:1.5px solid var(--ink)}
+/* results as filing cards with a tab */
+.file-stack{margin-top:8px}
+.file-card{border:1.5px solid var(--ink);background:#fff;box-shadow:4px 4px 0 rgba(54,59,62,.14);margin-top:14px;position:relative}
+.file-card.open{box-shadow:6px 6px 0 var(--brass)}
+.file-tab{position:absolute;top:-1.5px;left:20px;transform:translateY(-100%);background:var(--coal);color:var(--brass);
+ font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;
+ padding:5px 14px 6px;border:1.5px solid var(--ink);border-bottom:none}
+.file-head{padding:16px 20px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.file-head:hover{background:rgba(181,146,78,.05)}
+.file-title{font-weight:800;font-size:16.5px;line-height:1.2}
+.file-meta{font-size:12.5px;color:#4a5261;margin-top:5px}
+.file-chev{width:22px;height:22px;flex-shrink:0;color:var(--brass);transition:transform .2s}
+.file-card.open .file-chev{transform:rotate(180deg)}
+.file-body{display:none;padding:0 20px 18px;border-top:1px solid var(--rule);margin-top:-1px;padding-top:14px}
+.file-card.open .file-body{display:block}
+.fwin{padding:9px 0;border-bottom:1px dotted var(--rule)}
+.fwin:last-child{border-bottom:none}
+.fwin strong{font-size:14.5px}
+.fwin .ft{font-size:12px;color:#4a5261;margin-top:2px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.ffiles{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.ffile{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border:1.5px solid var(--ink);background:var(--brass);
+ color:#241c0c;font-size:12px;font-weight:800;text-decoration:none;letter-spacing:.04em;text-transform:uppercase}
+.ffile:hover{filter:brightness(1.08)}
+.file-body img{max-width:100%;height:auto;display:block;margin-top:12px;border:1.5px solid var(--ink)}
 </style>
 </head>
 <body>
@@ -168,7 +213,8 @@ ol.rules li,ol.steps li{margin-bottom:10px}
           <li>Original work only. Sources must be cited. Any AI assistance must be disclosed on the cover page.</li>
           <li>One entry per student per track. You may enter both tracks.</li>
           <li>Word limit: <span id="word-limit"></span>, excluding references.</li>
-          <li>Entries are scored out of 50.</li>
+          <li>Your name, school and year group appear on the cover page only. Judging is blind.</li>
+          <li>Entries are scored out of 50 against the published rubric for the cycle.</li>
         </ol>
       </div>
       <div>
@@ -182,9 +228,9 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     </div>
 
     <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Competition results</h2></div>
-    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events. </p>
+    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events. Entries appear here only once marked CITABLE in the Evidence Register. Winner names are published only with written permission.</p>
     <div id="results"><p class="loading">Loading</p></div>
-    <h2 class="sheetidx" style="margin-top:36px">Event archive</h2>
+    <div class="callout" style="margin-top:40px"><span class="bubble" aria-hidden="true">F</span><h2>Event archive</h2></div>
     <div id="eventarchive"><p class="loading">Loading</p></div>
   </div>
 </section>
@@ -242,19 +288,28 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const EL = document.getElementById("events-list");
   const evs = await rows("events","sort");
   if(evs && evs.length){
-    EL.innerHTML = evs.map(e => `<div class="archive-item">
-      <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
-        <div>
-          <h3>${fmt(e.name)}</h3>
-          <p class="meta">${fmt(e.date_text||"")} · ${fmt(e.venue||"")} · ${fmt(e.description||"")} Status: scheduled.</p>
+    const nextId = ((evs||[]).filter(e => e.is_next)[0] || evs[0] || {}).name;
+    EL.innerHTML = `<div class="timeline">` + evs.map(e => {
+      const isNext = e.name === nextId;
+      return `<div class="tl-item ${isNext ? "next" : ""}">
+        <span class="tl-node"></span>
+        <div class="tl-when">${fmt(e.date_text||"Date to follow")}</div>
+        <div class="tl-card">
+          <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+            <div>
+              <div class="tl-name">${fmt(e.name)}</div>
+              <div class="tl-venue">${fmt(e.venue||"")}${e.description ? " · " + fmt(e.description) : ""}</div>
+            </div>
+            ${isNext ? `<span class="tl-badge">Next up</span>` : `<svg class="tl-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>`}
+          </div>
+          <div class="tl-body">
+            ${e.poster_url ? `<img src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}" style="max-width:400px">` : ""}
+            ${e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : ""}
+            ${!e.poster_url && !e.photo_url ? `<p class="meta" style="padding-top:2px">Details to follow.</p>` : ""}
+          </div>
         </div>
-        <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-      <div class="archive-body">
-        ${e.poster_url ? `<img src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}" style="max-width:400px;height:auto;margin-top:8px;display:block;border:1.5px solid var(--ink)">` : ""}
-        ${e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}" style="margin-top:12px">` : ""}
-      </div>
-    </div>`).join("");
+      </div>`;
+    }).join("") + `</div>`;
   } else {
     EL.innerHTML = `<div class="rowlist"><div class="rowitem">
       <strong>${ph("[No events listed yet, Evidence Register, Events rows]")}</strong>
@@ -283,36 +338,34 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const R = document.getElementById("results");
   const res = await rows("results","sort");
   if(res && res.length){
-    R.innerHTML = res.map((r,i) => {
+    R.innerHTML = `<div class="file-stack">` + res.map((r,i) => {
       const winners = (r.winners||r.winner||"").split("\n").filter(w=>w.trim());
       const files = [];
       if(r.file_url) files.push({url:r.file_url, name:r.file_label||"View document"});
       if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
       if(r.file_url_3) files.push({url:r.file_url_3, name:r.file_label_3||"View document"});
       const photos = [];
-      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||""});
-      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||""});
-      return `<div class="archive-item" data-idx="${i}">
-        <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title});
+      return `<div class="file-card">
+        <span class="file-tab">Result ${String(i+1).padStart(2,"0")}</span>
+        <div class="file-head" onclick="this.parentElement.classList.toggle('open')">
           <div>
-            <h3>${fmt(r.title)}</h3>
-            <p class="meta">${fmt(r.meta||"")}</p>
+            <div class="file-title">${fmt(r.title)}</div>
+            <div class="file-meta">${fmt(r.meta||"")}</div>
           </div>
-          <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          <svg class="file-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </div>
-        <div class="archive-body">
-          ${winners.length ? `<div style="margin-top:4px">${winners.map(w => {
+        <div class="file-body">
+          ${winners.length ? winners.map(w => {
             const parts = w.split("|");
-            return `<div class="winner-row"><strong>${fmt(parts[0])}</strong>${parts[1] ? `<div class="wmeta">${fmt(parts[1])}</div>` : ""}</div>`;
-          }).join("")}</div>` : ""}
-          ${photos.length ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
-            ${photos.map(p => `<img class="evphoto ${esc(p.size)}" src="${esc(p.url)}" alt="${esc(p.alt)}" style="margin:0">`).join("")}
-          </div>` : ""}
-          ${files.length ? `<div class="archive-files">${files.map(f =>
-            `<a class="archive-file" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
+            return `<div class="fwin"><strong>${fmt(parts[0])}</strong>${parts[1] ? `<div class="ft">${fmt(parts[1])}</div>` : ""}</div>`;
+          }).join("") : ""}
+          ${photos.length ? photos.map(p => `<img src="${esc(p.url)}" alt="${esc(p.alt)}">`).join("") : ""}
+          ${files.length ? `<div class="ffiles">${files.map(f => `<a class="ffile" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
         </div>
       </div>`;
-    }).join("");
+    }).join("") + `</div>`;
   } else {
     R.innerHTML = `<div class="archive-item"><h3>${ph("[No results citable yet]")}</h3>
       <p class="meta">The first cycle's results will appear here once its Evidence Register row is marked CITABLE.</p>
@@ -322,33 +375,31 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const EA = document.getElementById("eventarchive");
   const ea = await rows("event_archive","sort");
   if(ea && ea.length){
-    EA.innerHTML = ea.map((r,i) => {
+    EA.innerHTML = `<div class="file-stack">` + ea.map((r,i) => {
       const files = [];
       if(r.file_url) files.push({url:r.file_url, name:r.file_label||"View document"});
       if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
       const photos = [];
-      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||""});
-      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||""});
-      return `<div class="archive-item" data-idx="ea${i}">
-        <div class="archive-head" onclick="this.parentElement.classList.toggle('open')">
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title});
+      return `<div class="file-card">
+        <span class="file-tab">Event ${String(i+1).padStart(2,"0")}</span>
+        <div class="file-head" onclick="this.parentElement.classList.toggle('open')">
           <div>
-            <h3>${fmt(r.title)}</h3>
-            <p class="meta">${fmt(r.meta||"")}</p>
+            <div class="file-title">${fmt(r.title)}</div>
+            <div class="file-meta">${fmt(r.meta||"")}</div>
           </div>
-          <svg class="archive-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          <svg class="file-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </div>
-        <div class="archive-body">
-          ${r.description ? `<p style="margin-top:8px">${fmt(r.description)}</p>` : ""}
+        <div class="file-body">
+          ${r.description ? `<p style="margin-top:0">${fmt(r.description)}</p>` : ""}
           ${r.speaker ? `<p style="margin-top:8px"><strong>Speaker:</strong> ${fmt(r.speaker)}</p>` : ""}
-          ${r.attendance ? `<p style="margin-top:4px"><strong>Attendance:</strong> ${esc(r.attendance)} students${r.schools ? " from "+esc(r.schools)+" schools" : ""}</p>` : ""}
-          ${photos.length ? `<div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:flex-start">
-            ${photos.map(p => `<img class="evphoto ${esc(p.size)}" src="${esc(p.url)}" alt="${esc(p.alt)}" style="margin:0">`).join("")}
-          </div>` : ""}
-          ${files.length ? `<div class="archive-files">${files.map(f =>
-            `<a class="archive-file" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
+          ${r.attendance ? `<p style="margin-top:4px"><strong>Attendance:</strong> ${esc(r.attendance)} students${r.schools ? " from " + esc(r.schools) + " schools" : ""}</p>` : ""}
+          ${photos.length ? photos.map(p => `<img src="${esc(p.url)}" alt="${esc(p.alt)}">`).join("") : ""}
+          ${files.length ? `<div class="ffiles">${files.map(f => `<a class="ffile" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
         </div>
       </div>`;
-    }).join("");
+    }).join("") + `</div>`;
   } else { EA.innerHTML = '<p class="meta">No past events archived yet.</p>'; }
 
 })();

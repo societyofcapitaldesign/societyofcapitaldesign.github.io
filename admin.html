@@ -364,7 +364,7 @@ const SCHEMAS = {
       ["network_join_how","Network: Join section, how to join"]],
     hint:"Rewrite any paragraph to your liking. Leave a field blank to keep the standard wording. Wrap words in double asterisks like **this** to make them bold on the site." },
   settings: { label:"Emails + rules", special:true,
-    keys:[["logo_url","SCD logo image (upload or paste a link, shows on the home page under the buttons)"],
+    keys:[["logo_url","SCD logo image (shows on the home page under the buttons)","file"],
       ["contact_email","Contact email (About and Join sheets)"],
       ["join_email","Join email"],["submissions_email","Essay submissions email"],
       ["subscribe_email","Bulletin subscribe email"],
@@ -426,16 +426,31 @@ function openTab(k){
     const target = s.target || "settings";
     const map = DB[target] || {};
     list.innerHTML = `<form class="aform">
-      ${s.keys.map(([key,label]) => s.multiline
+      ${s.keys.map(([key,label,kind]) => kind === "file"
+        ? `<label>${esc(label)}</label>
+           <input type="text" name="${key}" value="${esc(map[key]||"")}" placeholder="Uploads fill this automatically, or paste a link">
+           <input type="file" data-target="${key}" style="margin-top:6px">`
+        : s.multiline
         ? `<label>${esc(label)}</label><textarea name="${key}">${esc(map[key]||"")}</textarea>`
         : `<label>${esc(label)}</label><input type="text" name="${key}" value="${esc(map[key]||"")}">`).join("")}
       <div class="btnrow"><button class="btn" type="submit">Save all</button></div>
       <p class="msg" id="smsg"></p></form>`;
+    list.querySelectorAll("input[type=file]").forEach(fi => fi.onchange = async () => {
+      const msg = document.getElementById("smsg");
+      if(!fi.files[0]) return;
+      msg.textContent="Uploading"; msg.className="msg";
+      try{
+        const folder = fi.files[0].type === "application/pdf" ? "bulletins" : "photos";
+        const path = await uploadBinary(fi.files[0], folder);
+        list.querySelector(`[name=${fi.dataset.target}]`).value = path;
+        msg.textContent="Uploaded. Now press Save all."; msg.className="msg ok";
+      }catch(e){ msg.textContent="Upload failed: "+e.message; msg.className="msg err"; }
+    });
     list.querySelector("form").onsubmit = async e => {
       e.preventDefault();
       const msg = document.getElementById("smsg"); msg.textContent="Saving"; msg.className="msg";
       DB[target] = DB[target] || {};
-      s.keys.forEach(([key]) => DB[target][key] = list.querySelector(`[name=${key}]`).value);
+      s.keys.forEach(([key]) => DB[target][key] = list.querySelector(`input[name=${key}], textarea[name=${key}]`).value);
       try{ await saveDB(s.label); msg.textContent="Saved. Live in about a minute."; msg.className="msg ok"; }
       catch(err){ msg.textContent="Save failed: "+err.message; msg.className="msg err"; }
     };

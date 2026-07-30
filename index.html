@@ -243,8 +243,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const box = document.getElementById("home-logo");
   if(s.logo_url && String(s.logo_url).trim()){
     box.innerHTML = `<img src="${esc(s.logo_url)}" alt="Society of Capital Design logo"
-      style="max-width:100%;width:100%;height:auto;display:block">`;
-  }
+style="max-width:100%;width:100%;height:auto;display:block;border-radius:16px">`  }
 })();
 applyText({"t-tagline":"home_tagline","t-home-intro":"home_intro","t-home-membership":"home_membership","t-prog1":"program_1","t-prog2":"program_2","t-prog3":"program_3"});
 </script>

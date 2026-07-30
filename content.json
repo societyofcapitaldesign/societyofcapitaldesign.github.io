@@ -511,6 +511,18 @@
       "lead": "",
       "description": "",
       "sort": 100
+    },
+    {
+      "id": 1785392987621,
+      "club_name": "test",
+      "school": "Dubai College",
+      "city": "Dubai",
+      "country": "",
+      "type": "affiliate",
+      "joined": "",
+      "lead": "",
+      "description": "",
+      "sort": 100
     }
   ]
 }

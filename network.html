@@ -134,8 +134,10 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Recent activity</h2></div>
     <div id="activity-feed"><p class="loading">Loading</p></div>
 
-    <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">B</span><h2>Directory</h2></div>
-    <div id="directory"><p class="loading">Loading</p></div>
+    <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">B</span><h2>Network map</h2></div>
+    <p class="meta" style="margin-top:-6px">Drawn like the system it is. Select any club on the map for its full record.</p>
+    <div id="netmap-scroll"><div id="directory"><p class="loading">Loading</p></div></div>
+    <div id="club-detail"></div>
 
     <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">C</span><h2>Join the network</h2></div>
     <div class="panel">
@@ -172,6 +174,17 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .club-activity .an{font-weight:700;font-size:14px}
 .club-activity .am{font-size:13px;color:#4a5261}
 .club-activity img{max-width:280px;height:auto;display:block;margin-top:8px;border:1.5px solid var(--ink)}
+#netmap-scroll{overflow-x:auto;margin-top:16px;border:1.5px solid var(--ink);background:#fff;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
+#netmap-scroll svg{display:block;min-width:820px;width:100%;height:auto;
+ background-image:linear-gradient(rgba(51,96,143,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(51,96,143,.06) 1px,transparent 1px);
+ background-size:20px 20px}
+.nm-chip{cursor:pointer}
+.nm-chip:hover .nm-box{fill:#f6f1e6}
+.nm-chip.selected .nm-box{stroke-width:3}
+#club-detail{margin-top:18px}
+#club-detail .club-entry{animation:cd-in .18s ease}
+@keyframes cd-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#club-detail .club-entry{animation:none}}
 </style>
 <script>
 
@@ -238,45 +251,122 @@ function parseDate(d){
     F.innerHTML = '<p class="meta">No activities posted yet. The first club reports will appear here.</p>';
   }
 
-  // ── Directory grouped by country, clubs ordered by most recent activity ──
+  // ── Network map: drafting-style schematic ──
   const D = document.getElementById("directory");
+  const DET = document.getElementById("club-detail");
   if(!clubs.length){
-    D.innerHTML = '<p class="meta">The directory is being assembled. Chapters and affiliates will be listed here.</p>';
+    D.innerHTML = '<p class="meta" style="padding:16px">The map is being drawn. Chapters and affiliates will appear here as they join.</p>';
     return;
   }
+
   const lastAct = {};
   acts.forEach(a => {
     const k = (a.club||"").trim().toLowerCase();
     const t = parseDate(a.date);
     if(!lastAct[k] || t > lastAct[k]) lastAct[k] = t;
   });
+  const now = Date.now(), DAY = 86400000;
+
   const countries = {};
   clubs.forEach(c => {
     const co = (c.country||"Other").trim();
     (countries[co] = countries[co] || []).push(c);
   });
   const countryNames = Object.keys(countries).sort();
-  D.innerHTML = countryNames.map(co => {
-    const list = countries[co].slice().sort((a,b) =>
-      (lastAct[(b.club_name||"").trim().toLowerCase()]||0) - (lastAct[(a.club_name||"").trim().toLowerCase()]||0));
-    return `<div class="country-head">${esc(co)}</div>` + list.map(c => {
+  countryNames.forEach(co => countries[co].sort((a,b) =>
+    (lastAct[(b.club_name||"").trim().toLowerCase()]||0) - (lastAct[(a.club_name||"").trim().toLowerCase()]||0)));
+
+  // geometry
+  const CHIP_X = 320, CHIP_W = 430, CHIP_H = 56, VGAP = 18, CO_PAD = 34, TOP = 30, BOT = 24;
+  const TRUNK_X = 190, BRANCH_X = 258, HUB_X = 86;
+  let y = TOP;
+  const blocks = [];
+  countryNames.forEach(co => {
+    const list = countries[co];
+    const blockTop = y;
+    y += 24; // country label
+    const chipYs = list.map((c,i) => { const cy = y; y += CHIP_H + VGAP; return cy; });
+    y += CO_PAD - VGAP;
+    blocks.push({co, list, blockTop, chipYs, jy: chipYs[0] + ((chipYs[chipYs.length-1] + CHIP_H) - chipYs[0])/2});
+  });
+  const H = Math.max(y + BOT, 280);
+  const HUB_Y = H/2;
+
+  const trunkTop = blocks[0].jy, trunkBot = blocks[blocks.length-1].jy;
+  const truncate = (s,n) => { s = String(s||""); return s.length > n ? s.slice(0,n-1) + "…" : s; };
+
+  let svg = `<svg viewBox="0 0 800 ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of clubs in the SCD network">`;
+
+  // hub → trunk
+  svg += `<line x1="${HUB_X+44}" y1="${HUB_Y}" x2="${TRUNK_X}" y2="${HUB_Y}" stroke="#363b3e" stroke-width="2"/>`;
+  if(blocks.length > 1 || Math.abs(trunkTop - HUB_Y) > 4){
+    svg += `<line x1="${TRUNK_X}" y1="${Math.min(trunkTop, HUB_Y)}" x2="${TRUNK_X}" y2="${Math.max(trunkBot, HUB_Y)}" stroke="#363b3e" stroke-width="2"/>`;
+  }
+
+  // hub node
+  svg += `<circle cx="${HUB_X}" cy="${HUB_Y}" r="44" fill="#363b3e" stroke="#b5924e" stroke-width="3"/>
+    <text x="${HUB_X}" y="${HUB_Y-2}" text-anchor="middle" fill="#edf0f3" font-size="17" font-weight="800" font-family="ui-monospace,Menlo,Consolas,monospace">SCD</text>
+    <text x="${HUB_X}" y="${HUB_Y+15}" text-anchor="middle" fill="#b5924e" font-size="8" letter-spacing="2" font-family="ui-monospace,Menlo,Consolas,monospace">NETWORK</text>`;
+
+  blocks.forEach(b => {
+    // junction diamond + country label
+    svg += `<rect x="${TRUNK_X-6}" y="${b.jy-6}" width="12" height="12" transform="rotate(45 ${TRUNK_X} ${b.jy})" fill="#fff" stroke="#363b3e" stroke-width="2"/>`;
+    svg += `<text x="${CHIP_X}" y="${b.blockTop+16}" fill="#4a5261" font-size="12" font-weight="800" letter-spacing="2" font-family="ui-monospace,Menlo,Consolas,monospace">${esc(b.co.toUpperCase())}</text>`;
+    // branch spine
+    svg += `<line x1="${TRUNK_X+8}" y1="${b.jy}" x2="${BRANCH_X}" y2="${b.jy}" stroke="#363b3e" stroke-width="1.5"/>`;
+    const midYs = b.chipYs.map(cy => cy + CHIP_H/2);
+    if(midYs.length > 1){
+      svg += `<line x1="${BRANCH_X}" y1="${Math.min(...midYs, b.jy)}" x2="${BRANCH_X}" y2="${Math.max(...midYs, b.jy)}" stroke="#363b3e" stroke-width="1.5"/>`;
+    }
+    b.list.forEach((c, i) => {
+      const cy = b.chipYs[i], my = cy + CHIP_H/2;
       const k = (c.club_name||"").trim().toLowerCase();
-      const clubActs = sortedActs.filter(a => (a.club||"").trim().toLowerCase() === k);
-      const isFounding = (c.type||"").toLowerCase().includes("found");
-      return `<div class="club-entry">
-        <h3 style="display:inline;font-size:18px">${fmt(c.club_name)}</h3>
-        <span class="club-tag ${isFounding ? "founding" : ""}">${isFounding ? "Founding Chapter" : "Affiliate"}</span>
-        <p class="meta" style="margin-top:6px">${fmt(c.school||"")} · ${fmt(c.city||"")}${c.joined ? " · In the network since " + fmt(c.joined) : ""}${c.lead ? " · Chapter lead: " + fmt(c.lead) : ""}</p>
-        ${c.description ? `<p style="margin-top:8px;font-size:15px">${fmt(c.description)}</p>` : ""}
-        ${clubActs.length ? clubActs.map(a => `<div class="club-activity">
-          <div class="an">${fmt(a.event_name)}</div>
-          <div class="am">${fmt(a.date||"")}${a.attendees ? " · " + esc(a.attendees) + " attended" : ""}</div>
-          ${a.description ? `<div class="am" style="margin-top:4px">${fmt(a.description)}</div>` : ""}
-          ${a.photo_url ? `<img src="${esc(a.photo_url)}" alt="${esc(a.photo_alt||a.event_name)}">` : ""}
-        </div>`).join("") : ""}
-      </div>`;
-    }).join("");
-  }).join("");
+      const founding = (c.type||"").toLowerCase().includes("found");
+      const active = lastAct[k] && (now - lastAct[k]) < 90*DAY;
+      svg += `<line x1="${BRANCH_X}" y1="${my}" x2="${CHIP_X-8}" y2="${my}" stroke="#363b3e" stroke-width="1.5"/>`;
+      svg += `<circle cx="${CHIP_X-8}" cy="${my}" r="3" fill="#363b3e"/>`;
+      svg += `<g class="nm-chip" data-club="${esc(c.club_name)}">
+        <rect class="nm-box" x="${CHIP_X}" y="${cy}" width="${CHIP_W}" height="${CHIP_H}" fill="${founding ? "#f4ead6" : "#fff"}" stroke="${founding ? "#b5924e" : "#24282c"}" stroke-width="${founding ? 2.5 : 1.5}"/>
+        <text x="${CHIP_X+14}" y="${cy+24}" fill="#24282c" font-size="15" font-weight="800" font-family="-apple-system,Segoe UI,Roboto,Arial,sans-serif">${esc(truncate(c.club_name, 34))}</text>
+        <text x="${CHIP_X+14}" y="${cy+42}" fill="#4a5261" font-size="11.5" font-family="-apple-system,Segoe UI,Roboto,Arial,sans-serif">${esc(truncate((c.school||"") + (c.city ? " · " + c.city : ""), 52))}</text>
+        ${founding ? `<text x="${CHIP_X+CHIP_W-12}" y="${cy+18}" text-anchor="end" fill="#b5924e" font-size="8" font-weight="800" letter-spacing="1.5" font-family="ui-monospace,Menlo,Consolas,monospace">FOUNDING</text>` : ""}
+        ${active ? `<circle cx="${CHIP_X+CHIP_W-16}" cy="${cy+CHIP_H-14}" r="4.5" fill="#b5924e"><title>Activity in the last 90 days</title></circle>` : ""}
+      </g>`;
+    });
+  });
+  svg += `</svg>`;
+  D.innerHTML = svg;
+
+  // detail rendering on click
+  function showClub(name){
+    const k = String(name||"").trim().toLowerCase();
+    const c = clubByName[k];
+    if(!c) return;
+    const clubActs = sortedActs.filter(a => (a.club||"").trim().toLowerCase() === k);
+    const founding = (c.type||"").toLowerCase().includes("found");
+    DET.innerHTML = `<div class="club-entry">
+      <h3 style="display:inline;font-size:18px">${fmt(c.club_name)}</h3>
+      <span class="club-tag ${founding ? "founding" : ""}">${founding ? "Founding Chapter" : "Affiliate"}</span>
+      <p class="meta" style="margin-top:6px">${fmt(c.school||"")} · ${fmt(c.city||"")}${c.country ? " · " + fmt(c.country) : ""}${c.joined ? " · In the network since " + fmt(c.joined) : ""}${c.lead ? " · Chapter lead: " + fmt(c.lead) : ""}</p>
+      ${c.description ? `<p style="margin-top:8px;font-size:15px">${fmt(c.description)}</p>` : ""}
+      ${clubActs.length ? clubActs.map(a => `<div class="club-activity">
+        <div class="an">${fmt(a.event_name)}</div>
+        <div class="am">${fmt(a.date||"")}${a.attendees ? " · " + esc(a.attendees) + " attended" : ""}</div>
+        ${a.description ? `<div class="am" style="margin-top:4px">${fmt(a.description)}</div>` : ""}
+        ${a.photo_url ? `<img src="${esc(a.photo_url)}" alt="${esc(a.photo_alt||a.event_name)}">` : ""}
+      </div>`).join("") : `<p class="meta" style="margin-top:10px">No activities posted yet.</p>`}
+    </div>`;
+    document.querySelectorAll(".nm-chip").forEach(g => g.classList.toggle("selected", (g.dataset.club||"").trim().toLowerCase() === k));
+    DET.scrollIntoView({behavior:"smooth", block:"nearest"});
+  }
+  D.addEventListener("click", e => {
+    const g = e.target.closest(".nm-chip");
+    if(g) showClub(g.dataset.club);
+  });
+  // preselect the most recently active club
+  const firstActive = clubs.slice().sort((a,b) =>
+    (lastAct[(b.club_name||"").trim().toLowerCase()]||0) - (lastAct[(a.club_name||"").trim().toLowerCase()]||0))[0];
+  if(firstActive) showClub(firstActive.club_name);
 })();
 applyText({"t-network-intro":"network_intro","t-net-keeps":"network_join_keeps","t-net-members":"network_join_members","t-net-lead":"network_join_lead","t-net-how":"network_join_how"});
 </script>

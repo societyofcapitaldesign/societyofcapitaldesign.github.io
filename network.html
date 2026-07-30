@@ -185,29 +185,33 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .act-name{font-weight:800;font-size:14.5px;line-height:1.3}
 .act-club{font-size:12px;color:#4a5261;margin-top:5px}
 .act-att{margin-top:auto;padding-top:10px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brass)}
-/* club registry plates */
-.club-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));margin-top:16px}
-.club-card{position:relative;border:1.5px solid var(--ink);background:#fff;cursor:pointer;
- display:grid;grid-template-columns:34px 1fr;box-shadow:5px 5px 0 rgba(54,59,62,.14);
- transition:box-shadow .12s}
-.club-card:hover{box-shadow:8px 8px 0 rgba(181,146,78,.35)}
-.club-card.selected{box-shadow:8px 8px 0 var(--brass)}
-.cc-spine{background:var(--coal);display:flex;align-items:center;justify-content:center;border-right:1.5px solid var(--ink)}
-.cc-spine span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:ui-monospace,Menlo,Consolas,monospace;
- font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);font-weight:800}
-.club-card.founding .cc-spine{background:var(--brass)}
-.club-card.founding .cc-spine span{color:#fff}
-.cc-main{padding:14px 14px 10px;position:relative}
-.cc-rivet{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink)}
-.cc-rivet.tl{top:6px;left:6px}.cc-rivet.tr{top:6px;right:6px}
-.cc-serial{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9px;letter-spacing:.2em;color:#8a94a3;text-transform:uppercase}
-.cc-name{font-weight:800;font-size:17px;line-height:1.25;margin-top:4px;text-transform:uppercase;letter-spacing:.02em}
-.cc-school{font-size:12.5px;color:#4a5261;margin-top:5px}
-.cc-stub{grid-column:2;border-top:1.5px dashed var(--rule);padding:8px 14px;display:flex;align-items:center;gap:10px;
- font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#4a5261}
-.cc-live{width:8px;height:8px;border-radius:50%;background:var(--brass);flex-shrink:0;
- box-shadow:0 0 0 3px rgba(181,146,78,.25)}
-.cc-open{margin-left:auto;color:var(--brass);font-weight:800}
+/* club tiles: big, bold, simple */
+.club-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:16px}
+.club-card{background:var(--coal);color:var(--paper);border:1.5px solid var(--ink);cursor:pointer;
+ padding:22px 24px;box-shadow:6px 6px 0 rgba(54,59,62,.2);transition:transform .12s,box-shadow .12s;
+ display:flex;flex-direction:column;min-height:170px}
+.club-card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--brass)}
+@media(prefers-reduced-motion:reduce){.club-card:hover{transform:none}}
+.club-card.selected{box-shadow:9px 9px 0 var(--brass);outline:2.5px solid var(--brass);outline-offset:-8px}
+.club-card.founding{background:var(--brass);color:#241c0c}
+.cc-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+ font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:800}
+.club-card .cc-top{color:var(--brass)}
+.club-card.founding .cc-top{color:#241c0c}
+.cc-name{font-weight:800;font-size:clamp(21px,2.6vw,26px);line-height:1.12;text-transform:uppercase;
+ letter-spacing:.01em;margin-top:10px}
+.cc-school{font-size:13px;margin-top:7px;opacity:.75}
+.cc-foot{margin-top:auto;padding-top:16px;display:flex;align-items:flex-end;gap:10px}
+.cc-count{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:34px;font-weight:800;line-height:.9}
+.club-card .cc-count{color:var(--brass)}
+.club-card.founding .cc-count{color:#241c0c}
+.cc-countlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7;padding-bottom:3px}
+.cc-live{width:9px;height:9px;border-radius:50%;background:var(--brass);margin-bottom:8px;
+ box-shadow:0 0 0 3px rgba(181,146,78,.3)}
+.club-card.founding .cc-live{background:#241c0c;box-shadow:0 0 0 3px rgba(36,28,12,.25)}
+.cc-open{margin-left:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;padding-bottom:3px}
+.club-card .cc-open{color:var(--paper)}
+.club-card.founding .cc-open{color:#241c0c}
 #club-detail{margin-top:18px}
 #club-detail .club-entry{animation:cd-in .18s ease}
 @keyframes cd-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -312,17 +316,17 @@ function parseDate(d){
     const active = lastAct[k] && (now - lastAct[k]) < 90*DAY;
     const count = actCount[k] || 0;
     return `<div class="club-card ${founding ? "founding" : ""}" data-club="${esc(c.club_name)}">
-      <div class="cc-spine"><span>${esc((c.country||"").toUpperCase())}</span></div>
-      <div class="cc-main">
-        <div class="cc-rivet tl"></div><div class="cc-rivet tr"></div>
-        <div class="cc-serial">${founding ? "Founding chapter" : "Affiliate"}${c.joined ? " · since " + esc(c.joined) : ""}</div>
-        <div class="cc-name">${fmt(c.club_name)}</div>
-        <div class="cc-school">${fmt(c.school||"")}${c.city ? " · " + fmt(c.city) : ""}</div>
+      <div class="cc-top">
+        <span>${esc((c.country||"").toUpperCase())}</span>
+        <span>${founding ? "Founding" : "Affiliate"}</span>
       </div>
-      <div class="cc-stub">
-        ${active ? `<span class="cc-live" title="Activity in the last 90 days"></span>` : ""}
-        <span>${count ? count + (count===1?" activity":" activities") : "New"}</span>
-        <span class="cc-open">Open file →</span>
+      <div class="cc-name">${fmt(c.club_name)}</div>
+      <div class="cc-school">${fmt(c.school||"")}${c.city ? " · " + fmt(c.city) : ""}</div>
+      <div class="cc-foot">
+        <span class="cc-count">${count}</span>
+        <span class="cc-countlbl">${count===1?"activity":"activities"}</span>
+        ${active ? `<span class="cc-live" title="Active in the last 90 days"></span>` : ""}
+        <span class="cc-open">View →</span>
       </div>
     </div>`;
   }).join("") + `</div>`;

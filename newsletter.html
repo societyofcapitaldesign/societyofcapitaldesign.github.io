@@ -103,6 +103,26 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .tb .lbl{display:block;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#6f5a2a;font-weight:700}
 .tb .val{text-transform:uppercase;font-weight:700}
 .loading{opacity:.6;font-style:italic}
+
+.issue-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));margin-top:18px}
+.issue-card{border:1.5px solid var(--ink);background:#fff;box-shadow:5px 5px 0 rgba(54,59,62,.14);
+ text-decoration:none;color:var(--ink);display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s}
+.issue-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(54,59,62,.18)}
+@media(prefers-reduced-motion:reduce){.issue-card:hover{transform:none}}
+.issue-top{background:var(--coal);color:var(--paper);padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.issue-num{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:26px;font-weight:800;color:var(--brass);line-height:1}
+.issue-date{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aeb6c2;font-family:ui-monospace,Menlo,Consolas,monospace;text-align:right}
+.issue-strip{height:5px;background:var(--brass)}
+.issue-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}
+.issue-title{font-weight:800;font-size:15px;line-height:1.35}
+.issue-open{margin-top:auto;padding-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--brass)}
+.issue-feature{grid-column:1/-1;flex-direction:row;align-items:stretch}
+.issue-feature .issue-top{flex-direction:column;justify-content:center;min-width:130px;border-right:5px solid var(--brass)}
+.issue-feature .issue-num{font-size:40px}
+.issue-feature .issue-strip{display:none}
+.issue-feature .issue-title{font-size:19px}
+.issue-feature .issue-latest{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+@media(max-width:560px){.issue-feature{flex-direction:column}.issue-feature .issue-top{border-right:none;border-bottom:5px solid var(--brass)}}
 </style>
 </head>
 <body>
@@ -184,9 +204,23 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const I = document.getElementById("issues");
   const iss = await rows("issues","sort");
   if(iss && iss.length){
-    I.innerHTML = `<div class="rowlist">` + iss.map(x => `<div class="rowitem">
-      <strong>${x.link_url ? `<a href="${esc(x.link_url)}">${fmt(x.title)}</a>` : fmt(x.title)}</strong>
-      <p class="meta">${fmt(x.date_text||"")}</p></div>`).join("") + `</div>`;
+    const num = t => { const m = String(t||"").match(/(\d+)/); return m ? m[1].padStart(2,"0") : "·"; };
+    const strip = t => String(t||"").replace(/^Issue\s*\d+\s*[:.·-]?\s*/i,"");
+    I.innerHTML = `<div class="issue-grid">` + iss.map((x,i) => {
+      const inner = `
+        <div class="issue-top">
+          ${i===0 ? `<div><div class="issue-latest">Latest issue</div><div class="issue-num">${esc(num(x.title))}</div></div>` : `<div class="issue-num">${esc(num(x.title))}</div>`}
+          <div class="issue-date">${fmt(x.date_text||"")}</div>
+        </div>
+        <div class="issue-strip"></div>
+        <div class="issue-body">
+          <div class="issue-title">${fmt(strip(x.title))}</div>
+          <div class="issue-open">${x.link_url ? "Read the issue →" : "Coming soon"}</div>
+        </div>`;
+      return x.link_url
+        ? `<a class="issue-card ${i===0?"issue-feature":""}" href="${esc(x.link_url)}" target="_blank">${inner}</a>`
+        : `<div class="issue-card ${i===0?"issue-feature":""}">${inner}</div>`;
+    }).join("") + `</div>`;
   } else {
     I.innerHTML = `<div class="rowlist"><div class="rowitem">
       <strong>${ph("[No issues published yet, Evidence Register, Bulletin row]")}</strong>

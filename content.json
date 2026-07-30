@@ -381,9 +381,14 @@
     "program_3": "",
     "about_1": "",
     "about_2": "",
-    "archive_intro": "",
+    "archive_intro": "Winning results from past cycles and events.\n\n\n",
     "newsletter_intro": "",
-    "join_intro": ""
+    "join_intro": "",
+    "network_intro": "",
+    "network_join_keeps": "",
+    "network_join_members": "",
+    "network_join_lead": "",
+    "network_join_how": ""
   },
   "event_archive": [
     {

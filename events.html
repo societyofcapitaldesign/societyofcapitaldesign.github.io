@@ -172,6 +172,15 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .file-body img.small{max-width:200px !important;width:200px !important}
 .file-body img.half{max-width:340px !important;width:340px !important}
 .file-body img{height:auto;display:block;margin-top:12px;border:1.5px solid var(--ink)}
+
+/* photo lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:999;
+ justify-content:center;align-items:center;padding:20px;cursor:zoom-out}
+.lightbox.show{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border:2px solid #fff;box-shadow:0 0 40px rgba(0,0,0,.5);cursor:default}
+.lightbox-close{position:fixed;top:16px;right:20px;color:#fff;font-size:32px;font-weight:800;cursor:pointer;
+ z-index:1000;font-family:Arial,sans-serif;line-height:1;opacity:.8}
+.lightbox-close:hover{opacity:1}
 </style>
 </head>
 <body>
@@ -249,6 +258,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
       </table>
     </div>
   </main>
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')"><span class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('show')">&times;</span><img id="lb-img" src="" alt=""></div>
 </div>
 <script>
 
@@ -408,6 +418,14 @@ const EL = document.getElementById("events-list");
   } else { EA.innerHTML = '<p class="meta">No past events archived yet.</p>'; }
 
 })();
+document.addEventListener("click", e => {
+  const img = e.target.closest("img");
+  if(!img || img.closest(".band") || img.closest(".lightbox")) return;
+  const lb = document.getElementById("lightbox");
+  document.getElementById("lb-img").src = img.src;
+  lb.classList.add("show");
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape") document.getElementById("lightbox").classList.remove("show"); });
 applyText({"t-archive-intro":"archive_intro"});
 </script>
 </body>

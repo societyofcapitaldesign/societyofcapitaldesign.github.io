@@ -217,7 +217,8 @@ ol.rules li,ol.steps li{margin-bottom:10px}
           <li>Original work only. Sources must be cited. Any AI assistance must be disclosed on the cover page.</li>
           <li>One entry per student per track. You may enter both tracks.</li>
           <li>Word limit: <span id="word-limit"></span>, excluding references.</li>
-          <li>Entries are scored out of 50.</li>
+          <li>Your name, school and year group appear on the cover page only. Judging is blind.</li>
+          <li>Entries are scored out of 50 against the published rubric for the cycle.</li>
         </ol>
       </div>
       <div>
@@ -231,7 +232,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     </div>
 
     <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Competition results</h2></div>
-    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events. </p>
+    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events. Entries appear here only once marked CITABLE in the Evidence Register. Winner names are published only with written permission.</p>
     <div id="results"><p class="loading">Loading</p></div>
     <div class="callout" style="margin-top:40px"><span class="bubble" aria-hidden="true">F</span><h2>Event archive</h2></div>
     <div id="eventarchive"><p class="loading">Loading</p></div>
@@ -288,7 +289,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   document.getElementById("word-limit").innerHTML = S(st,"essay_word_limit","[N words, founders to confirm]");
   document.getElementById("sub-email").innerHTML = S(st,"submissions_email","[submissions email, founders to supply]");
 
-  const EL = document.getElementById("events-list");
+  const photoStyle = sz => ({small:"max-width:200px;width:200px",half:"max-width:340px;width:340px",full:"max-width:100%;width:100%"}[sz] || "max-width:100%;width:100%");
+const EL = document.getElementById("events-list");
   const evs = await rows("events","sort");
   if(evs && evs.length){
     const nextId = ((evs||[]).filter(e => e.is_next)[0] || evs[0] || {}).name;
@@ -307,7 +309,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
           </div>
           <div class="tl-body">
             ${e.poster_url ? `<img src="${esc(e.poster_url)}" alt="${esc(e.poster_alt||e.name+' poster')}" style="max-width:400px">` : ""}
-            ${e.photo_url ? `<img class="evphoto ${esc(e.photo_size||"")}" src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}">` : ""}
+            ${e.photo_url ? `<img src="${esc(e.photo_url)}" alt="${esc(e.photo_alt||e.name)}" style="${photoStyle(e.photo_size)};height:auto;display:block;margin-top:8px;border:1.5px solid var(--ink)">` : ""}
             ${!e.poster_url && !e.photo_url ? `<p class="meta" style="padding-top:2px">Details to follow.</p>` : ""}
           </div>
         </div>
@@ -348,8 +350,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
       if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
       if(r.file_url_3) files.push({url:r.file_url_3, name:r.file_label_3||"View document"});
       const photos = [];
-      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title});
-      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title});
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||''});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||''});
       return `<div class="file-card">
         <span class="file-tab">Result ${String(i+1).padStart(2,"0")}</span>
         <div class="file-head" onclick="this.parentElement.classList.toggle('open')">
@@ -364,7 +366,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
             const parts = w.split("|");
             return `<div class="fwin"><strong>${fmt(parts[0])}</strong>${parts[1] ? `<div class="ft">${fmt(parts[1])}</div>` : ""}</div>`;
           }).join("") : ""}
-          ${photos.length ? photos.map(p => `<img src="${esc(p.url)}" alt="${esc(p.alt)}">`).join("") : ""}
+          ${photos.length ? photos.map(p => `<img src="${esc(p.url)}" alt="${esc(p.alt)}" style="${photoStyle(p.size)};height:auto;display:block;margin-top:12px;border:1.5px solid var(--ink)}">`).join("") : ""}
           ${files.length ? `<div class="ffiles">${files.map(f => `<a class="ffile" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
         </div>
       </div>`;
@@ -383,8 +385,8 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
       if(r.file_url) files.push({url:r.file_url, name:r.file_label||"View document"});
       if(r.file_url_2) files.push({url:r.file_url_2, name:r.file_label_2||"View document"});
       const photos = [];
-      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title});
-      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title});
+      if(r.photo_url) photos.push({url:r.photo_url, alt:r.photo_alt||r.title, size:r.photo_size||''});
+      if(r.photo_url_2) photos.push({url:r.photo_url_2, alt:r.photo_alt_2||r.title, size:r.photo_size_2||''});
       return `<div class="file-card">
         <span class="file-tab">Event ${String(i+1).padStart(2,"0")}</span>
         <div class="file-head" onclick="this.parentElement.classList.toggle('open')">
@@ -398,7 +400,7 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
           ${r.description ? `<p style="margin-top:0">${fmt(r.description)}</p>` : ""}
           ${r.speaker ? `<p style="margin-top:8px"><strong>Speaker:</strong> ${fmt(r.speaker)}</p>` : ""}
           ${r.attendance ? `<p style="margin-top:4px"><strong>Attendance:</strong> ${esc(r.attendance)} students${r.schools ? " from " + esc(r.schools) + " schools" : ""}</p>` : ""}
-          ${photos.length ? photos.map(p => `<img src="${esc(p.url)}" alt="${esc(p.alt)}">`).join("") : ""}
+          ${photos.length ? photos.map(p => `<img src="${esc(p.url)}" alt="${esc(p.alt)}" style="${photoStyle(p.size)};height:auto;display:block;margin-top:12px;border:1.5px solid var(--ink)}">`).join("") : ""}
           ${files.length ? `<div class="ffiles">${files.map(f => `<a class="ffile" href="${esc(f.url)}" target="_blank">${fmt(f.name)}</a>`).join("")}</div>` : ""}
         </div>
       </div>`;

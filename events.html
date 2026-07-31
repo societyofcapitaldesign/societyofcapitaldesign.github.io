@@ -69,8 +69,8 @@ a.more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;
 .photobox{border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,#fff,#fff 12px,rgba(51,96,143,.05) 12px,rgba(51,96,143,.05) 24px);
  display:grid;place-items:center;min-height:150px;margin-top:16px;padding:14px;text-align:center}
 .evphoto{margin-top:14px;border:1.5px solid var(--ink);width:100%;height:auto;display:block}
-.evphoto.half{width:48%}
-.evphoto.small{width:30%}
+.evphoto.half{width:48%;max-width:340px}
+.evphoto.small{width:30%;max-width:200px}
 .boq{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;font-size:14px;
  border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(54,59,62,.14)}
 .boq th,.boq td{border:1px solid var(--ink);padding:10px 12px;text-align:left}
@@ -143,6 +143,8 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .tl-card.open .tl-chev{transform:rotate(180deg)}
 .tl-body{display:none;padding:0 18px 16px}
 .tl-card.open .tl-body{display:block}
+.tl-body img.small{max-width:200px !important;width:200px !important}
+.tl-body img.half{max-width:340px !important;width:340px !important}
 .tl-body img{height:auto;display:block;margin-top:4px;border:1.5px solid var(--ink)}
 /* results as filing cards with a tab */
 .file-stack{margin-top:28px}
@@ -167,6 +169,8 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .ffile{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border:1.5px solid var(--ink);background:var(--brass);
  color:#241c0c;font-size:12px;font-weight:800;text-decoration:none;letter-spacing:.04em;text-transform:uppercase}
 .ffile:hover{filter:brightness(1.08)}
+.file-body img.small{max-width:200px !important;width:200px !important}
+.file-body img.half{max-width:340px !important;width:340px !important}
 .file-body img{height:auto;display:block;margin-top:12px;border:1.5px solid var(--ink)}
 </style>
 </head>
@@ -227,7 +231,7 @@ ol.rules li,ol.steps li{margin-bottom:10px}
     </div>
 
     <div class="callout" id="archive"><span class="bubble" aria-hidden="true">E</span><h2>Competition results</h2></div>
-    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events.</p>
+    <p class="lede" style="margin-top:0" id="t-archive-intro">Winning results from past cycles and events. </p>
     <div id="results"><p class="loading">Loading</p></div>
     <div class="callout" style="margin-top:40px"><span class="bubble" aria-hidden="true">F</span><h2>Event archive</h2></div>
     <div id="eventarchive"><p class="loading">Loading</p></div>

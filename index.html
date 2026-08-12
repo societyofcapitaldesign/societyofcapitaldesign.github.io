@@ -34,7 +34,7 @@ a{color:inherit}
 @media(max-width:700px){.topnav .logo span{display:none}.nav-link{padding:12px 10px;font-size:10.5px}}
 
 /* ── HERO: full viewport dark section ── */
-.hero{min-height:92vh;background:var(--dark);color:#fff;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero{min-height:100vh;background:var(--dark);color:#fff;display:flex;align-items:center;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;
  background-image:linear-gradient(rgba(181,146,78,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(181,146,78,.07) 1px,transparent 1px);
  background-size:48px 48px;animation:herogrid 40s linear infinite}
@@ -44,11 +44,11 @@ a{color:inherit}
 #home-logo{width:100%}
 @media(min-width:800px){.hero-inner{grid-template-columns:1fr 1fr;align-items:center;padding:40px 48px 60px}}
 .hero-eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);font-weight:700}
-.hero h1{font-size:clamp(38px,7vw,72px);line-height:1.02;font-weight:700;margin-top:14px;text-transform:uppercase;letter-spacing:-.01em}
+.hero h1{font-size:clamp(42px,8vw,82px);line-height:1.02;font-weight:700;margin-top:14px;text-transform:uppercase;letter-spacing:-.01em}
 .hero h1 em{font-style:normal;color:var(--brass)}
-.hero .tagline{font-size:clamp(16px,2.2vw,20px);color:#aeb6c2;margin-top:18px;max-width:480px;font-weight:400}
+.hero .tagline{font-size:clamp(17px,2.5vw,22px);color:#aeb6c2;margin-top:18px;max-width:480px;font-weight:400}
 .hero .btnrow{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
-.hero .btn{display:inline-block;padding:14px 28px;font-weight:700;letter-spacing:.1em;font-size:13px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.hero .btn{display:inline-block;padding:16px 34px;font-weight:700;letter-spacing:.1em;font-size:13px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
 .hero .btn.primary{background:var(--brass);color:#1a1d20}
 .hero .btn.primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,146,78,.35)}
 .hero .btn.outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
@@ -121,6 +121,20 @@ a{color:inherit}
 
 .loading{opacity:.6;font-style:italic}
 .ph{border:1.5px dashed var(--brass);background:rgba(181,146,78,.09);padding:0 6px;font-size:.82em;color:#6f5a2a}
+
+/* dark section accents */
+.sec.dark{position:relative;overflow:hidden}
+.sec.dark::before{content:"";position:absolute;top:0;right:0;width:300px;height:100%;
+ background:linear-gradient(135deg,transparent 40%,rgba(181,146,78,.04) 40%,rgba(181,146,78,.04) 60%,transparent 60%);pointer-events:none}
+.sec.dark::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent)}
+/* cream sections subtle pattern */
+.sec.cream{background:#f8f5ef url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0z' fill='%23e8e2d6' fill-opacity='.4'/%3E%3C/svg%3E")}
+/* card upgrades */
+.prog-card,.join-card,.about-panel{position:relative;overflow:hidden}
+.prog-card::after,.join-card::after,.about-panel::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brass),transparent)}
+/* stats band glow */
+.stats-band{background:linear-gradient(135deg,var(--coal) 0%,#2a2e31 50%,var(--coal) 100%);position:relative}
+.stats-band::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 10%,var(--brass) 50%,transparent 90%)}
 </style>
 </head>
 <body>
@@ -152,7 +166,7 @@ a{color:inherit}
       <p class="hero-eyebrow">Finance × Engineering · UAE</p>
       <h1>Society of<br><em>Capital Design</em></h1>
       <p class="tagline" id="t-tagline">Where the design and the balance sheet meet.</p>
-      <p style="color:#8a94a3;margin-top:14px;max-width:480px;font-size:15px" id="t-home-intro">Founded by students in 2025 and run through school chapters across the UAE. Finance students and engineering students work the same problems here, from budget caps to load limits.</p>
+      <p style="color:#8a94a3;margin-top:18px;max-width:520px;font-size:17px;line-height:1.6" id="t-home-intro">Founded by students in 2025 and run through school chapters across the UAE. Finance students and engineering students work the same problems here, from budget caps to load limits.</p>
       <div class="btnrow">
         <a class="btn primary" href="join.html">Join SCD</a>
         <a class="btn outline" href="events.html">Events + Competitions</a>

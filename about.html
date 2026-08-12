@@ -74,6 +74,20 @@ img.headshot{object-fit:cover}
 .ch-item{background:var(--darkcard);border:1px solid rgba(181,146,78,.12);padding:16px 20px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .ch-item strong{color:#fff;font-size:15px}
 .ch-item .meta{color:#aeb6c2;margin:0}
+
+/* dark section accents */
+.sec.dark{position:relative;overflow:hidden}
+.sec.dark::before{content:"";position:absolute;top:0;right:0;width:300px;height:100%;
+ background:linear-gradient(135deg,transparent 40%,rgba(181,146,78,.04) 40%,rgba(181,146,78,.04) 60%,transparent 60%);pointer-events:none}
+.sec.dark::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent)}
+/* cream sections subtle pattern */
+.sec.cream{background:#f8f5ef url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0z' fill='%23e8e2d6' fill-opacity='.4'/%3E%3C/svg%3E")}
+/* card upgrades */
+.prog-card,.join-card,.about-panel{position:relative;overflow:hidden}
+.prog-card::after,.join-card::after,.about-panel::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brass),transparent)}
+/* stats band glow */
+.stats-band{background:linear-gradient(135deg,var(--coal) 0%,#2a2e31 50%,var(--coal) 100%);position:relative}
+.stats-band::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 10%,var(--brass) 50%,transparent 90%)}
 </style>
 </head>
 <body>
@@ -105,6 +119,7 @@ img.headshot{object-fit:cover}
   <div class="sec-inner">
     <span class="sec-label reveal">Our approach</span>
     <h2 class="sec-title reveal">What drives us</h2>
+    <div id="contact-email" style="display:none"></div><div id="charter" style="display:none"></div><div id="boq" style="display:none"></div>
     <div class="about-panel reveal" id="t-about-mission">
       <p>Schools teach finance and engineering separately. The real world never does. A solar panel is a physics problem and a payback problem at the same time. We train the habit of thinking in both at once.</p>
     </div>
@@ -115,7 +130,7 @@ img.headshot{object-fit:cover}
   <div class="sec-inner">
     <span class="sec-label reveal">The people</span>
     <h2 class="sec-title reveal">Leadership</h2>
-    <div class="team-grid" id="team-list"><p class="loading">Loading</p></div>
+    <div class="team-grid" id="leaders"><p class="loading">Loading</p></div>
   </div>
 </section>
 
@@ -123,7 +138,7 @@ img.headshot{object-fit:cover}
   <div class="sec-inner">
     <span class="sec-label reveal">The network</span>
     <h2 class="sec-title reveal">Chapters</h2>
-    <div class="chapters-list" id="chapters-list"><p class="loading">Loading</p></div>
+    <div class="chapters-list" id="chapters"><p class="loading">Loading</p></div>
     <p class="reveal" style="margin-top:20px"><a href="join.html" class="btn">Start a chapter</a></p>
   </div>
 </section>

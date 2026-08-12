@@ -4,214 +4,254 @@
  <meta name="google-site-verification" content="ia4p0POHlF17BoX5rvJF3F-Zpu_6aOOYhjrtawJjvEU" /> <meta charset="utf-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home · Society of Capital Design</title>
-<meta name="description" content="Society of Capital Design, a student founded UAE organization at the intersection of finance and engineering.">
+<title>Society of Capital Design · Finance × Engineering · UAE</title>
+<meta name="description" content="Student society bridging finance and engineering. Essay competitions, speaker sessions, the SCD Bulletin, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--coal:#363b3e;--brass:#b5924e;--paper:#edf0f3;--ink:#24282c;--steel:#33608f;--rule:#c7cdd3}
+:root{--coal:#363b3e;--brass:#b5924e;--paper:#edf0f3;--ink:#24282c;--steel:#33608f;--rule:#c7cdd3;--dark:#1a1d20;--darkcard:#252a2e}
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Liberation Sans",Arial,sans-serif;
- color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px;padding:10px;
- background-image:linear-gradient(rgba(51,96,143,.05) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(51,96,143,.05) 1px,transparent 1px),
-  linear-gradient(rgba(51,96,143,.09) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(51,96,143,.09) 1px,transparent 1px);
- background-size:8px 8px,8px 8px,40px 40px,40px 40px}
-.mono,.tabs a,.callout .bubble,.eyebrow,.ph,.stamp,.tb td,.boq,.panel-label,.role
- {font-family:ui-monospace,"Cascadia Mono",Menlo,Consolas,"Liberation Mono",monospace}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px}
+h1,h2,h3,.nav-link,.hero-eyebrow,.stat-num,.stat-lbl,.sec-label,.card-label,.program-num{font-family:'Space Grotesk','DM Sans',sans-serif}
 img{max-width:100%;display:block}
 a{color:inherit}
-main p a,main .meta a{color:var(--steel);text-decoration-color:var(--brass)}
 :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 .skip{position:absolute;left:-999px;top:0;background:var(--brass);color:#fff;padding:8px 14px;z-index:9}
 .skip:focus{left:8px}
-.sheet{width:100%;border:2px solid var(--ink);outline:1px solid var(--ink);outline-offset:4px}
-.wrap{padding:0 18px}
-@media(min-width:700px){.wrap{padding:0 40px}}
-@media(min-width:1400px){.wrap{padding:0 64px}}
-.cols{display:grid;gap:0 56px}
-@media(min-width:1000px){.cols{grid-template-columns:1fr 1fr}}
-.band{background:var(--coal);color:var(--paper);display:flex;align-items:center;gap:14px;
- padding:12px 18px;border-bottom:2px solid var(--ink)}
-.band img{width:46px;height:46px;border-radius:50%;border:2px solid var(--brass);flex-shrink:0}
-.band .org{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px;line-height:1.3}
-.band .sub{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
-.tabs{display:flex;overflow-x:auto;border-bottom:2px solid var(--ink);background:#fff}
-.tabs a{flex:1 0 auto;text-decoration:none;font-size:11px;letter-spacing:.1em;padding:10px 14px;
- border-right:1px solid var(--ink);white-space:nowrap;text-transform:uppercase}
-.tabs a:last-child{border-right:none}
-.tabs a:hover{background:var(--paper)}
-.tabs a[aria-current="page"]{background:var(--brass);color:#fff;font-weight:700}
-.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);
- font-weight:700;margin-bottom:10px}
-h1{font-size:clamp(28px,5vw,46px);text-transform:uppercase;letter-spacing:.02em;font-weight:800;line-height:1.12}
-.tagline{margin-top:10px;font-size:clamp(16px,2.4vw,19px);color:var(--steel);font-weight:600}
-.lede{max-width:62ch;margin-top:14px}
-section{padding:36px 0 8px}
-.callout{display:flex;align-items:center;gap:14px;margin:34px 0 18px}
-.callout .bubble{width:38px;height:38px;border:2px solid var(--ink);border-radius:50%;
- display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0;background:#fff}
-.callout h2{font-size:clamp(18px,2.6vw,24px);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
-.callout::after{content:"";flex:1;border-top:1.5px solid var(--ink);min-width:24px}
-.panel,.banner,.program,.card{border:1.5px solid var(--ink);background:#fff;padding:20px;
- position:relative;box-shadow:5px 5px 0 rgba(54,59,62,.14);margin-top:22px}
-.panel-label{position:absolute;top:-10px;left:14px;background:#fff;border:1.5px solid var(--ink);
- font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:2px 8px;font-weight:700}
-.cards,.leaders{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:8px}
-.card h3,.panel h3,.program h3,.archive-item h3{font-size:17px;text-transform:uppercase;
- letter-spacing:.05em;font-weight:800;margin-bottom:8px}
-.card p,.panel p{font-size:15px}
-a.more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
- font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--brass)}
-.ph{border:1.5px dashed var(--brass);background:rgba(181,146,78,.09);padding:0 6px;
- font-size:.82em;color:#6f5a2a;white-space:normal}
-.stamp{display:inline-block;transform:rotate(-2deg);border:2.5px solid #6f5a2a;color:#6f5a2a;
- text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.12em;padding:5px 12px;margin:8px 0}
-.photobox{border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,#fff,#fff 12px,rgba(51,96,143,.05) 12px,rgba(51,96,143,.05) 24px);
- display:grid;place-items:center;min-height:150px;margin-top:16px;padding:14px;text-align:center}
-.evphoto{margin-top:14px;border:1.5px solid var(--ink);max-height:420px;object-fit:cover}
-.boq{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;font-size:14px;
- border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.boq th,.boq td{border:1px solid var(--ink);padding:10px 12px;text-align:left}
-.boq th{background:var(--coal);color:var(--paper);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-.boq td:first-child{width:56px;text-align:center}
-.boq td:last-child{text-align:right}
-.note{font-size:13px;color:#4a5261;margin-top:12px;max-width:60ch}
-.leader{border:1.5px solid var(--ink);background:#fff;padding:20px;text-align:center;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.leader .headshot{width:104px;height:104px;border-radius:50%;border:1.5px dashed var(--brass);
- background:rgba(181,146,78,.07);display:grid;place-items:center;margin:0 auto 12px;
- font-size:10px;color:#6f5a2a;padding:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
-img.headshot{border-style:solid;object-fit:cover}
-.leader h3{font-size:15px}
-.role{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#6f5a2a;font-weight:700;margin-top:6px}
-.rowlist{margin-top:20px;border:1.5px solid var(--ink);background:#fff;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.rowitem{padding:16px 18px;border-bottom:1px solid var(--rule)}
-.rowitem:last-child{border-bottom:none}
-.rowitem strong{font-size:16px;font-weight:800}
-.rowitem .meta,.meta{font-size:14px;color:#4a5261;margin-top:3px}
-ol.rules,ol.steps{margin:14px 0 0 22px;max-width:62ch}
-ol.rules li,ol.steps li{margin-bottom:10px}
-.archive-item{border:1.5px solid var(--ink);background:#fff;padding:20px;margin-top:20px;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.btnrow{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;background:var(--brass);color:#fff;text-decoration:none;padding:12px 22px;
- font-weight:800;letter-spacing:.1em;font-size:12px;text-transform:uppercase;border:1.5px solid var(--ink);
- box-shadow:4px 4px 0 var(--ink);cursor:pointer}
-.btn.ghost{background:#fff;color:var(--ink)}
-.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
-@media(prefers-reduced-motion:reduce){.btn:hover{transform:none}}
-.tb{width:100%;border-collapse:collapse;border-top:2px solid var(--ink);margin-top:44px;background:#fff}
-.tb td{border:1px solid var(--ink);padding:7px 12px;font-size:11px;letter-spacing:.08em}
-.tb .lbl{display:block;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#6f5a2a;font-weight:700}
-.tb .val{text-transform:uppercase;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{animation:none !important;transition-duration:0s !important}}
+
+/* ── NAV: floating glass bar ── */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(26,29,32,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ border-bottom:1px solid rgba(181,146,78,.25);display:flex;align-items:center;padding:0 20px;gap:0}
+.topnav .logo{display:flex;align-items:center;gap:12px;padding:10px 0;text-decoration:none;flex-shrink:0}
+.topnav .logo img{width:40px;height:40px;border-radius:50%;border:2px solid var(--brass)}
+.topnav .logo span{font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.nav-links{display:flex;margin-left:auto;overflow-x:auto}
+.nav-link{text-decoration:none;font-size:11.5px;letter-spacing:.1em;padding:14px 14px;white-space:nowrap;
+ text-transform:uppercase;color:#aeb6c2;font-weight:600;transition:color .15s}
+.nav-link:hover,.nav-link.active{color:var(--brass)}
+.nav-link.active{box-shadow:inset 0 -2px 0 var(--brass)}
+@media(max-width:700px){.topnav .logo span{display:none}.nav-link{padding:12px 10px;font-size:10.5px}}
+
+/* ── HERO: full viewport dark section ── */
+.hero{min-height:92vh;background:var(--dark);color:#fff;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;
+ background-image:linear-gradient(rgba(181,146,78,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(181,146,78,.07) 1px,transparent 1px);
+ background-size:48px 48px;animation:herogrid 40s linear infinite}
+@keyframes herogrid{to{background-position:48px 48px}}
+.hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(transparent,var(--dark))}
+.hero-inner{position:relative;z-index:2;padding:60px 28px 80px;max-width:1200px;margin:0 auto;width:100%;display:grid;gap:40px}
+#home-logo{width:100%}
+@media(min-width:800px){.hero-inner{grid-template-columns:1fr 1fr;align-items:center;padding:40px 48px 60px}}
+.hero-eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.hero h1{font-size:clamp(38px,7vw,72px);line-height:1.02;font-weight:700;margin-top:14px;text-transform:uppercase;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--brass)}
+.hero .tagline{font-size:clamp(16px,2.2vw,20px);color:#aeb6c2;margin-top:18px;max-width:480px;font-weight:400}
+.hero .btnrow{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+.hero .btn{display:inline-block;padding:14px 28px;font-weight:700;letter-spacing:.1em;font-size:13px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.hero .btn.primary{background:var(--brass);color:#1a1d20}
+.hero .btn.primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,146,78,.35)}
+.hero .btn.outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.hero .btn.outline:hover{border-color:var(--brass);color:var(--brass)}
+.hero-right{display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:center}
+.hero-logo{max-width:100%;width:100%;border-radius:16px}
+
+/* ── STATS BAND: full-width dark ── */
+.stats-band{background:var(--coal);border-top:3px solid var(--brass);border-bottom:1px solid rgba(255,255,255,.06)}
+.stats-inner{max-width:1200px;margin:0 auto;padding:36px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px;text-align:center}
+.stat-num{font-size:clamp(32px,5vw,48px);font-weight:700;color:var(--brass);line-height:1}
+.stat-lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#aeb6c2;margin-top:6px;font-weight:600}
+
+/* ── SECTIONS ── */
+.sec{padding:64px 28px}
+@media(min-width:800px){.sec{padding:80px 48px}}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec.dark{background:var(--dark);color:#fff}
+.sec.dark .sec-label{color:var(--brass)}
+.sec.dark .sec-title{color:#fff}
+.sec.dark p{color:#c0c6ce}
+.sec.light{background:var(--paper)}
+.sec.cream{background:#f8f5ef}
+.sec-label{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.sec-title{font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.1;margin-top:8px;text-transform:uppercase}
+
+/* ── NEXT EVENT: dramatic card ── */
+.next-card{margin-top:32px;background:var(--darkcard);border:1px solid rgba(181,146,78,.2);padding:28px 32px;position:relative;overflow:hidden}
+.next-card::before{content:"NEXT EVENT";position:absolute;top:14px;right:18px;font-family:'Space Grotesk';font-size:10px;letter-spacing:.2em;color:var(--brass);font-weight:700}
+.next-card h3{font-size:22px;font-weight:700;color:#fff}
+.next-card .meta{font-size:14px;color:#aeb6c2;margin-top:8px}
+.next-card img{margin-top:16px;max-width:340px;border:1px solid rgba(255,255,255,.1);border-radius:4px}
+
+/* ── PROGRAM CARDS ── */
+.programs{display:grid;gap:20px;margin-top:32px}
+@media(min-width:800px){.programs{grid-template-columns:repeat(3,1fr)}}
+.prog-card{background:#fff;border:1.5px solid var(--ink);padding:0;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.prog-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.08)}
+.prog-top{background:var(--coal);padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.program-num{font-size:28px;font-weight:700;color:var(--brass)}
+.card-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#aeb6c2;font-weight:700}
+.prog-body{padding:20px}
+.prog-body h3{font-size:18px;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+.prog-body p{font-size:14.5px;color:#4a5261}
+.prog-link{display:inline-block;margin-top:14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--brass);text-decoration:none;border-bottom:2px solid var(--brass)}
+
+/* ── MEMBERSHIP: light section ── */
+.join-strip{margin-top:32px;background:#fff;border:1.5px solid var(--ink);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.join-strip p{font-size:15.5px;max-width:520px}
+.join-strip .btn{display:inline-block;padding:13px 26px;background:var(--brass);color:#1a1d20;font-weight:700;letter-spacing:.1em;font-size:13px;text-transform:uppercase;text-decoration:none;border:none;flex-shrink:0;transition:transform .15s}
+.join-strip .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(181,146,78,.3)}
+
+/* ── FOOTER ── */
+.footer{background:var(--dark);color:#aeb6c2;padding:24px 28px;text-align:center;font-size:12px;letter-spacing:.08em}
+.footer strong{color:var(--brass)}
+
+
+/* hero video/image background */
+.hero-media{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-media video,.hero-media img{position:absolute;width:100%;height:100%;object-fit:cover}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.7) 40%,rgba(26,29,32,.85) 100%)}
+/* sliding images */
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:heroSlide var(--slide-total) linear infinite}
+@keyframes heroSlide{0%{opacity:0}4%{opacity:1}25%{opacity:1}29%{opacity:0}100%{opacity:0}}
+.hero-slides::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.7) 40%,rgba(26,29,32,.85) 100%)}
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+
 .loading{opacity:.6;font-style:italic}
+.ph{border:1.5px dashed var(--brass);background:rgba(181,146,78,.09);padding:0 6px;font-size:.82em;color:#6f5a2a}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="sheet">
-  <div class="band">
-    <img src="scd-logo.jpg" alt="Society of Capital Design logo showing the letters SCD with gears, a rising chart and a compass needle">
-    <div>
-      <div class="org">Society of Capital Design</div>
-      <div class="sub">Drawing set · Sheet 01 of 05</div>
-    </div>
+
+<!-- NAV -->
+<nav class="topnav" aria-label="Main navigation">
+  <a class="logo" href="index.html">
+    <img src="scd-logo.jpg" alt="SCD logo">
+    <span>Society of Capital Design</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link active" href="index.html">Home</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link" href="events.html">Events</a>
+    <a class="nav-link" href="network.html">Network</a>
+    <a class="nav-link" href="newsletter.html">Newsletter</a>
+    <a class="nav-link" href="join.html">Join</a>
   </div>
-  <nav class="tabs" aria-label="Sheet index">
-    <a href="index.html" aria-current="page">01 Home</a>
-    <a href="about.html">02 About</a>
-    <a href="events.html">03 Events + Competitions</a>
-    <a href="network.html">04 Network</a>
-    <a href="newsletter.html">05 Newsletter</a>
-    <a href="join.html">06 Join</a>
-  </nav>
-  <main id="main">
+</nav>
 
-<section>
-  <div class="wrap">
-    <div class="cols">
-      <div>
-        <p class="eyebrow">Finance × Engineering · UAE</p>
-        <h1>Society of<br>Capital Design</h1>
-        <p class="tagline" id="t-tagline">where the design and the balance sheet meet.</p>
-        <p class="lede" id="t-home-intro">Founded by students in 2025 and run through school chapters across the UAE. Finance students and engineering students work the same problems here, from budget caps to load limits.</p>
-        <div class="btnrow">
-          <a class="btn" href="join.html">Join SCD</a>
-          <a class="btn ghost" href="events.html">Events + Competitions</a>
-        </div>
-        <div id="home-logo" style="margin-top:24px"></div>
-      </div>
-      <div>
-        <div class="callout" style="margin-top:34px"><span class="bubble" aria-hidden="true">A</span><h2>Next event</h2></div>
-        <div class="banner" id="next-event"><p class="loading">Loading</p></div>
-        <div class="callout"><span class="bubble" aria-hidden="true">B</span><h2>Membership</h2></div>
-        <div class="panel">
-          <span class="panel-label">Join</span>
-          <p id="t-home-membership">Membership runs through school chapters. If your school does not have one yet, you can start it.</p>
-          <div class="btnrow"><a class="btn" href="join.html">Join SCD</a></div>
-        </div>
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media" id="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Finance × Engineering · UAE</p>
+      <h1>Society of<br><em>Capital Design</em></h1>
+      <p class="tagline" id="t-tagline">Where the design and the balance sheet meet.</p>
+      <p style="color:#8a94a3;margin-top:14px;max-width:480px;font-size:15px" id="t-home-intro">Founded by students in 2025 and run through school chapters across the UAE. Finance students and engineering students work the same problems here, from budget caps to load limits.</p>
+      <div class="btnrow">
+        <a class="btn primary" href="join.html">Join SCD</a>
+        <a class="btn outline" href="events.html">Events + Competitions</a>
       </div>
     </div>
-
-    <div class="callout"><span class="bubble" aria-hidden="true">C</span><h2>Programs</h2></div>
-    <div class="cards">
-      <div class="card">
-        <span class="panel-label">Program 1</span>
-        <h3>Essay Competitions</h3>
-        <p id="t-prog1">Two tracks, Finance and Engineering, with original prompts written for each term and blind judging against a published rubric.</p>
-        <a class="more" href="events.html#essays">Current cycle</a>
-      </div>
-      <div class="card">
-        <span class="panel-label">Program 2</span>
-        <h3>Speaker Sessions</h3>
-        <p id="t-prog2">Working professionals from finance, engineering and infrastructure talk through how their fields collide in practice.</p>
-        <a class="more" href="events.html">Upcoming events</a>
-      </div>
-      <div class="card">
-        <span class="panel-label">Program 3</span>
-        <h3>The SCD Bulletin</h3>
-        <p id="t-prog3">Our member newsletter. Every issue carries a market and finance update, an engineering highlight, a feature and a member spotlight.</p>
-        <a class="more" href="newsletter.html">Issue archive</a>
-      </div>
+    <div class="hero-right">
+      <div id="home-logo"></div>
     </div>
-    <p style="margin-top:20px;font-size:15px">Meet the team and see our chapters on the <a href="about.html"><strong>About sheet</strong></a>.</p>
   </div>
 </section>
 
-    <div class="wrap">
-      <table class="tb" aria-label="Title block">
-        <tr>
-          <td><span class="lbl">Sheet title</span><span class="val">General arrangement</span></td>
-          <td><span class="lbl">Sheet</span><span class="val">01 / 06</span></td>
-          <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025 · UAE</span></td>
-        </tr>
-      </table>
-    </div>
-  </main>
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stats-inner" id="stats-band">
+    <div class="reveal"><div class="stat-num" id="s-chapters">-</div><div class="stat-lbl">Chapters</div></div>
+    <div class="reveal"><div class="stat-num" id="s-members">-</div><div class="stat-lbl">Members</div></div>
+    <div class="reveal"><div class="stat-num" id="s-entries">-</div><div class="stat-lbl">Essay entries</div></div>
+    <div class="reveal"><div class="stat-num" id="s-events">-</div><div class="stat-lbl">Events held</div></div>
+  </div>
 </div>
-<script>
 
+<!-- NEXT EVENT -->
+<section class="sec dark">
+  <div class="sec-inner">
+    <span class="sec-label reveal">What's coming</span>
+    <h2 class="sec-title reveal">Next Event</h2>
+    <div class="next-card reveal" id="next-event"><p class="loading">Loading</p></div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="sec cream">
+  <div class="sec-inner">
+    <span class="sec-label reveal">What we do</span>
+    <h2 class="sec-title reveal">Three Programs</h2>
+    <div class="programs">
+      <div class="prog-card reveal">
+        <div class="prog-top"><span class="program-num">01</span><span class="card-label">Program</span></div>
+        <div class="prog-body">
+          <h3>Essay Competitions</h3>
+          <p id="t-prog1">Two tracks, Finance and Engineering, with original prompts written for each term and blind judging against a published rubric.</p>
+          <a class="prog-link" href="events.html#essays">Current cycle →</a>
+        </div>
+      </div>
+      <div class="prog-card reveal">
+        <div class="prog-top"><span class="program-num">02</span><span class="card-label">Program</span></div>
+        <div class="prog-body">
+          <h3>Speaker Sessions</h3>
+          <p id="t-prog2">Working professionals from finance, engineering and infrastructure talk through how their fields collide in practice.</p>
+          <a class="prog-link" href="events.html">Upcoming events →</a>
+        </div>
+      </div>
+      <div class="prog-card reveal">
+        <div class="prog-top"><span class="program-num">03</span><span class="card-label">Program</span></div>
+        <div class="prog-body">
+          <h3>The SCD Bulletin</h3>
+          <p id="t-prog3">Our member newsletter. Every issue carries a market and finance update, an engineering highlight, a feature and a member spotlight.</p>
+          <a class="prog-link" href="newsletter.html">Issue archive →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="sec light">
+  <div class="sec-inner">
+    <span class="sec-label reveal">Get involved</span>
+    <h2 class="sec-title reveal">Membership</h2>
+    <div class="join-strip reveal">
+      <p id="t-home-membership">Membership runs through school chapters. If your school does not have one yet, you can start it.</p>
+      <a class="btn" href="join.html">Join SCD</a>
+    </div>
+    <p class="reveal" style="margin-top:20px;font-size:15px">Meet the team and see our chapters on the <a href="about.html" style="color:var(--steel);font-weight:600">About page</a>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <strong>Society of Capital Design</strong> · Founded 2025 · UAE
+</footer>
+
+</main>
+
+<script>
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ph = s => `<span class="ph">${esc(s)}</span>`;
 const fmt = s => esc(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>");
 let __content = null;
 async function content(){
   if(__content) return __content;
-  try{
-    const r = await fetch("content.json?v=" + Date.now());
-    __content = r.ok ? await r.json() : {};
-  }catch(e){ __content = {}; }
+  try{ const r = await fetch("content.json?v=" + Date.now()); __content = r.ok ? await r.json() : {}; }catch(e){ __content = {}; }
   return __content;
 }
 async function rows(table){
   const c = await content();
-  const a = Array.isArray(c[table]) ? c[table] : [];
-  return a.slice().sort((x,y) => (parseInt(x.sort)||100) - (parseInt(y.sort)||100));
+  return (Array.isArray(c[table]) ? c[table] : []).slice().sort((x,y) => (parseInt(x.sort)||100) - (parseInt(y.sort)||100));
 }
-async function settings(){
-  const c = await content();
-  return c.settings || {};
-}
-
+async function settings(){ return (await content()).settings || {}; }
 async function applyText(map){
   const c = await content(); const t = c.text || {};
   for(const [id,key] of Object.entries(map)){
@@ -221,31 +261,60 @@ async function applyText(map){
 }
 const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(fallback);
 
-
 (async () => {
+  // next event
   const box = document.getElementById("next-event");
-  const evs = await rows("events","sort");
+  const evs = await rows("events");
   const next = (evs||[]).filter(e => e.is_next)[0] || (evs||[])[0];
   if(next){
-    box.innerHTML = `<span class="panel-label">Scheduled</span>
-      <strong style="font-weight:800">${fmt(next.name)}</strong>
+    box.innerHTML = `<h3>${fmt(next.name)}</h3>
       <p class="meta">${fmt(next.date_text||"")} · ${fmt(next.venue||"")} · Register through your chapter lead.</p>
-      ${next.poster_url ? `<img src="${esc(next.poster_url)}" alt="${esc(next.poster_alt||next.name+' poster')}" style="max-width:300px;height:auto;margin-top:14px;display:block;border:1.5px solid var(--ink)">` : ""}
-      ${next.photo_url ? `<img class="evphoto" src="${esc(next.photo_url)}" alt="${esc(next.photo_alt||next.name)}">` : ""}`;
+      ${next.poster_url ? `<img src="${esc(next.poster_url)}" alt="${esc(next.poster_alt||next.name+' poster')}">` : ""}
+      ${next.photo_url ? `<img src="${esc(next.photo_url)}" alt="${esc(next.photo_alt||next.name)}" style="max-width:340px;margin-top:12px;border:1px solid rgba(255,255,255,.1);border-radius:4px">` : ""}`;
   } else {
-    box.innerHTML = `<span class="panel-label">Scheduled</span>
-      <strong style="font-weight:800">${ph("[Event name, Evidence Register, Events row]")}</strong>
-      <p class="meta">${ph("[Date]")} · ${ph("[School or venue]")} · Register through your chapter lead.</p>`;
+    box.innerHTML = `<h3>${ph("[Event name]")}</h3><p class="meta">${ph("[Date]")} · ${ph("[Venue]")} · Register through your chapter lead.</p>`;
+  }
+
+  // stats
+  const st = await settings();
+  const stats = {
+    "s-chapters": st.stat_chapters || "-",
+    "s-members": st.stat_members || "-",
+    "s-entries": st.stat_entries || "-",
+    "s-events": st.stat_events || "-"
+  };
+  for(const [id, val] of Object.entries(stats)){
+    const el = document.getElementById(id);
+    if(el && val !== "-") el.textContent = val;
+  }
+
+  // hero background: video or sliding images
+  if(st.hero_video && String(st.hero_video).trim()){
+    document.getElementById("hero-bg").innerHTML = `<video autoplay muted loop playsinline><source src="${esc(st.hero_video)}" type="video/mp4"></video>`;
+  } else {
+    const imgs = [st.hero_img_1, st.hero_img_2, st.hero_img_3, st.hero_img_4].filter(u => u && String(u).trim());
+    if(imgs.length){
+      const dur = imgs.length * 6;
+      const bg = document.getElementById("hero-bg");
+      bg.className = "hero-slides";
+      bg.style.setProperty("--slide-total", dur + "s");
+      bg.innerHTML = imgs.map((u, i) => `<img src="${esc(u)}" alt="" style="animation-delay:${i * (dur/imgs.length)}s">`).join("") + `<div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.7) 40%,rgba(26,29,32,.85) 100%);z-index:1"></div>`;
+    }
+  }
+  // logo
+  if(st.logo_url && String(st.logo_url).trim()){
+    document.getElementById("home-logo").innerHTML = `<img src="${esc(st.logo_url)}" alt="Society of Capital Design logo" class="hero-logo">`;
   }
 })();
-(async () => {
-  const s = await settings();
-  const box = document.getElementById("home-logo");
-  if(s.logo_url && String(s.logo_url).trim()){
-    box.innerHTML = `<img src="${esc(s.logo_url)}" alt="Society of Capital Design logo"
-style="max-width:100%;width:100%;height:auto;display:block;border-radius:16px">`  }
+applyText({"t-tagline":"home_tagline","t-home-intro":"home_intro","t-home-membership":"home_membership","t-prog1":"home_prog1","t-prog2":"home_prog2","t-prog3":"home_prog3"});
+
+// scroll reveal
+(function(){
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add("visible"); obs.unobserve(e.target); }});
+  }, {threshold:0.08, rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
 })();
-applyText({"t-tagline":"home_tagline","t-home-intro":"home_intro","t-home-membership":"home_membership","t-prog1":"program_1","t-prog2":"program_2","t-prog3":"program_3"});
 </script>
 </body>
 </html>

@@ -88,6 +88,24 @@ img.headshot{object-fit:cover}
 /* stats band glow */
 .stats-band{background:linear-gradient(135deg,var(--coal) 0%,#2a2e31 50%,var(--coal) 100%);position:relative}
 .stats-band::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 10%,var(--brass) 50%,transparent 90%)}
+
+/* mission in hero */
+.hero-mission{background:rgba(181,146,78,.1);border:1px solid rgba(181,146,78,.3);padding:18px 22px;
+ color:#c0c6ce;font-size:16px;line-height:1.6;max-width:580px}
+/* leader cards */
+.leader-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));margin-top:20px}
+.leader-card{background:#fff;border:1.5px solid var(--ink);box-shadow:4px 4px 0 rgba(54,59,62,.12);padding:20px;text-align:center;transition:transform .2s,box-shadow .2s}
+.leader-card:hover{transform:translateY(-3px);box-shadow:6px 6px 0 rgba(181,146,78,.2)}
+.leader-card .headshot{width:72px;height:72px;border-radius:50%;border:2.5px solid var(--brass);margin:0 auto 12px;
+ background:var(--paper);display:grid;place-items:center;font-size:9px;color:#6f5a2a;overflow:hidden}
+.leader-card .headshot img{width:100%;height:100%;object-fit:cover}
+.leader-card h3{font-size:15px;font-weight:700}
+.leader-card .role{font-family:'Space Grotesk',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-top:5px}
+/* chapter cards */
+.chapter-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:20px}
+.chapter-card{background:#fff;border:1.5px solid var(--ink);box-shadow:4px 4px 0 rgba(54,59,62,.12);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.chapter-card strong{font-size:15px}
+.chapter-card .meta{font-size:12.5px;color:#4a5261;margin:0}
 </style>
 </head>
 <body>
@@ -108,37 +126,30 @@ img.headshot{object-fit:cover}
 </nav>
 <main id="main">
 <section class="page-hero">
-  <div class="page-hero-inner">
-    <p class="eyebrow">About SCD</p>
-    <h1>Who <em>we are</em></h1>
-    <p class="lede" id="t-about-intro">A student founded society at the intersection of finance and engineering, with chapters across schools in the UAE.</p>
+  <div class="page-hero-inner" style="display:grid;gap:20px">
+    <div>
+      <p class="eyebrow">About SCD</p>
+      <h1>Who <em>we are</em></h1>
+      <p class="lede" id="t-about-intro">A student founded society at the intersection of finance and engineering, with chapters across schools in the UAE.</p>
+    </div>
+    <div class="hero-mission" id="t-about-mission">Schools teach finance and engineering separately. The real world never does. A solar panel is a physics problem and a payback problem at the same time. We train the habit of thinking in both at once.</div>
+  </div>
+</section>
+<div id="contact-email" style="display:none"></div><div id="charter" style="display:none"></div><div id="boq" style="display:none"></div>
+
+<section class="sec light">
+  <div class="sec-inner">
+    <span class="sec-label reveal">The people</span>
+    <h2 class="sec-title reveal">Leadership</h2>
+    <div class="leader-grid reveal" id="leaders"><p class="loading">Loading</p></div>
   </div>
 </section>
 
 <section class="sec cream">
   <div class="sec-inner">
-    <span class="sec-label reveal">Our approach</span>
-    <h2 class="sec-title reveal">What drives us</h2>
-    <div id="contact-email" style="display:none"></div><div id="charter" style="display:none"></div><div id="boq" style="display:none"></div>
-    <div class="about-panel reveal" id="t-about-mission">
-      <p>Schools teach finance and engineering separately. The real world never does. A solar panel is a physics problem and a payback problem at the same time. We train the habit of thinking in both at once.</p>
-    </div>
-  </div>
-</section>
-
-<section class="sec dark">
-  <div class="sec-inner">
-    <span class="sec-label reveal">The people</span>
-    <h2 class="sec-title reveal">Leadership</h2>
-    <div class="team-grid" id="leaders"><p class="loading">Loading</p></div>
-  </div>
-</section>
-
-<section class="sec light">
-  <div class="sec-inner">
     <span class="sec-label reveal">The network</span>
     <h2 class="sec-title reveal">Chapters</h2>
-    <div class="chapters-list" id="chapters"><p class="loading">Loading</p></div>
+    <div class="chapter-grid reveal" id="chapters"><p class="loading">Loading</p></div>
     <p class="reveal" style="margin-top:20px"><a href="join.html" class="btn">Start a chapter</a></p>
   </div>
 </section>

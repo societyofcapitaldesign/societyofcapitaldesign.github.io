@@ -3,234 +3,185 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home · Society of Capital Design</title>
-<meta name="description" content="Society of Capital Design, a student founded UAE organization at the intersection of finance and engineering.">
+<title>Network · Society of Capital Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--coal:#363b3e;--brass:#b5924e;--paper:#edf0f3;--ink:#24282c;--steel:#33608f;--rule:#c7cdd3}
+:root{--coal:#363b3e;--brass:#b5924e;--paper:#edf0f3;--ink:#24282c;--steel:#33608f;--rule:#c7cdd3;--dark:#1a1d20;--darkcard:#252a2e}
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Liberation Sans",Arial,sans-serif;
- color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px;padding:10px;
- background-image:linear-gradient(rgba(51,96,143,.05) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(51,96,143,.05) 1px,transparent 1px),
-  linear-gradient(rgba(51,96,143,.09) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(51,96,143,.09) 1px,transparent 1px);
- background-size:8px 8px,8px 8px,40px 40px,40px 40px}
-.mono,.tabs a,.callout .bubble,.eyebrow,.ph,.stamp,.tb td,.boq,.panel-label,.role
- {font-family:ui-monospace,"Cascadia Mono",Menlo,Consolas,"Liberation Mono",monospace}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px}
+h1,h2,h3,.sec-label,.sec-title{font-family:'Space Grotesk','DM Sans',sans-serif}
 img{max-width:100%;display:block}
 a{color:inherit}
-main p a,main .meta a{color:var(--steel);text-decoration-color:var(--brass)}
 :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 .skip{position:absolute;left:-999px;top:0;background:var(--brass);color:#fff;padding:8px 14px;z-index:9}
 .skip:focus{left:8px}
-.sheet{width:100%;border:2px solid var(--ink);outline:1px solid var(--ink);outline-offset:4px}
-.wrap{padding:0 18px}
-@media(min-width:700px){.wrap{padding:0 40px}}
-@media(min-width:1400px){.wrap{padding:0 64px}}
-.cols{display:grid;gap:0 56px}
-@media(min-width:1000px){.cols{grid-template-columns:1fr 1fr}}
-.band{background:var(--coal);color:var(--paper);display:flex;align-items:center;gap:14px;
- padding:12px 18px;border-bottom:2px solid var(--ink)}
-.band img{width:46px;height:46px;border-radius:50%;border:2px solid var(--brass);flex-shrink:0}
-.band .org{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px;line-height:1.3}
-.band .sub{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
-.tabs{display:flex;overflow-x:auto;border-bottom:2px solid var(--ink);background:#fff}
-.tabs a{flex:1 0 auto;text-decoration:none;font-size:11px;letter-spacing:.1em;padding:10px 14px;
- border-right:1px solid var(--ink);white-space:nowrap;text-transform:uppercase}
-.tabs a:last-child{border-right:none}
-.tabs a:hover{background:var(--paper)}
-.tabs a[aria-current="page"]{background:var(--brass);color:#fff;font-weight:700}
-.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);
- font-weight:700;margin-bottom:10px}
-h1{font-size:clamp(28px,5vw,46px);text-transform:uppercase;letter-spacing:.02em;font-weight:800;line-height:1.12}
-.tagline{margin-top:10px;font-size:clamp(16px,2.4vw,19px);color:var(--steel);font-weight:600}
-.lede{max-width:62ch;margin-top:14px}
-section{padding:36px 0 8px}
-.callout{display:flex;align-items:center;gap:14px;margin:34px 0 18px}
-.callout .bubble{width:38px;height:38px;border:2px solid var(--ink);border-radius:50%;
- display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0;background:#fff}
-.callout h2{font-size:clamp(18px,2.6vw,24px);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
-.callout::after{content:"";flex:1;border-top:1.5px solid var(--ink);min-width:24px}
-.panel,.banner,.program,.card{border:1.5px solid var(--ink);background:#fff;padding:20px;
- position:relative;box-shadow:5px 5px 0 rgba(54,59,62,.14);margin-top:22px}
-.panel-label{position:absolute;top:-10px;left:14px;background:#fff;border:1.5px solid var(--ink);
- font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:2px 8px;font-weight:700}
-.cards,.leaders{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:8px}
-.card h3,.panel h3,.program h3,.archive-item h3{font-size:17px;text-transform:uppercase;
- letter-spacing:.05em;font-weight:800;margin-bottom:8px}
-.card p,.panel p{font-size:15px}
-a.more{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
- font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--brass)}
-.ph{border:1.5px dashed var(--brass);background:rgba(181,146,78,.09);padding:0 6px;
- font-size:.82em;color:#6f5a2a;white-space:normal}
-.stamp{display:inline-block;transform:rotate(-2deg);border:2.5px solid #6f5a2a;color:#6f5a2a;
- text-transform:uppercase;font-weight:700;font-size:12px;letter-spacing:.12em;padding:5px 12px;margin:8px 0}
-.photobox{border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,#fff,#fff 12px,rgba(51,96,143,.05) 12px,rgba(51,96,143,.05) 24px);
- display:grid;place-items:center;min-height:150px;margin-top:16px;padding:14px;text-align:center}
-.evphoto{margin-top:14px;border:1.5px solid var(--ink);max-height:420px;object-fit:cover}
-.boq{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;font-size:14px;
- border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.boq th,.boq td{border:1px solid var(--ink);padding:10px 12px;text-align:left}
-.boq th{background:var(--coal);color:var(--paper);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-.boq td:first-child{width:56px;text-align:center}
-.boq td:last-child{text-align:right}
-.note{font-size:13px;color:#4a5261;margin-top:12px;max-width:60ch}
-.leader{border:1.5px solid var(--ink);background:#fff;padding:20px;text-align:center;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.leader .headshot{width:104px;height:104px;border-radius:50%;border:1.5px dashed var(--brass);
- background:rgba(181,146,78,.07);display:grid;place-items:center;margin:0 auto 12px;
- font-size:10px;color:#6f5a2a;padding:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
-img.headshot{border-style:solid;object-fit:cover}
-.leader h3{font-size:15px}
-.role{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#6f5a2a;font-weight:700;margin-top:6px}
-.rowlist{margin-top:20px;border:1.5px solid var(--ink);background:#fff;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.rowitem{padding:16px 18px;border-bottom:1px solid var(--rule)}
-.rowitem:last-child{border-bottom:none}
-.rowitem strong{font-size:16px;font-weight:800}
-.rowitem .meta,.meta{font-size:14px;color:#4a5261;margin-top:3px}
-ol.rules,ol.steps{margin:14px 0 0 22px;max-width:62ch}
-ol.rules li,ol.steps li{margin-bottom:10px}
-.archive-item{border:1.5px solid var(--ink);background:#fff;padding:20px;margin-top:20px;box-shadow:5px 5px 0 rgba(54,59,62,.14)}
-.btnrow{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;background:var(--brass);color:#fff;text-decoration:none;padding:12px 22px;
- font-weight:800;letter-spacing:.1em;font-size:12px;text-transform:uppercase;border:1.5px solid var(--ink);
- box-shadow:4px 4px 0 var(--ink);cursor:pointer}
-.btn.ghost{background:#fff;color:var(--ink)}
-.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
-@media(prefers-reduced-motion:reduce){.btn:hover{transform:none}}
-.tb{width:100%;border-collapse:collapse;border-top:2px solid var(--ink);margin-top:44px;background:#fff}
-.tb td{border:1px solid var(--ink);padding:7px 12px;font-size:11px;letter-spacing:.08em}
-.tb .lbl{display:block;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:#6f5a2a;font-weight:700}
-.tb .val{text-transform:uppercase;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{animation:none !important;transition-duration:0s !important}}
+.topnav{position:sticky;top:0;z-index:100;background:rgba(26,29,32,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ border-bottom:1px solid rgba(181,146,78,.25);display:flex;align-items:center;padding:0 20px}
+.topnav .logo{display:flex;align-items:center;gap:12px;padding:10px 0;text-decoration:none;flex-shrink:0}
+.topnav .logo img{width:40px;height:40px;border-radius:50%;border:2px solid var(--brass)}
+.topnav .logo span{font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.nav-links{display:flex;margin-left:auto;overflow-x:auto}
+.nav-link{text-decoration:none;font-size:11.5px;letter-spacing:.1em;padding:14px 14px;white-space:nowrap;
+ text-transform:uppercase;color:#aeb6c2;font-weight:600;transition:color .15s}
+.nav-link:hover,.nav-link.active{color:var(--brass)}
+.nav-link.active{box-shadow:inset 0 -2px 0 var(--brass)}
+@media(max-width:700px){.topnav .logo span{display:none}.nav-link{padding:12px 10px;font-size:10.5px}}
+.page-hero{background:var(--dark);color:#fff;padding:56px 28px 48px;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;
+ background-image:linear-gradient(rgba(181,146,78,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(181,146,78,.06) 1px,transparent 1px);
+ background-size:48px 48px;animation:pgrid 50s linear infinite}
+@keyframes pgrid{to{background-position:48px 48px}}
+.page-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto}
+.page-hero .eyebrow{font-family:'Space Grotesk';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.page-hero h1{font-size:clamp(30px,5.5vw,54px);font-weight:700;line-height:1.05;margin-top:12px;text-transform:uppercase}
+.page-hero h1 em{font-style:normal;color:var(--brass)}
+.page-hero .lede{font-size:16px;color:#aeb6c2;margin-top:14px;max-width:580px}
+.sec{padding:52px 28px}
+@media(min-width:800px){.sec{padding:64px 48px}.page-hero{padding:64px 48px 56px}}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec.dark{background:var(--dark);color:#fff}
+.sec.light{background:var(--paper)}
+.sec.cream{background:#f8f5ef}
+.sec.white{background:#fff}
+.sec-label{font-family:'Space Grotesk';font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.sec-title{font-size:clamp(24px,3.5vw,38px);font-weight:700;line-height:1.1;margin-top:8px;text-transform:uppercase}
+.sec.dark .sec-label{color:var(--brass)}.sec.dark .sec-title,.sec.dark h3{color:#fff}.sec.dark p,.sec.dark .meta{color:#c0c6ce}
+.meta{font-size:14px;color:#4a5261;margin-top:3px}
+.ph{border:1.5px dashed var(--brass);background:rgba(181,146,78,.09);padding:0 6px;font-size:.82em;color:#6f5a2a}
 .loading{opacity:.6;font-style:italic}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.footer{background:var(--dark);color:#aeb6c2;padding:24px 28px;text-align:center;font-size:12px;letter-spacing:.08em}
+.footer strong{color:var(--brass)}
+.btn{display:inline-block;padding:13px 26px;background:var(--brass);color:#1a1d20;font-weight:700;letter-spacing:.1em;font-size:13px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;font-family:'Space Grotesk'}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(181,146,78,.3)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{border-color:var(--brass);color:var(--brass)}
+
+
+/* activity cards */
+.feed-scroll{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:18px}
+.act-card{background:var(--darkcard);color:#fff;border:1px solid rgba(181,146,78,.15);
+ padding:20px 22px;display:flex;flex-direction:column;min-height:150px;transition:transform .2s,box-shadow .2s}
+.act-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.act-card.featured{grid-column:1/-1;background:var(--brass);color:#1a1d20}
+.act-when{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+ font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:800}
+.act-card .act-when{color:var(--brass)}.act-card.featured .act-when{color:#1a1d20}
+.act-name{font-family:'Space Grotesk';font-weight:800;font-size:clamp(18px,2.2vw,22px);line-height:1.15;text-transform:uppercase;margin-top:10px}
+.act-card.featured .act-name{font-size:clamp(22px,3vw,30px)}
+.act-club{font-size:13px;margin-top:7px;opacity:.75}
+.act-foot{margin-top:auto;padding-top:14px;display:flex;align-items:flex-end;gap:10px}
+.act-num{font-family:'Space Grotesk',monospace;font-size:30px;font-weight:800;line-height:.9}
+.act-card .act-num{color:var(--brass)}.act-card.featured .act-num{color:#1a1d20}
+.act-numlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7;padding-bottom:2px}
+.act-latest{font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:800}
+/* club tiles */
+.club-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:18px}
+.club-card{background:var(--coal);color:var(--paper);border:1.5px solid var(--ink);cursor:pointer;
+ padding:22px 24px;box-shadow:6px 6px 0 rgba(54,59,62,.2);transition:transform .15s,box-shadow .15s;
+ display:flex;flex-direction:column;min-height:170px}
+.club-card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--brass)}
+.club-card.selected{box-shadow:9px 9px 0 var(--brass);outline:2.5px solid var(--brass);outline-offset:-8px}
+.club-card.founding{background:var(--brass);color:#1a1d20}
+.cc-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+ font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:800}
+.club-card .cc-top{color:var(--brass)}.club-card.founding .cc-top{color:#1a1d20}
+.cc-name{font-family:'Space Grotesk';font-weight:800;font-size:clamp(21px,2.6vw,26px);line-height:1.12;text-transform:uppercase;margin-top:10px}
+.cc-school{font-size:13px;margin-top:7px;opacity:.75}
+.cc-foot{margin-top:auto;padding-top:16px;display:flex;align-items:flex-end;gap:10px}
+.cc-count{font-family:'Space Grotesk',monospace;font-size:34px;font-weight:800;line-height:.9}
+.club-card .cc-count{color:var(--brass)}.club-card.founding .cc-count{color:#1a1d20}
+.cc-countlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7;padding-bottom:3px}
+.cc-live{width:9px;height:9px;border-radius:50%;background:var(--brass);margin-bottom:8px;box-shadow:0 0 0 3px rgba(181,146,78,.3)}
+.club-card.founding .cc-live{background:#1a1d20;box-shadow:0 0 0 3px rgba(26,29,32,.25)}
+.cc-open{margin-left:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;padding-bottom:3px}
+.club-card .cc-open{color:var(--paper)}.club-card.founding .cc-open{color:#1a1d20}
+/* detail */
+#club-detail{margin-top:18px}
+.club-entry{background:#fff;border:1.5px solid var(--ink);padding:20px 24px;box-shadow:4px 4px 0 rgba(54,59,62,.12);animation:cd-in .2s ease}
+@keyframes cd-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.club-tag{display:inline-block;font-family:'Space Grotesk';font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border:1.5px solid var(--brass);color:var(--brass);margin-left:10px;vertical-align:middle}
+.club-tag.founding{background:var(--brass);color:#fff}
+.detail-acts{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:14px}
+.club-activity{border:1.5px solid var(--ink);background:var(--paper);padding:14px 16px;box-shadow:4px 4px 0 rgba(54,59,62,.14);display:flex;flex-direction:column}
+.club-activity .adate{font-family:'Space Grotesk',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--brass)}
+.club-activity .an{font-weight:800;font-size:15.5px;line-height:1.25;margin-top:6px;text-transform:uppercase}
+.club-activity .am{font-size:13px;color:#4a5261;margin-top:6px}
+.club-activity .aatt{margin-top:auto;padding-top:10px;font-family:'Space Grotesk',monospace;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.club-activity img{max-width:100%;height:auto;display:block;margin-top:10px;border:1.5px solid var(--ink)}
+/* join panel */
+.join-panel{background:var(--darkcard);border:1px solid rgba(181,146,78,.15);padding:28px 32px;margin-top:24px}
+.join-panel p{color:#c0c6ce;margin-top:10px}.join-panel p:first-of-type{margin-top:14px}
+.join-panel strong{color:#fff}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="sheet">
-  <div class="band">
-    <img src="scd-logo.jpg" alt="Society of Capital Design logo showing the letters SCD with gears, a rising chart and a compass needle">
-    <div>
-      <div class="org">Society of Capital Design</div>
-      <div class="sub">Drawing set · Sheet 01 of 05</div>
-    </div>
+<nav class="topnav" aria-label="Main navigation">
+  <a class="logo" href="index.html">
+    <img src="scd-logo.jpg" alt="SCD logo">
+    <span>Society of Capital Design</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link" href="events.html">Events</a>
+    <a class="nav-link active" href="network.html">Network</a>
+    <a class="nav-link" href="newsletter.html">Newsletter</a>
+    <a class="nav-link" href="join.html">Join</a>
   </div>
-  <nav class="tabs" aria-label="Sheet index">
-    <a href="index.html">01 Home</a>
-    <a href="about.html">02 About</a>
-    <a href="events.html">03 Events + Competitions</a>
-    <a href="network.html" aria-current="page">04 Network</a>
-    <a href="newsletter.html">05 Newsletter</a>
-    <a href="join.html">06 Join</a>
-  </nav>
-  <main id="main">
-
-<section>
-  <div class="wrap">
+</nav>
+<main id="main">
+<section class="page-hero">
+  <div class="page-hero-inner">
     <p class="eyebrow">The SCD Network</p>
-    <h1>Clubs and societies<br>in the network</h1>
+    <h1>Clubs in the <em>network</em></h1>
     <p class="lede" id="t-network-intro">SCD chapters and affiliated clubs across schools and countries. Every activity listed here happened, was reported by the club that ran it, and is verified before publication.</p>
+  </div>
+</section>
 
-    <div class="callout"><span class="bubble" aria-hidden="true">A</span><h2>Recent activity</h2></div>
-    <div id="activity-feed"><p class="loading">Loading</p></div>
+<section class="sec dark">
+  <div class="sec-inner">
+    <span class="sec-label reveal">Live feed</span>
+    <h2 class="sec-title reveal">Recent Activity</h2>
+    <div id="activity-feed" class="reveal"><p class="loading" style="color:#aeb6c2">Loading</p></div>
+  </div>
+</section>
 
-    <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">B</span><h2>The clubs</h2></div>
-    <p class="meta" style="margin-top:-6px">Select any club for its full record and activities.</p>
-    <div id="directory"><p class="loading">Loading</p></div>
+<section class="sec light">
+  <div class="sec-inner">
+    <span class="sec-label reveal">Directory</span>
+    <h2 class="sec-title reveal">The Clubs</h2>
+    <p class="meta reveal" style="margin-top:-4px">Select any club to see its full record and activities.</p>
+    <div id="directory" class="reveal"><p class="loading">Loading</p></div>
     <div id="club-detail"></div>
+  </div>
+</section>
 
-    <div class="callout" style="margin-top:36px"><span class="bubble" aria-hidden="true">C</span><h2>Join the network</h2></div>
-    <div class="panel">
-      <span class="panel-label">For club presidents</span>
-      <p style="margin-top:10px" id="t-net-keeps"><strong>What your club keeps.</strong> Your name, your identity, your leadership, and full control of what you run at your school. Affiliation adds, it does not absorb.</p>
+<section class="sec dark">
+  <div class="sec-inner">
+    <span class="sec-label reveal">For club presidents</span>
+    <h2 class="sec-title reveal">Join the Network</h2>
+    <div class="join-panel reveal">
+      <p id="t-net-keeps"><strong>What your club keeps.</strong> Your name, your identity, your leadership, and full control of what you run at your school. Affiliation adds, it does not absorb.</p>
       <p id="t-net-members"><strong>What your members gain.</strong> Entry to every SCD competition cycle, the Bulletin every issue, invitations to network events, and their work published alongside students from other schools and countries.</p>
       <p id="t-net-lead"><strong>What your chapter lead gains.</strong> A named position in a cross school network, judging and marking experience against a published rubric, and a track record that is verifiable because we only publish what happened.</p>
       <p id="t-net-how"><strong>How to join.</strong> Email us with your club name, school, and a short description of what you currently run. We reply to every message.</p>
-      <p class="meta" style="margin-top:12px">societyofcapitaldesign@gmail.com</p>
+      <p class="meta" style="margin-top:14px;color:var(--brass)">societyofcapitaldesign@gmail.com</p>
     </div>
   </div>
 </section>
 
-    <div class="wrap">
-      <table class="tb" aria-label="Title block">
-        <tr>
-          <td><span class="lbl">Sheet title</span><span class="val">Network directory</span></td>
-          <td><span class="lbl">Sheet</span><span class="val">04 / 06</span></td>
-          <td><span class="lbl">Organization</span><span class="val">Society of Capital Design · Founded 2025 · UAE</span></td>
-        </tr>
-      </table>
-    </div>
-  </main>
-</div>
-<style>
-.feed-item{border:1.5px solid var(--ink);background:#fff;padding:12px 16px;margin-top:10px;box-shadow:4px 4px 0 rgba(54,59,62,.12);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.feed-item .fmain{font-weight:800;font-size:15px}
-.feed-item .fmeta{font-size:13px;color:#4a5261}
-.club-entry{border:1.5px solid var(--ink);background:#fff;margin-top:16px;box-shadow:5px 5px 0 rgba(54,59,62,.14);padding:18px}
-.club-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border:1.5px solid var(--brass);color:var(--brass);margin-left:10px;vertical-align:middle}
-.club-tag.founding{background:var(--brass);color:#fff}
-.country-head{font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#4a5261;margin-top:28px;border-bottom:1.5px solid var(--rule);padding-bottom:6px}
-.detail-acts{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:14px}
-.club-activity{border:1.5px solid var(--ink);background:var(--paper);padding:14px 16px;
- box-shadow:4px 4px 0 rgba(54,59,62,.14);display:flex;flex-direction:column}
-.club-activity .adate{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.18em;
- text-transform:uppercase;font-weight:800;color:var(--brass)}
-.club-activity .an{font-weight:800;font-size:15.5px;line-height:1.25;margin-top:6px;text-transform:uppercase}
-.club-activity .am{font-size:13px;color:#4a5261;margin-top:6px}
-.club-activity .aatt{margin-top:auto;padding-top:10px;font-family:ui-monospace,Menlo,Consolas,monospace;
- font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
-.club-activity img{max-width:100%;height:auto;display:block;margin-top:10px;border:1.5px solid var(--ink)}
-/* activity feed: big bold tiles, first one featured */
-.feed-scroll{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:16px}
-.act-card{background:var(--coal);color:var(--paper);border:1.5px solid var(--ink);
- box-shadow:6px 6px 0 rgba(54,59,62,.2);padding:20px 22px;display:flex;flex-direction:column;min-height:150px}
-.act-card.featured{grid-column:1/-1;background:var(--brass);color:#241c0c;min-height:130px}
-.act-when{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
- font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:800}
-.act-card .act-when{color:var(--brass)}
-.act-card.featured .act-when{color:#241c0c}
-.act-name{font-weight:800;font-size:clamp(18px,2.2vw,22px);line-height:1.15;text-transform:uppercase;margin-top:10px}
-.act-card.featured .act-name{font-size:clamp(22px,3vw,30px)}
-.act-club{font-size:13px;margin-top:7px;opacity:.75}
-.act-foot{margin-top:auto;padding-top:14px;display:flex;align-items:flex-end;gap:10px}
-.act-num{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:30px;font-weight:800;line-height:.9}
-.act-card .act-num{color:var(--brass)}
-.act-card.featured .act-num{color:#241c0c}
-.act-numlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7;padding-bottom:2px}
-.act-latest{font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:800}
-/* club tiles: big, bold, simple */
-.club-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:16px}
-.club-card{background:var(--coal);color:var(--paper);border:1.5px solid var(--ink);cursor:pointer;
- padding:22px 24px;box-shadow:6px 6px 0 rgba(54,59,62,.2);transition:transform .12s,box-shadow .12s;
- display:flex;flex-direction:column;min-height:170px}
-.club-card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--brass)}
-@media(prefers-reduced-motion:reduce){.club-card:hover{transform:none}}
-.club-card.selected{box-shadow:9px 9px 0 var(--brass);outline:2.5px solid var(--brass);outline-offset:-8px}
-.club-card.founding{background:var(--brass);color:#241c0c}
-.cc-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
- font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:800}
-.club-card .cc-top{color:var(--brass)}
-.club-card.founding .cc-top{color:#241c0c}
-.cc-name{font-weight:800;font-size:clamp(21px,2.6vw,26px);line-height:1.12;text-transform:uppercase;
- letter-spacing:.01em;margin-top:10px}
-.cc-school{font-size:13px;margin-top:7px;opacity:.75}
-.cc-foot{margin-top:auto;padding-top:16px;display:flex;align-items:flex-end;gap:10px}
-.cc-count{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:34px;font-weight:800;line-height:.9}
-.club-card .cc-count{color:var(--brass)}
-.club-card.founding .cc-count{color:#241c0c}
-.cc-countlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7;padding-bottom:3px}
-.cc-live{width:9px;height:9px;border-radius:50%;background:var(--brass);margin-bottom:8px;
- box-shadow:0 0 0 3px rgba(181,146,78,.3)}
-.club-card.founding .cc-live{background:#241c0c;box-shadow:0 0 0 3px rgba(36,28,12,.25)}
-.cc-open{margin-left:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;padding-bottom:3px}
-.club-card .cc-open{color:var(--paper)}
-.club-card.founding .cc-open{color:#241c0c}
-#club-detail{margin-top:18px}
-#club-detail .club-entry{animation:cd-in .18s ease}
-@keyframes cd-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){#club-detail .club-entry{animation:none}}
-</style>
+<footer class="footer">
+  <strong>Society of Capital Design</strong> · Founded 2025 · UAE
+</footer>
+</main>
 <script>
+
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ph = s => `<span class="ph">${esc(s)}</span>`;
@@ -375,6 +326,18 @@ function parseDate(d){
   if(ordered[0]) showClub(ordered[0].club_name);
 })();
 applyText({"t-network-intro":"network_intro","t-net-keeps":"network_join_keeps","t-net-members":"network_join_members","t-net-lead":"network_join_lead","t-net-how":"network_join_how"});
+
+</script>
+<script>
+(function(){
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add("visible"); obs.unobserve(e.target); }});
+  }, {threshold:0.08, rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal,.sec-label,.sec-title,.page-hero h1,.page-hero .eyebrow,.page-hero .lede").forEach(el => {
+    el.classList.add("reveal");
+    obs.observe(el);
+  });
+})();
 </script>
 </body>
 </html>

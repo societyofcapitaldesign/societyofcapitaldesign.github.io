@@ -80,6 +80,20 @@ a{color:inherit}
 .issue-feature .issue-latest{font-family:'Space Grotesk';font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:6px}
 @media(max-width:560px){.issue-feature{flex-direction:column}.issue-feature .issue-top{border-right:none;border-bottom:4px solid var(--brass)}}
 
+
+/* dark section accents */
+.sec.dark{position:relative;overflow:hidden}
+.sec.dark::before{content:"";position:absolute;top:0;right:0;width:300px;height:100%;
+ background:linear-gradient(135deg,transparent 40%,rgba(181,146,78,.04) 40%,rgba(181,146,78,.04) 60%,transparent 60%);pointer-events:none}
+.sec.dark::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent)}
+/* cream sections subtle pattern */
+.sec.cream{background:#f8f5ef url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0z' fill='%23e8e2d6' fill-opacity='.4'/%3E%3C/svg%3E")}
+/* card upgrades */
+.prog-card,.join-card,.about-panel{position:relative;overflow:hidden}
+.prog-card::after,.join-card::after,.about-panel::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brass),transparent)}
+/* stats band glow */
+.stats-band{background:linear-gradient(135deg,var(--coal) 0%,#2a2e31 50%,var(--coal) 100%);position:relative}
+.stats-band::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 10%,var(--brass) 50%,transparent 90%)}
 </style>
 </head>
 <body>
@@ -111,7 +125,7 @@ a{color:inherit}
   <div class="sec-inner">
     <span class="sec-label reveal">Archive</span>
     <h2 class="sec-title reveal">All Issues</h2>
-    <div id="issues-list" class="reveal"><p class="loading">Loading</p></div>
+    <div id="issues" class="reveal"><p class="loading">Loading</p></div>
   </div>
 </section>
 

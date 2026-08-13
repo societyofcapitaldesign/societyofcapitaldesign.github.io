@@ -537,14 +537,14 @@
   "network_activities": [
     {
       "id": 1785393022367,
-      "club": "Shark Tank ",
-      "event_name": "Pitch Competition",
+      "club": "Entrepeneurship club",
+      "event_name": "Shark Tank Pitches",
       "date": "",
       "attendees": "47",
       "description": "",
-      "photo_url": "",
+      "photo_url": "photos/1786603939122-sharktankbackgroundimage.webp",
       "photo_alt": "",
-      "sort": 100
+      "sort": 1
     },
     {
       "id": 1785394700593,

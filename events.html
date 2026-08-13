@@ -150,6 +150,25 @@ ol.rules li,ol.steps li{margin-bottom:10px}
 .essay-col .sec-label{color:var(--brass)}
 .essay-col .sec-title{color:#fff}
 .essay-col p,.essay-col .meta,.essay-col .loading{color:#c0c6ce}
+
+/* cycle header */
+.cycle-header{margin-bottom:20px}
+.cycle-name{font-size:22px;color:#fff;font-weight:700;text-transform:uppercase}
+.cycle-meta{display:flex;gap:16px;align-items:center;margin-top:8px;font-size:13px;color:#aeb6c2;font-family:'Space Grotesk',monospace;letter-spacing:.06em}
+.cycle-status{background:var(--brass);color:#1a1d20;padding:3px 12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+/* track cards side by side */
+.track-grid{display:grid;gap:18px}
+@media(min-width:700px){.track-grid{grid-template-columns:1fr 1fr}}
+.track-card{background:var(--darkcard);border:1px solid rgba(181,146,78,.2);overflow:hidden}
+.track-head{background:rgba(181,146,78,.12);padding:14px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(181,146,78,.2)}
+.track-num{font-family:'Space Grotesk',monospace;font-size:24px;font-weight:800;color:var(--brass);line-height:1}
+.track-name{font-family:'Space Grotesk';font-size:16px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.08em}
+.track-body{padding:16px 20px}
+/* individual prompts */
+.prompt-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.prompt-item:last-child{border-bottom:none}
+.prompt-num{font-family:'Space Grotesk',monospace;font-size:20px;font-weight:800;color:var(--brass);line-height:1.2;flex-shrink:0;width:28px}
+.prompt-text{font-size:14.5px;color:#c0c6ce;line-height:1.5}
 </style>
 </head>
 <body>
@@ -309,19 +328,41 @@ const EL = document.getElementById("events-list");
   const cycles = await rows("cycles","id");
   const cur = (cycles||[]).filter(c => c.is_current)[0];
   if(cur){
-    CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
-      <strong style="font-weight:800">${fmt(cur.name)}</strong>
-      <p class="meta">Status: ${fmt(cur.status||"")} · Deadline: ${fmt(cur.deadline_text||"")}</p></div>
-      <div class="program"><span class="panel-label">Track 1</span><h3>Finance</h3>
-      <p>${cur.econ_prompts && cur.econ_prompts.trim() ? fmt(cur.econ_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>
-      <div class="program"><span class="panel-label">Track 2</span><h3>Engineering</h3>
-      <p>${cur.eng_prompts && cur.eng_prompts.trim() ? fmt(cur.eng_prompts).replace(/\n/g,"<br>") : ph("[Prompts published here when the cycle opens]")}</p></div>`;
+    const fmtPrompts = (raw) => {
+        if(!raw || !raw.trim()) return ph("[Prompts published here when the cycle opens]");
+        return raw.trim().split("\n").filter(l=>l.trim()).map((l,i) => {
+          const txt = l.replace(/^\d+[\.\)]\s*/, "");
+          return `<div class="prompt-item"><span class="prompt-num">${i+1}</span><span class="prompt-text">${fmt(txt)}</span></div>`;
+        }).join("");
+      };
+      CB.innerHTML = `<div class="cycle-header">
+        <h3 class="cycle-name">${fmt(cur.name)}</h3>
+        <div class="cycle-meta">
+          <span class="cycle-status">${fmt(cur.status||"Open")}</span>
+          <span>Deadline: ${fmt(cur.deadline_text||"TBA")}</span>
+        </div>
+      </div>
+      <div class="track-grid">
+        <div class="track-card">
+          <div class="track-head"><span class="track-num">01</span><span class="track-name">Finance</span></div>
+          <div class="track-body">${fmtPrompts(cur.econ_prompts)}</div>
+        </div>
+        <div class="track-card">
+          <div class="track-head"><span class="track-num">02</span><span class="track-name">Engineering</span></div>
+          <div class="track-body">${fmtPrompts(cur.eng_prompts)}</div>
+        </div>
+      </div>`;
   } else {
-    CB.innerHTML = `<div class="banner"><span class="panel-label">Cycle</span>
-      <strong style="font-weight:800">${ph("[Term or cycle name, founders]")}</strong>
-      <p class="meta">Status: ${ph("[opens / open / closed]")} · Deadline: ${ph("[Date, Evidence Register, Essay Cycle row]")}</p></div>
-      <div class="program"><span class="panel-label">Track 1</span><h3>Finance</h3><p>${ph("[Prompts published here when the cycle opens]")}</p></div>
-      <div class="program"><span class="panel-label">Track 2</span><h3>Engineering</h3><p>${ph("[Prompts published here when the cycle opens]")}</p></div>`;
+    CB.innerHTML = `<div class="cycle-header">
+        <h3 class="cycle-name">${ph("[Cycle name]")}</h3>
+        <div class="cycle-meta"><span class="cycle-status">Pending</span><span>Deadline: ${ph("[TBA]")}</span></div>
+      </div>
+      <div class="track-grid">
+        <div class="track-card"><div class="track-head"><span class="track-num">01</span><span class="track-name">Finance</span></div>
+          <div class="track-body">${ph("[Prompts published when the cycle opens]")}</div></div>
+        <div class="track-card"><div class="track-head"><span class="track-num">02</span><span class="track-name">Engineering</span></div>
+          <div class="track-body">${ph("[Prompts published when the cycle opens]")}</div></div>
+      </div>`;
   }
 
   const R = document.getElementById("results");

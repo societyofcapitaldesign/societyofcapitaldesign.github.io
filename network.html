@@ -100,20 +100,7 @@ a{color:inherit}
 .cc-open{margin-left:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;padding-bottom:3px}
 .club-card .cc-open{color:var(--paper)}.club-card.founding .cc-open{color:#1a1d20}
 
-/* rotating activity carousel */
-.activity-carousel{position:relative;overflow:hidden;margin-top:18px;min-height:180px}
-.carousel-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
-.carousel-slide{flex:0 0 100%;padding:0 4px}
-.carousel-slide .act-card{margin:0}
-.carousel-dots{display:flex;justify-content:center;gap:10px;margin-top:18px}
-.carousel-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--brass);background:transparent;cursor:pointer;transition:background .2s;padding:0}
-.carousel-dot.active{background:var(--brass)}
-.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(181,146,78,.9);
- color:#1a1d20;border:none;cursor:pointer;font-size:20px;font-weight:800;z-index:3;display:grid;place-items:center;transition:background .15s}
-.carousel-nav:hover{background:var(--brass)}
-.carousel-nav.prev{left:8px}
-.carousel-nav.next{right:8px}
-@media(min-width:800px){.carousel-slide{flex:0 0 50%}}
+
 
 /* detail */
 #club-detail{margin-top:18px}
@@ -133,6 +120,27 @@ a{color:inherit}
 .join-panel p{color:#c0c6ce;margin-top:10px}.join-panel p:first-of-type{margin-top:14px}
 .join-panel strong{color:#fff}
 
+
+/* full-bleed activity banner */
+.act-banner{background:var(--dark);position:relative;overflow:hidden;min-height:260px}
+.act-banner::before{content:"";position:absolute;inset:0;
+ background-image:linear-gradient(rgba(181,146,78,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(181,146,78,.05) 1px,transparent 1px);
+ background-size:48px 48px}
+.act-slides{position:relative;min-height:220px}
+.act-slide{position:absolute;inset:0;padding:48px 28px;max-width:1200px;margin:0 auto;
+ opacity:0;transform:translateX(40px);transition:opacity .5s,transform .5s;pointer-events:none;
+ display:flex;flex-direction:column;justify-content:center}
+.act-slide.active{opacity:1;transform:none;pointer-events:auto;position:relative}
+@media(min-width:800px){.act-slide{padding:56px 48px}}
+.act-slide .act-eyebrow{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.act-slide .act-event{font-family:'Space Grotesk';font-size:clamp(26px,4vw,42px);font-weight:700;color:#fff;text-transform:uppercase;line-height:1.1;margin-top:10px}
+.act-slide .act-from{font-size:15px;color:#aeb6c2;margin-top:10px}
+.act-slide .act-count{font-family:'Space Grotesk',monospace;font-size:48px;font-weight:800;color:var(--brass);line-height:1;margin-top:16px}
+.act-slide .act-countlbl{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aeb6c2;font-weight:700}
+.act-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3}
+.act-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--brass);background:transparent;cursor:pointer;padding:0;transition:background .2s}
+.act-dot.active{background:var(--brass)}
+.act-progress{position:absolute;bottom:0;left:0;height:3px;background:var(--brass);transition:width .1s linear;z-index:3}
 </style>
 </head>
 <body>
@@ -160,12 +168,8 @@ a{color:inherit}
   </div>
 </section>
 
-<section class="sec dark">
-  <div class="sec-inner">
-    <span class="sec-label reveal">Live feed</span>
-    <h2 class="sec-title reveal">Recent Activity</h2>
-    <div id="activity-feed" class="reveal"><p class="loading" style="color:#aeb6c2">Loading</p></div>
-  </div>
+<section class="act-banner">
+  <div class="act-banner-inner" id="activity-feed"><p class="loading" style="color:#aeb6c2;padding:80px 28px;text-align:center">Loading</p></div>
 </section>
 
 <section class="sec light">
@@ -253,47 +257,35 @@ function parseDate(d){
     };
     const slides = recent.map((a, i) => {
       const c = clubByName[(a.club||"").trim().toLowerCase()] || {};
-      const feat = i === 0;
-      return `<div class="carousel-slide"><div class="act-card ${feat ? "featured" : ""}">
-        <div class="act-when">
-          ${feat ? `<span class="act-latest">Most recent</span>` : ""}
-          <span>${esc(when(a.date))}</span>
-          <span>${esc((c.country||"").toUpperCase())}</span>
-        </div>
-        <div class="act-name">${fmt(a.event_name)}</div>
-        <div class="act-club">${fmt(c.club_name||a.club||"")}${c.school ? " · " + fmt(c.school) : ""}</div>
-        ${a.attendees ? `<div class="act-foot"><span class="act-num">${esc(a.attendees)}</span><span class="act-numlbl">attended</span></div>` : ""}
-      </div></div>`;
+      return `<div class="act-slide ${i===0?"active":""}">
+        <div class="act-eyebrow">${i===0?"Most recent · ":""}${esc(when(a.date))} · ${esc((c.country||"").toUpperCase())}</div>
+        <div class="act-event">${fmt(a.event_name)}</div>
+        <div class="act-from">${fmt(c.club_name||a.club||"")}${c.school ? " · " + fmt(c.school) : ""}</div>
+        ${a.attendees ? `<div class="act-count">${esc(a.attendees)}</div><div class="act-countlbl">attended</div>` : ""}
+      </div>`;
     }).join("");
-    const dots = recent.map((_,i) => `<button class="carousel-dot ${i===0?"active":""}" data-i="${i}" aria-label="Slide ${i+1}"></button>`).join("");
-    F.innerHTML = `<div class="activity-carousel">
-      <button class="carousel-nav prev" aria-label="Previous">&#8249;</button>
-      <div class="carousel-track">${slides}</div>
-      <button class="carousel-nav next" aria-label="Next">&#8250;</button>
-    </div>
-    <div class="carousel-dots">${dots}</div>`;
-    // carousel logic
-    const track = F.querySelector(".carousel-track");
-    const allDots = F.querySelectorAll(".carousel-dot");
-    let cur = 0, total = recent.length;
-    const slidesPerView = () => window.innerWidth >= 800 ? 2 : 1;
-    const maxSlide = () => Math.max(0, total - slidesPerView());
+    const dots = recent.map((_,i) => `<button class="act-dot ${i===0?"active":""}" data-i="${i}" aria-label="Activity ${i+1}"></button>`).join("");
+    F.innerHTML = `<div class="act-slides">${slides}</div><div class="act-dots">${dots}</div><div class="act-progress" id="act-prog"></div>`;
+    const allSlides = F.querySelectorAll(".act-slide");
+    const allDots = F.querySelectorAll(".act-dot");
+    const prog = document.getElementById("act-prog");
+    let cur = 0, total = recent.length, elapsed = 0;
+    const INTERVAL = 5000;
     function goTo(n){
-      cur = Math.max(0, Math.min(n, maxSlide()));
-      track.style.transform = `translateX(-${cur * (100/slidesPerView())}%)`;
+      cur = ((n % total) + total) % total;
+      allSlides.forEach((s,i) => s.classList.toggle("active", i===cur));
       allDots.forEach((d,i) => d.classList.toggle("active", i===cur));
+      elapsed = 0;
     }
-    F.querySelector(".carousel-nav.next").onclick = () => goTo(cur+1);
-    F.querySelector(".carousel-nav.prev").onclick = () => goTo(cur-1);
     allDots.forEach(d => d.onclick = () => goTo(+d.dataset.i));
-    // autoplay
-    let autoplay = setInterval(() => goTo(cur >= maxSlide() ? 0 : cur+1), 4500);
-    F.addEventListener("pointerenter", () => clearInterval(autoplay));
-    F.addEventListener("pointerleave", () => { autoplay = setInterval(() => goTo(cur >= maxSlide() ? 0 : cur+1), 4500); });
-    window.addEventListener("resize", () => goTo(cur));
-  } else {
-    F.innerHTML = '<p class="meta">No activities posted yet. The first club reports will appear here.</p>';
-  }
+    let tick = setInterval(() => {
+      elapsed += 50;
+      prog.style.width = (elapsed/INTERVAL*100) + "%";
+      if(elapsed >= INTERVAL) goTo(cur+1);
+    }, 50);
+    F.addEventListener("pointerenter", () => clearInterval(tick));
+    F.addEventListener("pointerleave", () => { tick = setInterval(() => { elapsed+=50; prog.style.width=(elapsed/INTERVAL*100)+"%"; if(elapsed>=INTERVAL) goTo(cur+1); }, 50); });
+  } else { F.innerHTML = '<p style="color:#aeb6c2;padding:60px 28px;text-align:center">No activities posted yet.</p>'; }
 
   // ── Club cards ──
   const D = document.getElementById("directory");

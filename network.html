@@ -127,18 +127,19 @@ a{color:inherit}
  background-image:linear-gradient(rgba(181,146,78,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(181,146,78,.05) 1px,transparent 1px);
  background-size:48px 48px}
 .act-slides{position:relative;min-height:220px}
-.act-slide{position:absolute;inset:0;padding:48px 28px;max-width:1200px;margin:0 auto;
- opacity:0;transform:translateX(40px);transition:opacity .5s,transform .5s;pointer-events:none;
- display:flex;flex-direction:column;justify-content:center}
+.act-slide{position:absolute;inset:0;opacity:0;transform:translateX(40px);transition:opacity .6s,transform .6s;pointer-events:none}
 .act-slide.active{opacity:1;transform:none;pointer-events:auto;position:relative}
-@media(min-width:800px){.act-slide{padding:56px 48px}}
-.act-slide .act-eyebrow{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
-.act-slide .act-event{font-family:'Space Grotesk';font-size:clamp(26px,4vw,42px);font-weight:700;color:#fff;text-transform:uppercase;line-height:1.1;margin-top:10px}
-.act-slide .act-from{font-size:15px;color:#aeb6c2;margin-top:10px}
-.act-slide .act-count{font-family:'Space Grotesk',monospace;font-size:48px;font-weight:800;color:var(--brass);line-height:1;margin-top:16px}
+.act-slide-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.act-slide-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.9) 0%,rgba(26,29,32,.65) 50%,rgba(26,29,32,.85) 100%)}
+.act-slide-content{position:relative;z-index:2;padding:56px 28px;max-width:1200px;margin:0 auto;min-height:280px;display:flex;flex-direction:column;justify-content:center}
+@media(min-width:800px){.act-slide-content{padding:72px 48px;min-height:340px}}
+.act-slide .act-eyebrow{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.act-slide .act-event{font-family:'Space Grotesk';font-size:clamp(28px,5vw,50px);font-weight:700;color:#fff;text-transform:uppercase;line-height:1.08;margin-top:12px}
+.act-slide .act-from{font-size:16px;color:#aeb6c2;margin-top:12px}
+.act-slide .act-count{font-family:'Space Grotesk',monospace;font-size:52px;font-weight:800;color:var(--brass);line-height:1;margin-top:18px}
 .act-slide .act-countlbl{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aeb6c2;font-weight:700}
-.act-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3}
-.act-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--brass);background:transparent;cursor:pointer;padding:0;transition:background .2s}
+.act-dots{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:3}
+.act-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--brass);background:transparent;cursor:pointer;padding:0;transition:background .2s}
 .act-dot.active{background:var(--brass)}
 .act-progress{position:absolute;bottom:0;left:0;height:3px;background:var(--brass);transition:width .1s linear;z-index:3}
 
@@ -268,10 +269,13 @@ function parseDate(d){
     const slides = recent.map((a, i) => {
       const c = clubByName[(a.club||"").trim().toLowerCase()] || {};
       return `<div class="act-slide ${i===0?"active":""}">
-        <div class="act-eyebrow">${i===0?"Most recent · ":""}${esc(when(a.date))} · ${esc((c.country||"").toUpperCase())}</div>
-        <div class="act-event">${fmt(a.event_name)}</div>
-        <div class="act-from">${fmt(c.club_name||a.club||"")}${c.school ? " · " + fmt(c.school) : ""}</div>
-        ${a.attendees ? `<div class="act-count">${esc(a.attendees)}</div><div class="act-countlbl">attended</div>` : ""}
+        ${a.photo_url ? `<div class="act-slide-bg" style="background-image:url('${esc(a.photo_url)}')"></div>` : ""}
+        <div class="act-slide-content">
+          <div class="act-eyebrow">${i===0?"Most recent · ":""}${esc(when(a.date))} · ${esc((c.country||"").toUpperCase())}</div>
+          <div class="act-event">${fmt(a.event_name)}</div>
+          <div class="act-from">${fmt(c.club_name||a.club||"")}${c.school ? " · " + fmt(c.school) : ""}</div>
+          ${a.attendees ? `<div class="act-count">${esc(a.attendees)}</div><div class="act-countlbl">attended</div>` : ""}
+        </div>
       </div>`;
     }).join("");
     const dots = recent.map((_,i) => `<button class="act-dot ${i===0?"active":""}" data-i="${i}" aria-label="Activity ${i+1}"></button>`).join("");

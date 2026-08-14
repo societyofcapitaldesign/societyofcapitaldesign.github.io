@@ -141,6 +141,15 @@ a{color:inherit}
 .act-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--brass);background:transparent;cursor:pointer;padding:0;transition:background .2s}
 .act-dot.active{background:var(--brass)}
 .act-progress{position:absolute;bottom:0;left:0;height:3px;background:var(--brass);transition:width .1s linear;z-index:3}
+
+/* hero background slideshow */
+.page-hero .hero-media{position:absolute;inset:0;z-index:0;overflow:hidden}
+.page-hero .hero-media video,.page-hero .hero-media img{position:absolute;width:100%;height:100%;object-fit:cover}
+.page-hero .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.72) 40%,rgba(26,29,32,.88) 100%)}
+.page-hero .hero-slides{position:absolute;inset:0;z-index:0}
+.page-hero .hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:heroSlide var(--slide-total) linear infinite}
+@keyframes heroSlide{0%{opacity:0}4%{opacity:1}25%{opacity:1}29%{opacity:0}100%{opacity:0}}
+.page-hero .hero-slides::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.72) 40%,rgba(26,29,32,.88) 100%)}
 </style>
 </head>
 <body>
@@ -161,6 +170,7 @@ a{color:inherit}
 </nav>
 <main id="main">
 <section class="page-hero">
+  <div class="hero-media" id="net-hero-bg"></div>
   <div class="page-hero-inner">
     <p class="eyebrow">The SCD Network</p>
     <h1>Clubs in the <em>network</em></h1>
@@ -286,6 +296,21 @@ function parseDate(d){
     F.addEventListener("pointerenter", () => clearInterval(tick));
     F.addEventListener("pointerleave", () => { tick = setInterval(() => { elapsed+=50; prog.style.width=(elapsed/INTERVAL*100)+"%"; if(elapsed>=INTERVAL) goTo(cur+1); }, 50); });
   } else { F.innerHTML = '<p style="color:#aeb6c2;padding:60px 28px;text-align:center">No activities posted yet.</p>'; }
+
+  const st = await settings();
+  // network hero background
+  if(st.net_hero_video && String(st.net_hero_video).trim()){
+    document.getElementById("net-hero-bg").innerHTML = `<video autoplay muted loop playsinline><source src="${esc(st.net_hero_video)}" type="video/mp4"></video>`;
+  } else {
+    const imgs = [st.net_hero_img_1, st.net_hero_img_2, st.net_hero_img_3, st.net_hero_img_4].filter(u => u && String(u).trim());
+    if(imgs.length){
+      const dur = imgs.length * 6;
+      const bg = document.getElementById("net-hero-bg");
+      bg.className = "hero-slides";
+      bg.style.setProperty("--slide-total", dur + "s");
+      bg.innerHTML = imgs.map((u, i) => `<img src="${esc(u)}" alt="" style="animation-delay:${i * (dur/imgs.length)}s">`).join("");
+    }
+  }
 
   // ── Club cards ──
   const D = document.getElementById("directory");

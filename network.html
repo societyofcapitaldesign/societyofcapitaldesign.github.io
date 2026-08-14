@@ -151,6 +151,17 @@ a{color:inherit}
 .page-hero .hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:heroSlide var(--slide-total) linear infinite}
 @keyframes heroSlide{0%{opacity:0}4%{opacity:1}25%{opacity:1}29%{opacity:0}100%{opacity:0}}
 .page-hero .hero-slides::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.72) 40%,rgba(26,29,32,.88) 100%)}
+
+/* merged hero+activities title */
+.act-banner{position:relative}
+.act-banner-title{position:relative;z-index:4;padding:48px 28px 0;max-width:1200px;margin:0 auto}
+.act-banner-title .title-box{background:rgba(26,29,32,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+ border:1px solid rgba(181,146,78,.3);padding:28px 32px;display:inline-block}
+@media(min-width:800px){.act-banner-title{padding:56px 48px 0}}
+.act-banner-title .eyebrow{font-family:'Space Grotesk';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.act-banner-title h1{font-family:'Space Grotesk';font-size:clamp(30px,5.5vw,54px);font-weight:700;line-height:1.05;margin-top:12px;text-transform:uppercase;color:#fff}
+.act-banner-title h1 em{font-style:normal;color:var(--brass)}
+.act-banner-title .lede{font-size:16px;color:#aeb6c2;margin-top:14px;max-width:580px}
 </style>
 </head>
 <body>
@@ -170,16 +181,14 @@ a{color:inherit}
   </div>
 </nav>
 <main id="main">
-<section class="page-hero">
-  <div class="hero-media" id="net-hero-bg"></div>
-  <div class="page-hero-inner">
-    <p class="eyebrow">The SCD Network</p>
-    <h1>Clubs in the <em>network</em></h1>
-    <p class="lede" id="t-network-intro">SCD chapters and affiliated clubs across schools and countries. Every activity listed here happened, was reported by the club that ran it, and is verified before publication.</p>
+<section class="act-banner" style="min-height:420px">
+  <div class="act-banner-title">
+    <div class="title-box">
+      <p class="eyebrow">The SCD Network</p>
+      <h1>Clubs in the <em>network</em></h1>
+      <p class="lede" id="t-network-intro">SCD chapters and affiliated clubs across schools and countries. Every activity listed here happened, was reported by the club that ran it, and is verified before publication.</p>
+    </div>
   </div>
-</section>
-
-<section class="act-banner">
   <div class="act-banner-inner" id="activity-feed"><p class="loading" style="color:#aeb6c2;padding:80px 28px;text-align:center">Loading</p></div>
 </section>
 
@@ -302,20 +311,6 @@ function parseDate(d){
   } else { F.innerHTML = '<p style="color:#aeb6c2;padding:60px 28px;text-align:center">No activities posted yet.</p>'; }
 
   const st = await settings();
-  // network hero background
-  if(st.net_hero_video && String(st.net_hero_video).trim()){
-    document.getElementById("net-hero-bg").innerHTML = `<video autoplay muted loop playsinline><source src="${esc(st.net_hero_video)}" type="video/mp4"></video>`;
-  } else {
-    const imgs = [st.net_hero_img_1, st.net_hero_img_2, st.net_hero_img_3, st.net_hero_img_4].filter(u => u && String(u).trim());
-    if(imgs.length){
-      const dur = imgs.length * 6;
-      const bg = document.getElementById("net-hero-bg");
-      bg.className = "hero-slides";
-      bg.style.setProperty("--slide-total", dur + "s");
-      bg.innerHTML = imgs.map((u, i) => `<img src="${esc(u)}" alt="" style="animation-delay:${i * (dur/imgs.length)}s">`).join("");
-    }
-  }
-
   // ── Club cards ──
   const D = document.getElementById("directory");
   const DET = document.getElementById("club-detail");

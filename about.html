@@ -244,11 +244,12 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const C = document.getElementById("chapters");
   const ch = await rows("chapters","sort");
   if(ch && ch.length){
-    C.innerHTML = ch.map(c => `<div class="rowitem"><strong>${fmt(c.school)}</strong>
-      <p class="meta">Chapter lead: ${c.lead && c.lead.trim() ? fmt(c.lead) : ph("[Initials, CRM Confirmed]")}${c.chartered ? " · Chartered " + fmt(c.chartered) : ""}</p></div>`).join("");
+    C.innerHTML = `<div class="chapter-grid">` + ch.map(c => `<div class="chapter-card">
+      <strong>${fmt(c.school)}</strong>
+      <p class="meta">Chapter lead: ${c.lead && c.lead.trim() ? fmt(c.lead) : ph("[Lead name]")}${c.chartered ? " · Chartered " + fmt(c.chartered) : ""}</p>
+    </div>`).join("") + `</div>`;
   } else {
-    C.innerHTML = `<div class="rowitem"><strong>${ph("[School name, Evidence Register, Chapters row]")}</strong>
-      <p class="meta">Chapter lead: ${ph("[Initials, CRM Confirmed]")}</p></div>`;
+    C.innerHTML = `<div class="chapter-grid"><div class="chapter-card"><strong>${ph("[School name]")}</strong><p class="meta">Chapter lead: ${ph("[Lead name]")}</p></div></div>`;
   }
 })();
 applyText({"t-about-1":"about_1","t-about-2":"about_2"});

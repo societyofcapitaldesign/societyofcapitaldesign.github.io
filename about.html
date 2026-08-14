@@ -157,7 +157,7 @@ img.headshot{object-fit:cover}
   <div class="sec-inner">
     <span class="sec-label reveal">The network</span>
     <h2 class="sec-title reveal">Chapters</h2>
-    <div class="chapter-grid reveal" id="chapters"><p class="loading">Loading</p></div>
+    <div class="reveal" id="chapters"><p class="loading">Loading</p></div>
     <p class="reveal" style="margin-top:20px"><a href="join.html" class="btn">Start a chapter</a></p>
   </div>
 </section>
@@ -242,12 +242,14 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const C = document.getElementById("chapters");
   const ch = await rows("chapters","sort");
   if(ch && ch.length){
-    C.innerHTML = `<div class="chapter-grid">` + ch.map(c => `<div class="chapter-card">
+    C.className = "chapter-grid reveal visible";
+    C.innerHTML = ch.map(c => `<div class="chapter-card">
       <strong>${fmt(c.school)}</strong>
       <p class="meta">Chapter lead: ${c.lead && c.lead.trim() ? fmt(c.lead) : ph("[Lead name]")}${c.chartered ? " · Chartered " + fmt(c.chartered) : ""}</p>
-    </div>`).join("") + `</div>`;
+    </div>`).join("");
   } else {
-    C.innerHTML = `<div class="chapter-grid"><div class="chapter-card"><strong>${ph("[School name]")}</strong><p class="meta">Chapter lead: ${ph("[Lead name]")}</p></div></div>`;
+    C.className = "chapter-grid reveal visible";
+    C.innerHTML = `<div class="chapter-card"><strong>${ph("[School name]")}</strong><p class="meta">Chapter lead: ${ph("[Lead name]")}</p></div>`;
   }
 })();
 applyText({"t-about-1":"about_1","t-about-2":"about_2"});

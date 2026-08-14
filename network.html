@@ -61,23 +61,7 @@ a{color:inherit}
 .btn.ghost:hover{border-color:var(--brass);color:var(--brass)}
 
 
-/* activity cards */
-.feed-scroll{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:18px}
-.act-card{background:var(--darkcard);color:#fff;border:1px solid rgba(181,146,78,.15);
- padding:20px 22px;display:flex;flex-direction:column;min-height:150px;transition:transform .2s,box-shadow .2s}
-.act-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.2)}
-.act-card.featured{grid-column:1/-1;background:var(--brass);color:#1a1d20}
-.act-when{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
- font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:800}
-.act-card .act-when{color:var(--brass)}.act-card.featured .act-when{color:#1a1d20}
-.act-name{font-family:'Space Grotesk';font-weight:800;font-size:clamp(18px,2.2vw,22px);line-height:1.15;text-transform:uppercase;margin-top:10px}
-.act-card.featured .act-name{font-size:clamp(22px,3vw,30px)}
-.act-club{font-size:13px;margin-top:7px;opacity:.75}
-.act-foot{margin-top:auto;padding-top:14px;display:flex;align-items:flex-end;gap:10px}
-.act-num{font-family:'Space Grotesk',monospace;font-size:30px;font-weight:800;line-height:.9}
-.act-card .act-num{color:var(--brass)}.act-card.featured .act-num{color:#1a1d20}
-.act-numlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7;padding-bottom:2px}
-.act-latest{font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:800}
+
 /* club tiles */
 .club-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:18px}
 .club-card{background:var(--coal);color:var(--paper);border:1.5px solid var(--ink);cursor:pointer;
@@ -121,47 +105,39 @@ a{color:inherit}
 .join-panel strong{color:#fff}
 
 
-/* full-bleed activity banner */
-.act-banner{background:var(--dark);position:relative;overflow:hidden;min-height:260px}
-.act-banner::before{content:"";position:absolute;inset:0;
- background-image:linear-gradient(rgba(181,146,78,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(181,146,78,.05) 1px,transparent 1px);
- background-size:48px 48px}
-.act-slides{position:absolute;inset:0;z-index:1}
-.act-slide{position:absolute;inset:0;opacity:0;transform:translateX(40px);transition:opacity .6s,transform .6s;pointer-events:none}
-.act-slide.active{opacity:1;transform:none;pointer-events:auto;position:relative;z-index:2}
-.act-slide-bg{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center}
-.act-slide-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.9) 0%,rgba(26,29,32,.65) 50%,rgba(26,29,32,.85) 100%)}
-.act-slide-content{position:relative;z-index:2;padding:56px 28px;max-width:1200px;margin:0 auto;min-height:240px;display:flex;flex-direction:column;justify-content:flex-end}
-@media(min-width:800px){.act-slide-content{padding:72px 48px;min-height:280px}}
-.act-slide .act-eyebrow{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
-.act-slide .act-event{font-family:'Space Grotesk';font-size:clamp(28px,5vw,50px);font-weight:700;color:#fff;text-transform:uppercase;line-height:1.08;margin-top:12px}
-.act-slide .act-from{font-size:16px;color:#aeb6c2;margin-top:12px}
-.act-slide .act-count{font-family:'Space Grotesk',monospace;font-size:52px;font-weight:800;color:var(--brass);line-height:1;margin-top:18px}
-.act-slide .act-countlbl{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aeb6c2;font-weight:700}
-.act-dots{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:5}
-.act-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--brass);background:transparent;cursor:pointer;padding:0;transition:background .2s}
-.act-dot.active{background:var(--brass)}
-.act-progress{position:absolute;bottom:0;left:0;height:3px;background:var(--brass);transition:width .1s linear;z-index:5}
 
-/* hero background slideshow */
-.page-hero .hero-media{position:absolute;inset:0;z-index:0;overflow:hidden}
-.page-hero .hero-media video,.page-hero .hero-media img{position:absolute;width:100%;height:100%;object-fit:cover}
-.page-hero .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.72) 40%,rgba(26,29,32,.88) 100%)}
-.page-hero .hero-slides{position:absolute;inset:0;z-index:0}
-.page-hero .hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:heroSlide var(--slide-total) linear infinite}
-@keyframes heroSlide{0%{opacity:0}4%{opacity:1}25%{opacity:1}29%{opacity:0}100%{opacity:0}}
+
+4%{opacity:1}25%{opacity:1}29%{opacity:0}100%{opacity:0}}
 .page-hero .hero-slides::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,29,32,.88) 0%,rgba(26,29,32,.72) 40%,rgba(26,29,32,.88) 100%)}
 
-/* merged hero+activities title */
-.act-banner{position:relative;overflow:hidden}
-.act-banner-title{position:relative;z-index:4;padding:48px 28px 0;max-width:1200px;margin:0 auto}
-.act-banner-title .title-box{background:rgba(26,29,32,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
- border:1px solid rgba(181,146,78,.3);padding:28px 32px;display:inline-block}
-@media(min-width:800px){.act-banner-title{padding:56px 48px 0}}
-.act-banner-title .eyebrow{font-family:'Space Grotesk';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);font-weight:700}
-.act-banner-title h1{font-family:'Space Grotesk';font-size:clamp(30px,5.5vw,54px);font-weight:700;line-height:1.05;margin-top:12px;text-transform:uppercase;color:#fff}
-.act-banner-title h1 em{font-style:normal;color:var(--brass)}
-.act-banner-title .lede{font-size:16px;color:#aeb6c2;margin-top:14px;max-width:580px}
+
+
+/* network hero: one big photo section */
+.net-hero{position:relative;min-height:85vh;background:var(--dark);overflow:hidden;display:flex;flex-direction:column}
+.net-hero-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s}
+.net-hero-bg.active{opacity:1}
+.net-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(26,29,32,.8) 0%,rgba(26,29,32,.5) 40%,rgba(26,29,32,.85) 100%)}
+.net-hero-title{position:relative;z-index:3;padding:48px 28px 24px;max-width:1200px;margin:0 auto;width:100%}
+@media(min-width:800px){.net-hero-title{padding:56px 48px 28px}}
+.net-title-box{background:rgba(26,29,32,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+ border:1px solid rgba(181,146,78,.3);padding:24px 28px;display:inline-block}
+.net-title-box .eyebrow{font-family:'Space Grotesk';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.net-title-box h1{font-family:'Space Grotesk';font-size:clamp(28px,5vw,48px);font-weight:700;line-height:1.05;margin-top:10px;text-transform:uppercase;color:#fff}
+.net-title-box h1 em{font-style:normal;color:var(--brass)}
+.net-title-box .lede{font-size:15px;color:#aeb6c2;margin-top:10px;max-width:480px}
+.net-hero-content{position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:flex-end;
+ padding:0 28px 48px;max-width:1200px;margin:0 auto;width:100%}
+@media(min-width:800px){.net-hero-content{padding:0 48px 56px}}
+.act-eyebrow{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:700}
+.act-event{font-family:'Space Grotesk';font-size:clamp(24px,4.5vw,44px);font-weight:700;color:#fff;text-transform:uppercase;line-height:1.08;margin-top:10px}
+.act-from{font-size:15px;color:#aeb6c2;margin-top:10px}
+.act-count{font-family:'Space Grotesk',monospace;font-size:48px;font-weight:800;color:var(--brass);line-height:1;margin-top:14px}
+.act-countlbl{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aeb6c2;font-weight:700}
+.net-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:4}
+.net-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--brass);background:transparent;cursor:pointer;padding:0;transition:background .2s}
+.net-dot.active{background:var(--brass)}
+.net-progress{position:absolute;bottom:0;left:0;height:3px;background:var(--brass);z-index:4;transition:width .1s linear}
+
 </style>
 </head>
 <body>
@@ -181,15 +157,20 @@ a{color:inherit}
   </div>
 </nav>
 <main id="main">
-<section class="act-banner" style="min-height:420px">
-  <div class="act-banner-title">
-    <div class="title-box">
+<section class="net-hero" id="net-hero">
+  <div class="net-hero-bg" id="net-bg-1"></div>
+  <div class="net-hero-bg" id="net-bg-2"></div>
+  <div class="net-hero-overlay"></div>
+  <div class="net-hero-title">
+    <div class="net-title-box">
       <p class="eyebrow">The SCD Network</p>
       <h1>Clubs in the <em>network</em></h1>
       <p class="lede" id="t-network-intro">SCD chapters and affiliated clubs across schools and countries. Every activity listed here happened, was reported by the club that ran it, and is verified before publication.</p>
     </div>
   </div>
-  <div class="act-banner-inner" id="activity-feed" style="position:relative;z-index:2"><p class="loading" style="color:#aeb6c2;padding:80px 28px;text-align:center">Loading</p></div>
+  <div class="net-hero-content" id="activity-feed"><p class="loading" style="color:#aeb6c2">Loading</p></div>
+  <div class="net-dots" id="net-dots"></div>
+  <div class="net-progress" id="net-prog"></div>
 </section>
 
 <section class="sec light">
@@ -275,39 +256,56 @@ function parseDate(d){
       const dt = new Date(t);
       return dt.getDate() + " " + dt.toLocaleString("en",{month:"short"}).toUpperCase() + " " + dt.getFullYear();
     };
-    const slides = recent.map((a, i) => {
-      const c = clubByName[(a.club||"").trim().toLowerCase()] || {};
-      return `<div class="act-slide ${i===0?"active":""}">
-        ${a.photo_url ? `<div class="act-slide-bg" style="background-image:url('${esc(a.photo_url)}')"></div>` : ""}
-        <div class="act-slide-content">
-          <div class="act-eyebrow">${i===0?"Most recent · ":""}${esc(when(a.date))} · ${esc((c.country||"").toUpperCase())}</div>
-          <div class="act-event">${fmt(a.event_name)}</div>
-          <div class="act-from">${fmt(c.club_name||a.club||"")}${c.school ? " · " + fmt(c.school) : ""}</div>
-          ${a.attendees ? `<div class="act-count">${esc(a.attendees)}</div><div class="act-countlbl">attended</div>` : ""}
-        </div>
-      </div>`;
-    }).join("");
-    const dots = recent.map((_,i) => `<button class="act-dot ${i===0?"active":""}" data-i="${i}" aria-label="Activity ${i+1}"></button>`).join("");
-    F.innerHTML = `<div class="act-slides">${slides}</div><div class="act-dots">${dots}</div><div class="act-progress" id="act-prog"></div>`;
-    const allSlides = F.querySelectorAll(".act-slide");
-    const allDots = F.querySelectorAll(".act-dot");
-    const prog = document.getElementById("act-prog");
+    // Two background divs for crossfade
+    const bg1 = document.getElementById("net-bg-1");
+    const bg2 = document.getElementById("net-bg-2");
+    const dotsC = document.getElementById("net-dots");
+    const prog = document.getElementById("net-prog");
     let cur = 0, total = recent.length, elapsed = 0;
     const INTERVAL = 5000;
-    function goTo(n){
+    let activeBg = bg1;
+
+    function showSlide(n){
       cur = ((n % total) + total) % total;
-      allSlides.forEach((s,i) => s.classList.toggle("active", i===cur));
-      allDots.forEach((d,i) => d.classList.toggle("active", i===cur));
+      const a = recent[cur];
+      const c = clubByName[(a.club||"").trim().toLowerCase()] || {};
+      // Swap background photo
+      const nextBg = activeBg === bg1 ? bg2 : bg1;
+      if(a.photo_url){
+        nextBg.style.backgroundImage = `url('${a.photo_url}')`;
+      } else {
+        nextBg.style.backgroundImage = "none";
+        nextBg.style.background = "var(--dark)";
+      }
+      nextBg.classList.add("active");
+      activeBg.classList.remove("active");
+      activeBg = nextBg;
+      // Update content
+      F.innerHTML = `<div class="act-eyebrow">${cur===0?"Most recent · ":""}${esc(when(a.date))} · ${esc((c.country||"").toUpperCase())}</div>
+        <div class="act-event">${fmt(a.event_name)}</div>
+        <div class="act-from">${fmt(c.club_name||a.club||"")}${c.school ? " · " + fmt(c.school) : ""}</div>
+        ${a.attendees ? `<div class="act-count">${esc(a.attendees)}</div><div class="act-countlbl">attended</div>` : ""}`;
+      // Update dots
+      dotsC.querySelectorAll(".net-dot").forEach((d,i) => d.classList.toggle("active", i===cur));
       elapsed = 0;
     }
-    allDots.forEach(d => d.onclick = () => goTo(+d.dataset.i));
+
+    // Create dots
+    dotsC.innerHTML = recent.map((_,i) => `<button class="net-dot ${i===0?"active":""}" data-i="${i}" aria-label="Activity ${i+1}"></button>`).join("");
+    dotsC.querySelectorAll(".net-dot").forEach(d => d.onclick = () => showSlide(+d.dataset.i));
+
+    // Initial slide
+    showSlide(0);
+
+    // Autoplay
     let tick = setInterval(() => {
       elapsed += 50;
       prog.style.width = (elapsed/INTERVAL*100) + "%";
-      if(elapsed >= INTERVAL) goTo(cur+1);
+      if(elapsed >= INTERVAL) showSlide(cur+1);
     }, 50);
-    F.addEventListener("pointerenter", () => clearInterval(tick));
-    F.addEventListener("pointerleave", () => { tick = setInterval(() => { elapsed+=50; prog.style.width=(elapsed/INTERVAL*100)+"%"; if(elapsed>=INTERVAL) goTo(cur+1); }, 50); });
+    const hero = document.getElementById("net-hero");
+    hero.addEventListener("pointerenter", () => clearInterval(tick));
+    hero.addEventListener("pointerleave", () => { tick = setInterval(() => { elapsed+=50; prog.style.width=(elapsed/INTERVAL*100)+"%"; if(elapsed>=INTERVAL) showSlide(cur+1); }, 50); });
   } else { F.innerHTML = '<p style="color:#aeb6c2;padding:60px 28px;text-align:center">No activities posted yet.</p>'; }
 
   const st = await settings();

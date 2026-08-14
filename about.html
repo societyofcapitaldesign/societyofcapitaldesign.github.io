@@ -149,7 +149,7 @@ img.headshot{object-fit:cover}
   <div class="sec-inner">
     <span class="sec-label reveal">The people</span>
     <h2 class="sec-title reveal">Leadership</h2>
-    <div class="leader-grid reveal" id="leaders"><p class="loading">Loading</p></div>
+    <div class="reveal" id="leaders"><p class="loading">Loading</p></div>
   </div>
 </section>
 
@@ -217,15 +217,13 @@ const S = (o,k,fallback) => (o && o[k] && String(o[k]).trim()) ? fmt(o[k]) : ph(
   const L = document.getElementById("leaders");
   const leads = await rows("leaders","sort");
   if(leads && leads.length){
-    L.innerHTML = leads.map(l => `<div class="leader">
-      ${l.photo_url ? `<img class="headshot" src="${esc(l.photo_url)}" alt="Portrait of ${esc(l.name)}" width="104" height="104" style="border-radius:50%;margin:0 auto 12px">`
-                    : `<div class="headshot">[photo optional]</div>`}
-      <h3>${l.name && l.name.trim() ? fmt(l.name) : ph("[Name, CRM Confirmed]")}</h3>
-      <p class="role">${fmt(l.role)}</p></div>`).join("");
+    L.innerHTML = `<div class="leader-grid">` + leads.map(l => `<div class="leader-card">
+      <div class="leader-photo">${l.photo_url ? `<img src="${esc(l.photo_url)}" alt="${esc(l.name)}">` : `<span class="no-photo">Photo</span>`}</div>
+      <div class="leader-info"><div class="role">${fmt(l.role)}</div><h3>${l.name && l.name.trim() ? fmt(l.name) : ph("[Name]")}</h3></div>
+    </div>`).join("") + `</div>`;
   } else {
-    L.innerHTML = ["Co founder · Finance","Co founder · Engineering","Head of Marketing","Head of Operations"]
-      .map(r => `<div class="leader"><div class="headshot">[photo optional]</div>
-        <h3>${ph("[Name, CRM Confirmed]")}</h3><p class="role">${r}</p></div>`).join("");
+    L.innerHTML = `<div class="leader-grid">` + ["Co founder · Finance","Co founder · Engineering","Head of Marketing","Head of Operations"]
+      .map(r => `<div class="leader-card"><div class="leader-photo"><span class="no-photo">Photo</span></div><div class="leader-info"><div class="role">${r}</div><h3>${ph("[Name]")}</h3></div></div>`).join("") + `</div>`;
   }
 
   const B = document.getElementById("boq");

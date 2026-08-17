@@ -103,6 +103,15 @@
       "econ_prompts": "1. Pick one company or bank that collapsed in the last 20 years. Explain what the warning signs were before it failed and argue whether investors should have seen it coming.\n\n2. Choose one market (housing, crypto, stocks, or another) that experienced a bubble. Explain how prices got so far from reality and what finally brought them back down.\n\n3. Pick one country that transitioned from a resource dependent income to a diversified one (or is currently attempting to). Explain the financial strategy behind the shift and assess how well it is working.",
       "eng_prompts": "1. Choose one form of renewable energy and one fossil fuel source. Compare their full engineering lifecycles from construction to decommissioning and argue which produces more usable energy per unit of total cost.\n\n2. Pick one medical technology (MRI, prosthetics, pacemakers, or another). Explain how it works at a technical level and how its engineering has improved since it was first introduced.\n\n3. Choose one mega project currently under construction anywhere in the world. Explain the biggest engineering challenge it faces and evaluate the solution being used.",
       "is_current": true
+    },
+    {
+      "id": 1786949836579,
+      "name": "Cycle 4 Autumn 2026",
+      "status": "OPEN",
+      "deadline_text": "30/9/2026",
+      "econ_prompts": "1. What is the difference between systematic and unsystematic risk, and how diversification protects a portfolio?\n2. What is the agency conflict between corporate managers and shareholders, and how compensation can resolve it?\n3. How does the Time Value of Money connects opportunity cost to long-term wealth accumulation?",
+      "eng_prompts": "1. What is the mathematically optimal angle for launching an object as far as possible?\n2. How can an engineer maximize the strength of a bridge while using the least material?\n3. How should an engineer design the safest possible car crash barrier?",
+      "is_current": true
     }
   ],
   "results": [

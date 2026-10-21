@@ -539,6 +539,18 @@
       "lead": "",
       "description": "",
       "sort": 100
+    },
+    {
+      "id": 1792561924668,
+      "club_name": "Politics Club",
+      "school": "Jumeirah College",
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "type": "affiliate",
+      "joined": "October 2026",
+      "lead": "Faraz",
+      "description": "",
+      "sort": 100
     }
   ],
   "network_activities": [

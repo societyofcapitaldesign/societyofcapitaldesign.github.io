@@ -551,6 +551,18 @@
       "lead": "Faraz",
       "description": "",
       "sort": 100
+    },
+    {
+      "id": 1792561948507,
+      "club_name": "Debate Society",
+      "school": "Jumeirah College",
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "type": "affiliate",
+      "joined": "",
+      "lead": "",
+      "description": "",
+      "sort": 100
     }
   ],
   "network_activities": [
